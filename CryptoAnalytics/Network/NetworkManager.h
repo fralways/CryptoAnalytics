@@ -1,0 +1,20 @@
+//
+//  NetworkManager.h
+//  CryptoAnalytics
+//
+//  Created by Filip Rajicic on 3/2/18.
+//  Copyright © 2018 Filip Rajicic. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+
+@interface NetworkManager : NSObject<NSURLSessionDelegate>
+
++ (id)sharedManager;
+
+//- (void)loginWithUsername:(NSString *)username password:(NSString *)password testUsername:(NSString *)testUsername withCompletionHandler:(void (^)(bool successful, NSError *httpError))completionHandler;
+
+- (void)getHomeWithCompletionHandler:(void (^)(bool successful, NSError *httpError))completionHandler;
+- (void)getCurrenciesWithCompletionHandler:(void (^)(bool successful, NSArray *currencies, NSError *httpError))completionHandler;
+
+@end
