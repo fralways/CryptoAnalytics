@@ -16,4 +16,6 @@
 @property Currency *currency;
 @property (strong, nonatomic) IBOutlet UIView *chartArea;
 
+- (IBAction)showChart:(id)sender;
+
 @end

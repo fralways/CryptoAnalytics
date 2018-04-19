@@ -19,32 +19,10 @@ typedef enum CurrencyDetails: NSInteger {
     DETAILSLOW24,
     DETAILSSTART24,
     DETAILSCHANGE24,
+    DETAILSCHART,
     DETAILSEND
 
 }CurrencyDetails;
-
-//@property double change24hour;
-//@property double change24HourPct;
-//@property NSInteger flags;
-//@property NSString *fromSymbol;
-//@property double high24Hour;
-//@property double highHour;
-//@property NSString *lastMarket;
-//@property double lastTradeId;
-//@property double lastUpdate;
-//@property double lastVolume;
-//@property double lastVolumeTo;
-//@property double low24Hour;
-//@property double lowHour;
-//@property NSString *market;
-//@property double open24Hour;
-//@property double openHour;
-//@property double price;
-//@property NSString *toSymbol;
-//@property double volume24Hour;
-//@property double volume24HourTo;
-//@property double volumeHour;
-//@property double volumeHourTo;
 
 @interface CurrencyDetailsViewController ()
 
@@ -56,9 +34,8 @@ typedef enum CurrencyDetails: NSInteger {
     [super viewDidLoad];
 
     [self setupTitle];
-    [self setupChart];
     self.tableView.delegate = self;
-    self.tableView.dataSource = self;
+    self.tableView.dataSource = self;    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -89,11 +66,6 @@ typedef enum CurrencyDetails: NSInteger {
     [stackView addArrangedSubview:label];
 }
 
-- (void)setupChart{
-    CurrencyChart *chart = [CurrencyChart new];
-    [chart createChartWithSuperview:self.chartArea];
-}
-
 #pragma mark - Helper
 
 - (UIImage *)imageWithImage:(UIImage *)image convertToSize:(CGSize)size {
@@ -111,10 +83,11 @@ typedef enum CurrencyDetails: NSInteger {
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    CurrencyDetailsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:STATIC_CELL_CURRENCYDETAILS];
-    
+
     NSString *text;
     NSString *details;
+    NSString *cellType = STATIC_CELL_CURRENCYDETAILS;
+    
     switch (indexPath.row) {
         case DETAILSPRICE:
             text = @"Price";
@@ -140,12 +113,19 @@ typedef enum CurrencyDetails: NSInteger {
             text = @"Start 24h";
             details = [NSString stringWithFormat:@"$ %.8g", self.currency.open24Hour];
             break;
+        case DETAILSCHART:
+            cellType = STATIC_CELL_CURRENCYDETAILSCHART;
+            break;
         default:
             break;
     }
     
-    cell.lblText.text = text;
-    cell.lblDetails.text = details;
+    CurrencyDetailsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellType];
+    
+    if (indexPath.row != DETAILSCHART){
+        cell.lblText.text = text;
+        cell.lblDetails.text = details;
+    }
     
     return cell;
 }
@@ -154,4 +134,7 @@ typedef enum CurrencyDetails: NSInteger {
     return @"Details";
 }
 
+- (IBAction)showChart:(id)sender {
+    [self performSegueWithIdentifier:@"CurrencyChartSegue" sender:nil];
+}
 @end

@@ -8,32 +8,54 @@
 
 import Foundation
 import UIKit
+import SwiftyJSON
 
-@objc class CurrencyChart: NSObject{
-    @objc func createChart(superview: UIView){
-        let chartConfig = ChartConfigXY(
-            xAxisConfig: ChartAxisConfig(from: 2, to: 14, by: 2),
-            yAxisConfig: ChartAxisConfig(from: 0, to: 14, by: 2)
-        )
-        
-        let frame = CGRect(x: 0, y: -100, width: 300, height: 500)
-        
-        let chart = LineChart(
-            frame: frame,
-            chartConfig: chartConfig,
-            xTitle: "X axis",
-            yTitle: "Y axis",
-            lines: [
-                (chartPoints: [(2.0, 10.6), (4.2, 5.1), (7.3, 3.0), (8.1, 5.5), (14.0, 8.0)], color: UIColor.red),
-                (chartPoints: [(2.0, 2.6), (4.2, 4.1), (7.3, 1.0), (8.1, 11.5), (14.0, 3.0)], color: UIColor.blue)
-            ]
-        )
-        
-        superview.addSubview(chart.view)
+@objc class CurrencyChart: UIViewController{
+
+    @IBOutlet var spinner: UIActivityIndicatorView!
+    
+    override func viewDidLoad() {
+        loadData()
+//        createChart2(superview: self.view)
     }
     
     func chartFrameTest(_ containerBounds: CGRect) -> CGRect {
         return CGRect(x: 0, y: 70, width: containerBounds.size.width, height: containerBounds.size.height - 70)
+    }
+    
+    func loadData(){
+        
+//        let url = URL(string: "http://192.168.0.14:8080/crypto_war_exploded/currency/BTC/history?tocurrencyid=USD")
+//        let task = URLSession.shared.dataTask(with: url!) {(data, response, error) in
+//            do{
+//                let json = try JSON(data: data!)
+//                print(json[0]["type"])
+//                DispatchQueue.main.async {
+//                    self.spinner.stopAnimating()
+//                    self.createChart2(json: json)
+//                }
+//
+//
+//            }catch let error as NSError {
+//                print(error.localizedDescription)
+//                print(data!)
+//            }
+//        }
+//        task.resume()
+        
+        if let path = Bundle.main.path(forResource: "CurrencyHistagram", ofType: "json") {
+            do {
+                let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
+                let json = try JSON(data: data)
+                DispatchQueue.main.async {
+                    self.spinner.stopAnimating()
+                    self.createChart2(json: json)
+                }
+            } catch {
+                // handle error
+            }
+        }
+        
     }
     
     fileprivate var iPhoneChartSettings: ChartSettings {
@@ -54,7 +76,7 @@ import UIKit
     
     fileprivate var chart: Chart? // arc
     
-    func createChart2(superview: UIView) {
+    func createChart2(json: JSON) {
         var labelSettings = ChartLabelSettings()
 
         var readFormatter = DateFormatter()
@@ -83,34 +105,43 @@ import UIKit
             return filler
         }
         
-        let chartPoints = [
-            ChartPointCandleStick(date: date("01.10.2015"), formatter: displayFormatter, high: 40, low: 37, open: 39.5, close: 39),
-            ChartPointCandleStick(date: date("02.10.2015"), formatter: displayFormatter, high: 39.8, low: 38, open: 39.5, close: 38.4),
-            ChartPointCandleStick(date: date("03.10.2015"), formatter: displayFormatter, high: 43, low: 39, open: 41.5, close: 42.5),
-            ChartPointCandleStick(date: date("04.10.2015"), formatter: displayFormatter, high: 48, low: 42, open: 44.6, close: 44.5),
-            ChartPointCandleStick(date: date("05.10.2015"), formatter: displayFormatter, high: 45, low: 41.6, open: 43, close: 44),
-            ChartPointCandleStick(date: date("06.10.2015"), formatter: displayFormatter, high: 46, low: 42.6, open: 44, close: 46),
-            ChartPointCandleStick(date: date("07.10.2015"), formatter: displayFormatter, high: 47.5, low: 41, open: 42, close: 45.5),
-            ChartPointCandleStick(date: date("08.10.2015"), formatter: displayFormatter, high: 50, low: 46, open: 46, close: 49),
-            ChartPointCandleStick(date: date("09.10.2015"), formatter: displayFormatter, high: 45, low: 41, open: 44, close: 43.5),
-            ChartPointCandleStick(date: date("11.10.2015"), formatter: displayFormatter, high: 47, low: 35, open: 45, close: 39),
-            ChartPointCandleStick(date: date("12.10.2015"), formatter: displayFormatter, high: 45, low: 33, open: 44, close: 40),
-            ChartPointCandleStick(date: date("13.10.2015"), formatter: displayFormatter, high: 43, low: 36, open: 41, close: 38),
-            ChartPointCandleStick(date: date("14.10.2015"), formatter: displayFormatter, high: 42, low: 31, open: 38, close: 39),
-            ChartPointCandleStick(date: date("15.10.2015"), formatter: displayFormatter, high: 39, low: 34, open: 37, close: 36),
-            ChartPointCandleStick(date: date("16.10.2015"), formatter: displayFormatter, high: 35, low: 32, open: 34, close: 33.5),
-            ChartPointCandleStick(date: date("17.10.2015"), formatter: displayFormatter, high: 32, low: 29, open: 31.5, close: 31),
-            ChartPointCandleStick(date: date("18.10.2015"), formatter: displayFormatter, high: 31, low: 29.5, open: 29.5, close: 30),
-            ChartPointCandleStick(date: date("19.10.2015"), formatter: displayFormatter, high: 29, low: 25, open: 25.5, close: 25),
-            ChartPointCandleStick(date: date("20.10.2015"), formatter: displayFormatter, high: 28, low: 24, open: 26.7, close: 27.5),
-            ChartPointCandleStick(date: date("21.10.2015"), formatter: displayFormatter, high: 28.5, low: 25.3, open: 26, close: 27),
-            ChartPointCandleStick(date: date("22.10.2015"), formatter: displayFormatter, high: 30, low: 28, open: 28, close: 30),
-            ChartPointCandleStick(date: date("25.10.2015"), formatter: displayFormatter, high: 31, low: 29, open: 31, close: 31),
-            ChartPointCandleStick(date: date("26.10.2015"), formatter: displayFormatter, high: 31.5, low: 29.2, open: 29.6, close: 29.6),
-            ChartPointCandleStick(date: date("27.10.2015"), formatter: displayFormatter, high: 30, low: 27, open: 29, close: 28.5),
-            ChartPointCandleStick(date: date("28.10.2015"), formatter: displayFormatter, high: 32, low: 30, open: 31, close: 30.6),
-            ChartPointCandleStick(date: date("29.10.2015"), formatter: displayFormatter, high: 35, low: 31, open: 31, close: 33)
-        ]
+        var chartPoints = Array<ChartPointCandleStick>()
+        for i in 0...json.count {
+            chartPoints.append(ChartPointCandleStick(date: Date(timeIntervalSince1970: json[i]["timestamp"].doubleValue), formatter: displayFormatter, high: json[i]["high"].doubleValue, low: json[i]["low"].doubleValue, open: json[i]["open"].doubleValue, close: json[i]["close"].doubleValue))
+        }
+        
+//        for i in 0...10 {
+//            chartPoints.append(ChartPointCandleStick(date: Date(timeIntervalSince1970: json[i]["timestamp"].doubleValue), formatter: displayFormatter, high: json[i]["high"].doubleValue, low: json[i]["low"].doubleValue, open: json[i]["open"].doubleValue, close: json[i]["close"].doubleValue))
+//        }
+        
+//        chartPoints = [
+//            ChartPointCandleStick(date: date("01.10.2015"), formatter: displayFormatter, high: 40, low: 37, open: 39.5, close: 39),
+//            ChartPointCandleStick(date: date("02.10.2015"), formatter: displayFormatter, high: 39.8, low: 38, open: 39.5, close: 38.4),
+//            ChartPointCandleStick(date: date("03.10.2015"), formatter: displayFormatter, high: 43, low: 39, open: 41.5, close: 42.5),
+//            ChartPointCandleStick(date: date("04.10.2015"), formatter: displayFormatter, high: 48, low: 42, open: 44.6, close: 44.5),
+//            ChartPointCandleStick(date: date("05.10.2015"), formatter: displayFormatter, high: 45, low: 41.6, open: 43, close: 44),
+//            ChartPointCandleStick(date: date("06.10.2015"), formatter: displayFormatter, high: 46, low: 42.6, open: 44, close: 46),
+//            ChartPointCandleStick(date: date("07.10.2015"), formatter: displayFormatter, high: 47.5, low: 41, open: 42, close: 45.5),
+//            ChartPointCandleStick(date: date("08.10.2015"), formatter: displayFormatter, high: 50, low: 46, open: 46, close: 49),
+//            ChartPointCandleStick(date: date("09.10.2015"), formatter: displayFormatter, high: 45, low: 41, open: 44, close: 43.5),
+//            ChartPointCandleStick(date: date("11.10.2015"), formatter: displayFormatter, high: 47, low: 35, open: 45, close: 39),
+//            ChartPointCandleStick(date: date("12.10.2015"), formatter: displayFormatter, high: 160, low: 20, open: 44, close: 40),
+//            ChartPointCandleStick(date: date("13.10.2015"), formatter: displayFormatter, high: 43, low: 36, open: 41, close: 38),
+//            ChartPointCandleStick(date: date("14.10.2015"), formatter: displayFormatter, high: 42, low: 31, open: 38, close: 39),
+//            ChartPointCandleStick(date: date("15.10.2015"), formatter: displayFormatter, high: 39, low: 34, open: 37, close: 36),
+//            ChartPointCandleStick(date: date("16.10.2015"), formatter: displayFormatter, high: 35, low: 32, open: 34, close: 33.5),
+//            ChartPointCandleStick(date: date("17.10.2015"), formatter: displayFormatter, high: 32, low: 29, open: 31.5, close: 31),
+//            ChartPointCandleStick(date: date("18.10.2015"), formatter: displayFormatter, high: 31, low: 29.5, open: 29.5, close: 30),
+//            ChartPointCandleStick(date: date("19.10.2015"), formatter: displayFormatter, high: 29, low: 25, open: 25.5, close: 25),
+//            ChartPointCandleStick(date: date("20.10.2015"), formatter: displayFormatter, high: 28, low: 24, open: 26.7, close: 27.5),
+//            ChartPointCandleStick(date: date("21.10.2015"), formatter: displayFormatter, high: 28.5, low: 25.3, open: 26, close: 27),
+//            ChartPointCandleStick(date: date("22.10.2015"), formatter: displayFormatter, high: 30, low: 28, open: 28, close: 30),
+//            ChartPointCandleStick(date: date("25.10.2015"), formatter: displayFormatter, high: 31, low: 29, open: 31, close: 31),
+//            ChartPointCandleStick(date: date("26.10.2015"), formatter: displayFormatter, high: 31.5, low: 29.2, open: 29.6, close: 29.6),
+//            ChartPointCandleStick(date: date("27.10.2015"), formatter: displayFormatter, high: 30, low: 27, open: 29, close: 28.5),
+//            ChartPointCandleStick(date: date("28.10.2015"), formatter: displayFormatter, high: 32, low: 30, open: 31, close: 30.6),
+//            ChartPointCandleStick(date: date("29.10.2015"), formatter: displayFormatter, high: 35, low: 31, open: 31, close: 33)
+//        ]
         
         func generateDateAxisValues(_ month: Int, year: Int) -> [ChartAxisValueDate] {
             let date = dateWithComponents(1, month, year)
@@ -122,18 +153,34 @@ import UIKit
             return arr.map {day in
                 let date = dateWithComponents(day, month, year)
                 let axisValue = ChartAxisValueDate(date: date, formatter: displayFormatter, labelSettings: labelSettings)
-                axisValue.hidden = !(day % 5 == 0)
+                axisValue.hidden = !(day % 20 == 0)
                 return axisValue
             }
         }
         
-        let xValues = generateDateAxisValues(10, year: 2015)
-        let yValues = stride(from: 20, through: 55, by: 5).map {ChartAxisValueDouble(Double($0), labelSettings: labelSettings)}
+//        var xValues = generateDateAxisValues(10, year: 2015)
+
+        var xValues = Array<ChartAxisValueDate>()
+        for i in 2018...2018 {
+            for j in 1...1 {
+                xValues.append(contentsOf: generateDateAxisValues(j, year: i))
+            }
+        }
+//        xValues.append(contentsOf: (generateDateAxisValues(10, year: 2015)))
+//        xValues.append(contentsOf: (generateDateAxisValues(11, year: 2015)))
+//        xValues.append(contentsOf: (generateDateAxisValues(12, year: 2015)))
+
+//        let min = 20
+//        let max = 500
+//        let height = UIScreen.main.bounds.height
+        
+        
+        let yValues = stride(from: 0, through: 20000, by: 5000).map {ChartAxisValueDouble(Double($0), labelSettings: labelSettings)}
         
         let xModel = ChartAxisModel(axisValues: xValues, axisTitleLabel: ChartAxisLabel(text: "Axis title", settings: labelSettings))
         let yModel = ChartAxisModel(axisValues: yValues, axisTitleLabel: ChartAxisLabel(text: "Axis title", settings: labelSettings.defaultVertical()))
         
-        let defaultChartFrame = chartFrameTest(superview.bounds)
+        let defaultChartFrame = chartFrameTest(view.bounds)
         let infoViewHeight: CGFloat = 50
         let chartFrame = CGRect(x: defaultChartFrame.origin.x, y: defaultChartFrame.origin.y + infoViewHeight, width: defaultChartFrame.width, height: defaultChartFrame.height - infoViewHeight)
         
@@ -159,8 +206,8 @@ import UIKit
         let candleStickLayer = ChartPointsCandleStickViewsLayer<ChartPointCandleStick, ChartCandleStickView>(xAxis: xAxisLayer.axis, yAxis: yAxisLayer.axis, innerFrame: innerFrame, chartPoints: chartPoints, viewGenerator: viewGenerator)
         
         
-        let infoView = InfoWithIntroView(frame: CGRect(x: 10, y: 70, width: superview.frame.size.width, height: infoViewHeight))
-        superview.addSubview(infoView)
+        let infoView = InfoWithIntroView(frame: CGRect(x: 10, y: 70, width: view.frame.size.width, height: infoViewHeight))
+        view.addSubview(infoView)
         
         let trackerLayer = ChartPointsTrackerLayer(xAxis: xAxisLayer.axis, yAxis: yAxisLayer.axis, chartPoints: chartPoints, locChangedFunc: {[candleStickLayer, weak infoView] screenLoc in
             candleStickLayer.highlightChartpointView(screenLoc: screenLoc)
@@ -192,7 +239,7 @@ import UIKit
             ]
         )
         
-        superview.addSubview(chart.view)
+        view.addSubview(chart.view)
         self.chart = chart
     }
 }

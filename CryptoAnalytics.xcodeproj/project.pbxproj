@@ -136,6 +136,7 @@
 		DC54DDFB206ADBA60076ABFB /* CurrencyDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC54DDFA206ADBA60076ABFB /* CurrencyDetailsViewController.m */; };
 		DC54DDFE206AE0950076ABFB /* CurrencyDetailsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DC54DDFD206AE0950076ABFB /* CurrencyDetailsTableViewCell.m */; };
 		DC54DE00206AF91B0076ABFB /* CurrencyChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC54DDFF206AF91B0076ABFB /* CurrencyChart.swift */; };
+		DC795C332089236C00F394BE /* CurrencyHistagram.json in Resources */ = {isa = PBXBuildFile; fileRef = DC795C322089236C00F394BE /* CurrencyHistagram.json */; };
 		DCCCAE80204F1B1300990407 /* Currency.m in Sources */ = {isa = PBXBuildFile; fileRef = DCCCAE7F204F1B1300990407 /* Currency.m */; };
 		DCF11B9D2049952C00E6807F /* CurrencyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DCF11B9C2049952C00E6807F /* CurrencyTableViewCell.m */; };
 		DCF11BA12049954D00E6807F /* Keys.m in Sources */ = {isa = PBXBuildFile; fileRef = DCF11BA02049954D00E6807F /* Keys.m */; };
@@ -285,6 +286,7 @@
 		DC54DDFC206AE0950076ABFB /* CurrencyDetailsTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CurrencyDetailsTableViewCell.h; sourceTree = "<group>"; };
 		DC54DDFD206AE0950076ABFB /* CurrencyDetailsTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CurrencyDetailsTableViewCell.m; sourceTree = "<group>"; };
 		DC54DDFF206AF91B0076ABFB /* CurrencyChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyChart.swift; sourceTree = "<group>"; };
+		DC795C322089236C00F394BE /* CurrencyHistagram.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = CurrencyHistagram.json; sourceTree = "<group>"; };
 		DCCCAE7E204F1B1300990407 /* Currency.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Currency.h; sourceTree = "<group>"; };
 		DCCCAE7F204F1B1300990407 /* Currency.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Currency.m; sourceTree = "<group>"; };
 		DCF11B9B2049952C00E6807F /* CurrencyTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CurrencyTableViewCell.h; sourceTree = "<group>"; };
@@ -348,6 +350,7 @@
 		DC06E9642046F72B008B2F82 /* CryptoAnalytics */ = {
 			isa = PBXGroup;
 			children = (
+				DC795C342089237600F394BE /* Mock */,
 				DC268643208681DC00F18663 /* External */,
 				DCF11B9E2049953100E6807F /* Cells */,
 				DCF11BA52049972D00E6807F /* Network */,
@@ -591,6 +594,14 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		DC795C342089237600F394BE /* Mock */ = {
+			isa = PBXGroup;
+			children = (
+				DC795C322089236C00F394BE /* CurrencyHistagram.json */,
+			);
+			path = Mock;
+			sourceTree = "<group>";
+		};
 		DCCCAE81204F1B2100990407 /* ObjectClasses */ = {
 			isa = PBXGroup;
 			children = (
@@ -686,6 +697,7 @@
 				DC06E9722046F72B008B2F82 /* LaunchScreen.storyboard in Resources */,
 				DC06E96F2046F72B008B2F82 /* Assets.xcassets in Resources */,
 				DC06E96D2046F72B008B2F82 /* Main.storyboard in Resources */,
+				DC795C332089236C00F394BE /* CurrencyHistagram.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -699,11 +711,11 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-CryptoAnalytics/Pods-CryptoAnalytics-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/SwiftCharts/SwiftCharts.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftCharts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;

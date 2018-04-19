@@ -11,6 +11,7 @@
 //cells
 static NSString *STATIC_CELL_CURRENCY = @"currencyCell";
 static NSString *STATIC_CELL_CURRENCYDETAILS = @"CurrencyDetailsCell";
+static NSString *STATIC_CELL_CURRENCYDETAILSCHART = @"CurrencyDetailsShowChartCell";
 
 
 //segues
