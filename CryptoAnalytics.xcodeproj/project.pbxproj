@@ -137,6 +137,8 @@
 		DC54DDFE206AE0950076ABFB /* CurrencyDetailsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DC54DDFD206AE0950076ABFB /* CurrencyDetailsTableViewCell.m */; };
 		DC54DE00206AF91B0076ABFB /* CurrencyChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC54DDFF206AF91B0076ABFB /* CurrencyChart.swift */; };
 		DC795C332089236C00F394BE /* CurrencyHistagram.json in Resources */ = {isa = PBXBuildFile; fileRef = DC795C322089236C00F394BE /* CurrencyHistagram.json */; };
+		DC795C37208D1F3200F394BE /* HistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC795C36208D1F3200F394BE /* HistoryViewController.m */; };
+		DC795C3A208D215000F394BE /* HistoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DC795C39208D215000F394BE /* HistoryTableViewCell.m */; };
 		DCCCAE80204F1B1300990407 /* Currency.m in Sources */ = {isa = PBXBuildFile; fileRef = DCCCAE7F204F1B1300990407 /* Currency.m */; };
 		DCF11B9D2049952C00E6807F /* CurrencyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DCF11B9C2049952C00E6807F /* CurrencyTableViewCell.m */; };
 		DCF11BA12049954D00E6807F /* Keys.m in Sources */ = {isa = PBXBuildFile; fileRef = DCF11BA02049954D00E6807F /* Keys.m */; };
@@ -287,6 +289,10 @@
 		DC54DDFD206AE0950076ABFB /* CurrencyDetailsTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CurrencyDetailsTableViewCell.m; sourceTree = "<group>"; };
 		DC54DDFF206AF91B0076ABFB /* CurrencyChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyChart.swift; sourceTree = "<group>"; };
 		DC795C322089236C00F394BE /* CurrencyHistagram.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = CurrencyHistagram.json; sourceTree = "<group>"; };
+		DC795C35208D1F3200F394BE /* HistoryViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HistoryViewController.h; sourceTree = "<group>"; };
+		DC795C36208D1F3200F394BE /* HistoryViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HistoryViewController.m; sourceTree = "<group>"; };
+		DC795C38208D215000F394BE /* HistoryTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HistoryTableViewCell.h; sourceTree = "<group>"; };
+		DC795C39208D215000F394BE /* HistoryTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HistoryTableViewCell.m; sourceTree = "<group>"; };
 		DCCCAE7E204F1B1300990407 /* Currency.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Currency.h; sourceTree = "<group>"; };
 		DCCCAE7F204F1B1300990407 /* Currency.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Currency.m; sourceTree = "<group>"; };
 		DCF11B9B2049952C00E6807F /* CurrencyTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CurrencyTableViewCell.h; sourceTree = "<group>"; };
@@ -366,6 +372,8 @@
 				DC54DDF7206AD8920076ABFB /* AnalyzerViewController.m */,
 				DC54DDF3206AD8870076ABFB /* SettingsViewController.h */,
 				DC54DDF4206AD8870076ABFB /* SettingsViewController.m */,
+				DC795C35208D1F3200F394BE /* HistoryViewController.h */,
+				DC795C36208D1F3200F394BE /* HistoryViewController.m */,
 				DCF11BA62049984500E6807F /* Context.h */,
 				DCF11BA72049984500E6807F /* Context.m */,
 				DCF11B9F2049954D00E6807F /* Keys.h */,
@@ -618,6 +626,8 @@
 				DCF11B9C2049952C00E6807F /* CurrencyTableViewCell.m */,
 				DC54DDFC206AE0950076ABFB /* CurrencyDetailsTableViewCell.h */,
 				DC54DDFD206AE0950076ABFB /* CurrencyDetailsTableViewCell.m */,
+				DC795C38208D215000F394BE /* HistoryTableViewCell.h */,
+				DC795C39208D215000F394BE /* HistoryTableViewCell.m */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -827,6 +837,7 @@
 				DC268736208681ED00F18663 /* ChartPointViewBarGreyOut.swift in Sources */,
 				DC06E96A2046F72B008B2F82 /* CurrencyViewController.m in Sources */,
 				DC26872D208681ED00F18663 /* ChartPointViewBar.swift in Sources */,
+				DC795C3A208D215000F394BE /* HistoryTableViewCell.m in Sources */,
 				DC268700208681ED00F18663 /* ChartAxisGeneratorMultiplier.swift in Sources */,
 				DC2686EA208681ED00F18663 /* Operators.swift in Sources */,
 				DC06E9752046F72B008B2F82 /* main.m in Sources */,
@@ -885,6 +896,7 @@
 				DC2686EB208681ED00F18663 /* ChartViewSelectorAlpha.swift in Sources */,
 				DC26870A208681ED00F18663 /* ChartAxisValuesGeneratorXDividers.swift in Sources */,
 				DC268703208681ED00F18663 /* ChartAxisXHighLayerDefault.swift in Sources */,
+				DC795C37208D1F3200F394BE /* HistoryViewController.m in Sources */,
 				DC26870D208681ED00F18663 /* ChartAxisLabelsGeneratorBase.swift in Sources */,
 				DC2686D6208681ED00F18663 /* ChartPointsAreaLayer.swift in Sources */,
 				DCF11BA82049984500E6807F /* Context.m in Sources */,

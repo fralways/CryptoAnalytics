@@ -19,7 +19,7 @@ typedef enum CurrencyDetails: NSInteger {
     DETAILSLOW24,
     DETAILSSTART24,
     DETAILSCHANGE24,
-    DETAILSCHART,
+//    DETAILSCHART,
     DETAILSEND
 
 }CurrencyDetails;
@@ -34,6 +34,8 @@ typedef enum CurrencyDetails: NSInteger {
     [super viewDidLoad];
 
     [self setupTitle];
+    [self setupBarButton];
+    
     self.tableView.delegate = self;
     self.tableView.dataSource = self;    
 }
@@ -64,6 +66,11 @@ typedef enum CurrencyDetails: NSInteger {
     [stackView setAlignment:UIStackViewAlignmentCenter];
     [stackView addArrangedSubview:imageView];
     [stackView addArrangedSubview:label];
+}
+
+- (void)setupBarButton{
+    UIBarButtonItem *btn = [[UIBarButtonItem alloc] initWithTitle:@"Chart" style:UIBarButtonItemStylePlain target:self action:@selector(showChart:)];
+    self.navigationItem.rightBarButtonItem = btn;
 }
 
 #pragma mark - Helper
@@ -113,19 +120,19 @@ typedef enum CurrencyDetails: NSInteger {
             text = @"Start 24h";
             details = [NSString stringWithFormat:@"$ %.8g", self.currency.open24Hour];
             break;
-        case DETAILSCHART:
-            cellType = STATIC_CELL_CURRENCYDETAILSCHART;
-            break;
+//        case DETAILSCHART:
+//            cellType = STATIC_CELL_CURRENCYDETAILSCHART;
+//            break;
         default:
             break;
     }
     
     CurrencyDetailsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellType];
     
-    if (indexPath.row != DETAILSCHART){
+//    if (indexPath.row != DETAILSCHART){
         cell.lblText.text = text;
         cell.lblDetails.text = details;
-    }
+//    }
     
     return cell;
 }
@@ -135,6 +142,16 @@ typedef enum CurrencyDetails: NSInteger {
 }
 
 - (IBAction)showChart:(id)sender {
-    [self performSegueWithIdentifier:@"CurrencyChartSegue" sender:nil];
+    [self performSegueWithIdentifier:STATIC_SEGUE_CURRENCYDETAILCHART sender:self.currency.fromSymbol];
 }
+
+#pragma mark - Navigation
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if ([segue.identifier isEqualToString:STATIC_SEGUE_CURRENCYDETAILCHART]){
+        CurrencyChart *vc = segue.destinationViewController;
+        vc.currency = sender;
+    }
+}
+
 @end

@@ -14,6 +14,8 @@ import SwiftyJSON
 
     @IBOutlet var spinner: UIActivityIndicatorView!
     
+    @objc var currency: String!
+    
     override func viewDidLoad() {
         loadData()
 //        createChart2(superview: self.view)
@@ -24,7 +26,7 @@ import SwiftyJSON
     }
     
     func loadData(){
-        
+        //napravi url da bude od this.currency
 //        let url = URL(string: "http://192.168.0.14:8080/crypto_war_exploded/currency/BTC/history?tocurrencyid=USD")
 //        let task = URLSession.shared.dataTask(with: url!) {(data, response, error) in
 //            do{
