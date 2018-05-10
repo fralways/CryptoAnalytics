@@ -8,8 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
-typedef enum{
-    SPEED,
+typedef enum: NSInteger{
+    SPEED   = 0,
     MACD,
     EMA,
     SMA
@@ -20,5 +20,8 @@ typedef enum{
 + (Context *)sharedContext;
 
 @property NSString *host;
+@property BOOL testing;
+
+- (NSString *)strategyToString:(STRATEGIES)strategy;
 
 @end

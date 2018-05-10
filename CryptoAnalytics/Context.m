@@ -22,6 +22,27 @@
 
 - (void)initParams{
     self.host = @"http://192.168.0.14:8080/crypto_war_exploded";
+    self.testing = YES;
+}
+
+- (NSString *)strategyToString:(STRATEGIES)strategy{
+    NSString *title = @"";
+    switch(strategy){
+        case SMA:
+            title = @"SMA";
+            break;
+        case EMA:
+            title = @"EMA";
+            break;
+        case SPEED:
+            title = @"SPEED";
+            break;
+        case MACD:
+            title = @"MACD";
+            break;
+            
+    }
+    return title;
 }
 
 @end

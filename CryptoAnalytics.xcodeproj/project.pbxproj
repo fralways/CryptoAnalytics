@@ -142,6 +142,7 @@
 		DC795C37208D1F3200F394BE /* HistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC795C36208D1F3200F394BE /* HistoryViewController.m */; };
 		DC795C3A208D215000F394BE /* HistoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DC795C39208D215000F394BE /* HistoryTableViewCell.m */; };
 		DCCCAE80204F1B1300990407 /* Currency.m in Sources */ = {isa = PBXBuildFile; fileRef = DCCCAE7F204F1B1300990407 /* Currency.m */; };
+		DCDD466620A4F4BA00CA271F /* config.json in Resources */ = {isa = PBXBuildFile; fileRef = DCDD466520A4F4BA00CA271F /* config.json */; };
 		DCF11B9D2049952C00E6807F /* CurrencyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DCF11B9C2049952C00E6807F /* CurrencyTableViewCell.m */; };
 		DCF11BA12049954D00E6807F /* Keys.m in Sources */ = {isa = PBXBuildFile; fileRef = DCF11BA02049954D00E6807F /* Keys.m */; };
 		DCF11BA42049972800E6807F /* NetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DCF11BA32049972800E6807F /* NetworkManager.m */; };
@@ -301,6 +302,7 @@
 		DC795C39208D215000F394BE /* HistoryTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HistoryTableViewCell.m; sourceTree = "<group>"; };
 		DCCCAE7E204F1B1300990407 /* Currency.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Currency.h; sourceTree = "<group>"; };
 		DCCCAE7F204F1B1300990407 /* Currency.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Currency.m; sourceTree = "<group>"; };
+		DCDD466520A4F4BA00CA271F /* config.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = config.json; sourceTree = "<group>"; };
 		DCF11B9B2049952C00E6807F /* CurrencyTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CurrencyTableViewCell.h; sourceTree = "<group>"; };
 		DCF11B9C2049952C00E6807F /* CurrencyTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CurrencyTableViewCell.m; sourceTree = "<group>"; };
 		DCF11B9F2049954D00E6807F /* Keys.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Keys.h; sourceTree = "<group>"; };
@@ -612,6 +614,7 @@
 			isa = PBXGroup;
 			children = (
 				DC795C322089236C00F394BE /* CurrencyHistagram.json */,
+				DCDD466520A4F4BA00CA271F /* config.json */,
 			);
 			path = Mock;
 			sourceTree = "<group>";
@@ -718,6 +721,7 @@
 				DC06E96F2046F72B008B2F82 /* Assets.xcassets in Resources */,
 				DC06E96D2046F72B008B2F82 /* Main.storyboard in Resources */,
 				DC795C332089236C00F394BE /* CurrencyHistagram.json in Resources */,
+				DCDD466620A4F4BA00CA271F /* config.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

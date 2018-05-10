@@ -22,5 +22,6 @@
 @property STRATEGIES selectedStrategy;
 
 - (id)initWithNetworkData:(NSDictionary *)data;
+- (NSDictionary *)toDictionary;
 
 @end

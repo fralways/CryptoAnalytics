@@ -9,9 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "SettingsTableViewCell.h"
 
-@interface SettingsViewController : UIViewController<UITableViewDataSource, UITableViewDelegate, SettingsTableViewCellDelegate>
+@interface SettingsViewController : UIViewController<UITableViewDataSource, UITableViewDelegate, SettingsTableViewCellDelegate, UIPickerViewDataSource, UIPickerViewDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
+
 
 
 @end

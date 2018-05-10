@@ -15,6 +15,7 @@ static NSString *STATIC_CELL_CURRENCYDETAILSCHART = @"CurrencyDetailsShowChartCe
 static NSString *STATIC_CELL_HISTORY = @"HistoryCell";
 static NSString *STATIC_CELL_SETTINGSSLIDER = @"SettingsSliderCell";
 static NSString *STATIC_CELL_SETTINGSSUBTITLE = @"SettingsSubtitleCell";
+static NSString *STATIC_CELL_SETTINGSPICKER = @"SettingsPickerCell";
 
 //segues
 static NSString *STATIC_SEGUE_CURRENCYDETAIL = @"CurrencyDetailSegue";

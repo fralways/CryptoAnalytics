@@ -20,13 +20,17 @@ typedef enum: NSInteger{
     OPTIONS_SMA_INTERVAL,
     OPTIONS_SPEED_NEEDPERC,
     OPTIONS_SPEED_INTERVAL,
-    OPTIONS_END
+    OPTIONS_END,
+    OPTIONS_SELECT_STRATEGY,
 }SERVER_OPTIONS;
 
 @interface SettingsViewController ()
 
 @property NSDictionary *networkConfig;
 @property Config *config;
+@property BOOL settingsChanged;
+@property BOOL optionsExpanded;
+@property NSMutableArray *options;
 
 @end
 
@@ -42,7 +46,12 @@ typedef enum: NSInteger{
     self.tableView.dataSource = self;
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Save" style:UIBarButtonItemStyleDone target:self action:@selector(save)];
+    [self.navigationItem.rightBarButtonItem setEnabled:NO];
     
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Reset" style:UIBarButtonItemStylePlain target:self action:@selector(reset)];
+    [self.navigationItem.leftBarButtonItem setEnabled:NO];
+    
+    [self initOptions];
     [self getConfig];
 }
 
@@ -51,11 +60,48 @@ typedef enum: NSInteger{
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - Init
+
+- (void)initOptions{
+    self.options = [NSMutableArray new];
+    
+    for (int i=0; i<OPTIONS_END; i++){
+        [self.options addObject:[self sectionToTitle:i]];
+    }
+    
+}
+
 #pragma mark - Network
 
 - (void)getConfig{
-    [[NetworkManager sharedManager] getConfigWithCompletionHandler:^(bool successful, NSDictionary *config, NSError *httpError) {
+    
+    if (![Context sharedContext].testing){
+        [[NetworkManager sharedManager] getConfigWithCompletionHandler:^(bool successful, NSDictionary *config, NSError *httpError) {
+            if (successful){
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    self.networkConfig = config;
+                    self.config = [[Config alloc]initWithNetworkData:config];
+                    
+                    [self refreshTableView];
+                });
+            }
+        }];
+    }else{
+        NSString *path = [[NSBundle mainBundle]pathForResource:@"config" ofType:@"json"];
+        NSData *data = [[NSData alloc]initWithContentsOfURL:[NSURL fileURLWithPath:path]];
+        NSDictionary *config = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+        NSLog(@"config: %@", config);
+        self.networkConfig = config;
+        self.config = [[Config alloc]initWithNetworkData:config];
+        
+        [self refreshTableView];
+    }
+}
+
+- (void)patchConfig{
+    [[NetworkManager sharedManager]patchConfig:[self.config toDictionary] withCompletionHandler:^(bool successful, NSDictionary *config, NSError *httpError) {
         if (successful){
+            NSLog(@"Config: Patched successfully");
             dispatch_async(dispatch_get_main_queue(), ^{
                 self.networkConfig = config;
                 self.config = [[Config alloc]initWithNetworkData:config];
@@ -66,10 +112,6 @@ typedef enum: NSInteger{
     }];
 }
 
-- (void)save{
-    
-}
-
 #pragma mark - Table view
 
 - (void)refreshTableView{
@@ -78,85 +120,84 @@ typedef enum: NSInteger{
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (self.config != NULL){
-        return OPTIONS_END;
+        return self.options.count;
     }else{
         return 0;
     }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    SettingsTableViewCell *cell = (indexPath.row == OPTIONS_SELECTED_STRATEGY) ? [tableView dequeueReusableCellWithIdentifier:STATIC_CELL_SETTINGSSUBTITLE] : [tableView dequeueReusableCellWithIdentifier:STATIC_CELL_SETTINGSSLIDER];
     
-    switch (indexPath.row) {
-        case OPTIONS_EMA_LONG: case OPTIONS_SMA_LONG:
-
-            cell.slider.maximumValue = 100;
-            cell.slider.minimumValue = 20;
-            
-            if (indexPath.row == OPTIONS_EMA_LONG){
-                cell.slider.value = self.config.emaLongCount;
-            }else{
-                cell.slider.value = self.config.smaLongCount;
-            }
-            
-            cell.lblValue.text = [NSString stringWithFormat:@"%d", (int)cell.slider.value];
-            
-            break;
-            
-        case OPTIONS_EMA_SHORT: case OPTIONS_SMA_SHORT:
-            
-            cell.slider.maximumValue = 20;
-            cell.slider.minimumValue = 5;
-            
-            if (indexPath.row == OPTIONS_EMA_SHORT){
-                cell.slider.value = self.config.emaShortCount;
-            }else{
-                cell.slider.value = self.config.smaShortCount;
-            }
-            
-            cell.lblValue.text = [NSString stringWithFormat:@"%d", (int)cell.slider.value];
-
-            break;
-            
-        case OPTIONS_EMA_INTERVAL: case OPTIONS_SMA_INTERVAL: case OPTIONS_SPEED_INTERVAL:
-            
-            cell.slider.minimumValue = 5;
-            cell.slider.maximumValue = 60 * 5;
-            
-            if (indexPath.row == OPTIONS_EMA_INTERVAL){
-                cell.slider.value = self.config.emaStrategyInterval;
-            }else if (indexPath.row == OPTIONS_SMA_INTERVAL){
-                cell.slider.value = self.config.smaStrategyInterval;
-            }else{
-                cell.slider.value = self.config.speedStrategyInterval;
-            }
-            
-            cell.lblValue.text = [NSString stringWithFormat:@"%d", (int)cell.slider.value];
-            
-            break;
-            
-        case OPTIONS_SPEED_NEEDPERC:
-            cell.slider.minimumValue = 0.01;
-            cell.slider.maximumValue = 0.5;
-            
-            cell.slider.value = self.config.speedStrategyPercentChangeNeeded;
-            
-            cell.lblValue.text = [NSString stringWithFormat:@"%d%%", (int)(cell.slider.value * 100)];
-
-            break;
-            
-        case OPTIONS_SELECTED_STRATEGY:
-            
-            cell.lblSubtitle.text = [self strategyToString:self.config.selectedStrategy];
-
-            break;
-        default:
-            NSLog(@"Settings: Cell type not found at row: %ld", (long)indexPath.row);
-            break;
+    NSString *option = self.options[indexPath.row];
+    
+    SettingsTableViewCell *cell;
+    
+    if ([option isEqualToString:[self sectionToTitle:OPTIONS_SELECTED_STRATEGY]]){
+        cell = [tableView dequeueReusableCellWithIdentifier:STATIC_CELL_SETTINGSSUBTITLE];
+    }else if ([option isEqualToString:[self sectionToTitle:OPTIONS_SELECT_STRATEGY]]){
+        cell = [tableView dequeueReusableCellWithIdentifier:STATIC_CELL_SETTINGSPICKER];
+    }else{
+        cell = [tableView dequeueReusableCellWithIdentifier:STATIC_CELL_SETTINGSSLIDER];
     }
     
-    cell.lblTitle.text = [self sectionToTitle:indexPath.row];
-    cell.tag = indexPath.row;
+    if ([option isEqualToString:[self sectionToTitle:OPTIONS_EMA_LONG]]){
+        cell.slider.maximumValue = 100;
+        cell.slider.minimumValue = 20;
+        cell.slider.value = self.config.emaLongCount;
+        cell.lblValue.text = [NSString stringWithFormat:@"%d", (int)cell.slider.value];
+    }else if ([option isEqualToString:[self sectionToTitle:OPTIONS_SMA_LONG]]){
+        cell.slider.maximumValue = 100;
+        cell.slider.minimumValue = 20;
+        cell.slider.value = self.config.smaLongCount;
+        cell.lblValue.text = [NSString stringWithFormat:@"%d", (int)cell.slider.value];
+    }else if ([option isEqualToString:[self sectionToTitle:OPTIONS_EMA_SHORT]]){
+        cell.slider.maximumValue = 20;
+        cell.slider.minimumValue = 5;
+        cell.slider.value = self.config.emaShortCount;
+        cell.lblValue.text = [NSString stringWithFormat:@"%d", (int)cell.slider.value];
+    }else if ([option isEqualToString:[self sectionToTitle:OPTIONS_SMA_SHORT]]){
+        cell.slider.maximumValue = 20;
+        cell.slider.minimumValue = 5;
+        cell.slider.value = self.config.smaShortCount;
+        cell.lblValue.text = [NSString stringWithFormat:@"%d", (int)cell.slider.value];
+    }else if ([option isEqualToString:[self sectionToTitle:OPTIONS_EMA_INTERVAL]]){
+        cell.slider.minimumValue = 5;
+        cell.slider.maximumValue = 60 * 5;
+        cell.slider.value = self.config.emaStrategyInterval;
+        cell.lblValue.text = [NSString stringWithFormat:@"%d", (int)cell.slider.value];
+    }else if ([option isEqualToString:[self sectionToTitle:OPTIONS_SMA_INTERVAL]]){
+        cell.slider.minimumValue = 5;
+        cell.slider.maximumValue = 60 * 5;
+        cell.slider.value = self.config.smaStrategyInterval;
+        cell.lblValue.text = [NSString stringWithFormat:@"%d", (int)cell.slider.value];
+    }else if ([option isEqualToString:[self sectionToTitle:OPTIONS_SPEED_INTERVAL]]){
+        cell.slider.minimumValue = 5;
+        cell.slider.maximumValue = 60 * 5;
+        cell.slider.value = self.config.speedStrategyInterval;
+        cell.lblValue.text = [NSString stringWithFormat:@"%d", (int)cell.slider.value];
+    }else if ([option isEqualToString:[self sectionToTitle:OPTIONS_SPEED_NEEDPERC]]){
+        cell.slider.minimumValue = 0.01;
+        cell.slider.maximumValue = 0.5;
+        cell.slider.value = self.config.speedStrategyPercentChangeNeeded;
+        cell.lblValue.text = [NSString stringWithFormat:@"%d%%", (int)(cell.slider.value * 100)];
+    }else if ([option isEqualToString:[self sectionToTitle:OPTIONS_SELECTED_STRATEGY]]){
+        cell.lblSubtitle.text = [[Context sharedContext] strategyToString:self.config.selectedStrategy];
+    }else if ([option isEqualToString:[self sectionToTitle:OPTIONS_SELECT_STRATEGY]]){
+        cell.pickerView.dataSource = self;
+        cell.pickerView.delegate = self;
+        [cell.pickerView selectRow:self.config.selectedStrategy inComponent:0 animated:NO];
+    }else{
+        NSLog(@"Settings: Cell type not found at row: %ld", (long)indexPath.row);
+    }
+
+    
+    if ([option isEqualToString:[self sectionToTitle:OPTIONS_SELECTED_STRATEGY]]){
+        cell.selectionStyle = UITableViewCellSelectionStyleDefault;
+    }else{
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    }
+    
+    cell.lblTitle.text = option;
     
     cell.delegate = self;
     
@@ -164,58 +205,100 @@ typedef enum: NSInteger{
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    
+    NSString *option = self.options[indexPath.row];
+
+    if ([option isEqualToString:[self sectionToTitle:OPTIONS_SELECTED_STRATEGY]]){
+        self.optionsExpanded = !self.optionsExpanded;
+        
+        
+        if (self.optionsExpanded){
+            [self.options insertObject:[self sectionToTitle:OPTIONS_SELECT_STRATEGY] atIndex:1];
+            [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:1 inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
+        }else{
+            [self.options removeObjectAtIndex:1];
+            [self.tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:1 inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
+        }
+    }
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 #pragma mark - Delegates
 
-- (void)sliderValueChanged:(double)value withTag:(NSInteger)tag{
+- (void)sliderValueChanged:(double)value withCellTitle:(NSString *)title{
     
-    SettingsTableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:tag inSection:0]];
+    NSInteger index = [self findIndexForTitle:title];
+    NSString *option = self.options[index];
+    SettingsTableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0]];
     
-    switch (tag) {
-        case OPTIONS_EMA_LONG:
-            self.config.emaLongCount = value;
-            cell.lblValue.text = [NSString stringWithFormat:@"%d", (int)cell.slider.value];
-            break;
-        case OPTIONS_EMA_SHORT:
-            self.config.emaShortCount = value;
-            cell.lblValue.text = [NSString stringWithFormat:@"%d", (int)cell.slider.value];
-            break;
-        case OPTIONS_EMA_INTERVAL:
-            self.config.emaStrategyInterval = value;
-            cell.lblValue.text = [NSString stringWithFormat:@"%d", (int)cell.slider.value];
-            break;
-        case OPTIONS_SMA_LONG:
-            self.config.smaLongCount = value;
-            cell.lblValue.text = [NSString stringWithFormat:@"%d", (int)cell.slider.value];
-            break;
-        case OPTIONS_SMA_SHORT:
-            self.config.smaShortCount = value;
-            cell.lblValue.text = [NSString stringWithFormat:@"%d", (int)cell.slider.value];
-            break;
-        case OPTIONS_SMA_INTERVAL:
-            self.config.smaStrategyInterval = value;
-            cell.lblValue.text = [NSString stringWithFormat:@"%d", (int)cell.slider.value];
-            break;
-        case OPTIONS_SPEED_NEEDPERC:
-            self.config.speedStrategyPercentChangeNeeded = value;
-            cell.lblValue.text = [NSString stringWithFormat:@"%d%%", (int)(cell.slider.value * 100)];
-            break;
-        case OPTIONS_SPEED_INTERVAL:
-            self.config.speedStrategyInterval = value;
-            cell.lblValue.text = [NSString stringWithFormat:@"%d", (int)cell.slider.value];
-            break;
-        default:
-            NSLog(@"Settings: Slider changed but row not found with tag: %ld", (long)tag);
-            break;
+    if ([option isEqualToString:[self sectionToTitle:OPTIONS_EMA_LONG]]){
+        self.config.emaLongCount = value;
+        cell.lblValue.text = [NSString stringWithFormat:@"%d", (int)cell.slider.value];
+    }else if ([option isEqualToString:[self sectionToTitle:OPTIONS_SMA_LONG]]){
+        self.config.smaLongCount = value;
+        cell.lblValue.text = [NSString stringWithFormat:@"%d", (int)cell.slider.value];
+    }else if ([option isEqualToString:[self sectionToTitle:OPTIONS_EMA_SHORT]]){
+        self.config.emaShortCount = value;
+        cell.lblValue.text = [NSString stringWithFormat:@"%d", (int)cell.slider.value];
+    }else if ([option isEqualToString:[self sectionToTitle:OPTIONS_SMA_SHORT]]){
+        self.config.smaShortCount = value;
+        cell.lblValue.text = [NSString stringWithFormat:@"%d", (int)cell.slider.value];
+    }else if ([option isEqualToString:[self sectionToTitle:OPTIONS_EMA_INTERVAL]]){
+        self.config.emaStrategyInterval = value;
+        cell.lblValue.text = [NSString stringWithFormat:@"%d", (int)cell.slider.value];
+    }else if ([option isEqualToString:[self sectionToTitle:OPTIONS_SMA_INTERVAL]]){
+        self.config.smaStrategyInterval = value;
+        cell.lblValue.text = [NSString stringWithFormat:@"%d", (int)cell.slider.value];
+    }else if ([option isEqualToString:[self sectionToTitle:OPTIONS_SPEED_INTERVAL]]){
+        self.config.speedStrategyInterval = value;
+        cell.lblValue.text = [NSString stringWithFormat:@"%d", (int)cell.slider.value];
+    }else if ([option isEqualToString:[self sectionToTitle:OPTIONS_SPEED_NEEDPERC]]){
+        self.config.speedStrategyPercentChangeNeeded = value;
+        cell.lblValue.text = [NSString stringWithFormat:@"%d%%", (int)(cell.slider.value * 100)];
+    }else if ([option isEqualToString:[self sectionToTitle:OPTIONS_SELECTED_STRATEGY]]){
+        cell.lblSubtitle.text = [[Context sharedContext] strategyToString:self.config.selectedStrategy];
+    }else if ([option isEqualToString:[self sectionToTitle:OPTIONS_SELECT_STRATEGY]]){
+        cell.pickerView.dataSource = self;
+        cell.pickerView.delegate = self;
+    }else{
+        NSLog(@"Settings: Slider changed but row not found with title: %@", title);
     }
+    
+    [self.navigationItem.rightBarButtonItem setEnabled:YES];
+    [self.navigationItem.leftBarButtonItem setEnabled:YES];
+}
+
+#pragma mark - Buttons
+
+- (void)save{
+    [self patchConfig];
+    [self.navigationItem.rightBarButtonItem setEnabled:NO];
+    [self.navigationItem.leftBarButtonItem setEnabled:NO];
+}
+
+- (void)reset{
+    self.config = [[Config alloc]initWithNetworkData:self.networkConfig];
+    [self refreshTableView];
+    [self.navigationItem.rightBarButtonItem setEnabled:NO];
+    [self.navigationItem.leftBarButtonItem setEnabled:NO];
 }
 
 #pragma mark - Helper
 
+- (NSInteger)findIndexForTitle:(NSString *)title{
+    for (int i=0; i<self.options.count; i++){
+        NSString *option = self.options[i];
+        if ([title isEqualToString:option]){
+            return i;
+        }
+    }
+    return -1;
+}
+
 - (NSString *)sectionToTitle:(SERVER_OPTIONS)option{
     NSString *title = @"";
+    
     switch (option) {
         case OPTIONS_EMA_SHORT:
             title = @"EMA short count";
@@ -250,24 +333,27 @@ typedef enum: NSInteger{
     return title;
 }
 
-- (NSString *)strategyToString:(STRATEGIES)strategy{
-    NSString *title = @"";
-    switch(strategy){
-        case SMA:
-            title = @"SMA";
-            break;
-        case EMA:
-            title = @"EMA";
-            break;
-        case SPEED:
-            title = @"SPEED";
-            break;
-        case MACD:
-            title = @"MACD";
-            break;
-            
-    }
-    return title;
+#pragma mark - Picker
+
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView{
+    return 1;
+}
+
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component{
+    return 4;
+}
+
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component{
+    STRATEGIES strategy = row;
+    return [[Context sharedContext] strategyToString:strategy];
+}
+
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
+    STRATEGIES strategy = row;
+    self.config.selectedStrategy = strategy;
+    [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
+    self.navigationItem.rightBarButtonItem.enabled = YES;
+    self.navigationItem.leftBarButtonItem.enabled = YES;
 }
 
 /*

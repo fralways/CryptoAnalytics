@@ -386,24 +386,24 @@
                                             <outlet property="slider" destination="Bgw-us-b1D" id="GfJ-C0-Mmp"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SettingsSubtitleCell" rowHeight="120" id="AGG-I9-ffU" customClass="SettingsTableViewCell">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="SettingsSubtitleCell" rowHeight="120" id="AGG-I9-ffU" customClass="SettingsTableViewCell">
                                         <rect key="frame" x="0.0" y="133" width="375" height="120"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="AGG-I9-ffU" id="o3e-4U-Wyz">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="119.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="342" height="119.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="3Yw-Xq-h4T">
-                                                    <rect key="frame" x="16" y="16" width="343" height="87.5"/>
+                                                <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="3Yw-Xq-h4T">
+                                                    <rect key="frame" x="16" y="16" width="310" height="87.5"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1UO-hO-8dM">
-                                                            <rect key="frame" x="0.0" y="0.0" width="343" height="55.5"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1UO-hO-8dM">
+                                                            <rect key="frame" x="0.0" y="0.0" width="254" height="87.5"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q6v-fq-eDm">
-                                                            <rect key="frame" x="0.0" y="63.5" width="343" height="24"/>
+                                                            <rect key="frame" x="262" y="0.0" width="48" height="87.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -421,6 +421,36 @@
                                         <connections>
                                             <outlet property="lblSubtitle" destination="q6v-fq-eDm" id="jXX-3N-XtH"/>
                                             <outlet property="lblTitle" destination="1UO-hO-8dM" id="Ghb-bI-mwm"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SettingsPickerCell" rowHeight="116" id="xZt-Zb-dKp" customClass="SettingsTableViewCell">
+                                        <rect key="frame" x="0.0" y="253" width="375" height="116"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="xZt-Zb-dKp" id="MFS-pP-HnI">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="115.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="vrK-mD-14w">
+                                                    <rect key="frame" x="16" y="8" width="343" height="100"/>
+                                                    <subviews>
+                                                        <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NwP-wE-ohZ">
+                                                            <rect key="frame" x="11.5" y="0.0" width="320" height="100"/>
+                                                        </pickerView>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="100" id="26i-X2-3fB"/>
+                                                    </constraints>
+                                                </stackView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="vrK-mD-14w" secondAttribute="bottom" constant="8" id="EMK-Dv-I0p"/>
+                                                <constraint firstAttribute="trailing" secondItem="vrK-mD-14w" secondAttribute="trailing" constant="16" id="FDy-Pg-0AX"/>
+                                                <constraint firstItem="vrK-mD-14w" firstAttribute="top" secondItem="MFS-pP-HnI" secondAttribute="top" constant="8" id="JYT-Kq-R51"/>
+                                                <constraint firstItem="vrK-mD-14w" firstAttribute="leading" secondItem="MFS-pP-HnI" secondAttribute="leading" constant="16" id="Jte-7d-rzo"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="pickerView" destination="NwP-wE-ohZ" id="PeB-PZ-sQW"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

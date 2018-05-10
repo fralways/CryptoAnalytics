@@ -18,5 +18,6 @@
 - (void)getCurrenciesWithCompletionHandler:(void (^)(bool successful, NSArray *currencies, NSError *httpError))completionHandler;
 - (void)getConfigWithCompletionHandler:(void (^)(bool successful, NSDictionary *config, NSError *httpError))completionHandler;
 - (void)getSuggestionsWithCompletionHandler:(void (^)(bool successful, NSArray *suggestions, NSError *httpError))completionHandler;
+- (void)patchConfig:(NSDictionary *)config withCompletionHandler:(void (^)(bool successful, NSDictionary *config, NSError *httpError))completionHandler;
 
 @end

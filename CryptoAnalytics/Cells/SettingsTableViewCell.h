@@ -11,8 +11,8 @@
 @protocol SettingsTableViewCellDelegate<NSObject>
 
 @optional
-- (void)sliderValueChanged:(double)value withTag:(NSInteger)tag;
-    
+- (void)sliderValueChanged:(double)value withCellTitle:(NSString *)title;
+
 @end
 
 @interface SettingsTableViewCell : UITableViewCell
@@ -23,5 +23,10 @@
 @property (strong, nonatomic) IBOutlet UILabel *lblValue;
 @property (strong, nonatomic) IBOutlet UILabel *lblTitle;
 @property (strong, nonatomic) IBOutlet UILabel *lblSubtitle;
+
+@property (strong, nonatomic) IBOutlet UIPickerView *pickerView;
+- (IBAction)cancel:(UIButton *)sender;
+- (IBAction)ok:(UIButton *)sender;
+
 
 @end

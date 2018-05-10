@@ -47,7 +47,7 @@
     return url;
 }
 
-#pragma mark - resfull metods
+#pragma mark - restful metods
 
 - (void)get:(NSString*)absoluteURL httpAdditionalHeaders:(NSDictionary *)httpAdditionalHeaders completionHandler:(void (^)(NSData *data, NSURLResponse *response, NSError *error)) completionHandler{
     
@@ -60,6 +60,31 @@
         [request setValue:httpAdditionalHeaders[key] forHTTPHeaderField:key];
     }
     //    [self.session setSessionDescription:absoluteURL];
+    
+    [[self.session dataTaskWithRequest:request completionHandler:completionHandler] resume];
+}
+
+- (void)patch:(NSString *)absoluteURL httpAdditionalHeaders: (NSDictionary*)httpAdditionalHeaders data:(id)data completionHandler:(void (^)(NSData *data, NSURLResponse *response, NSError *error))completionHandler{
+    
+    NSError *error;
+    
+    NSURL *url = [NSURL URLWithString:absoluteURL];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url
+                                                           cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                       timeoutInterval:60.0];
+    
+    for (NSString *key in httpAdditionalHeaders) {
+        [request setValue:httpAdditionalHeaders[key] forHTTPHeaderField:key];
+    }
+    
+    [request setHTTPMethod:@"PATCH"];
+    
+    if (data) {
+        NSData *patchData = [NSJSONSerialization dataWithJSONObject:data
+                                                            options:0
+                                                              error:&error];
+        [request setHTTPBody:patchData];
+    }
     
     [[self.session dataTaskWithRequest:request completionHandler:completionHandler] resume];
 }
@@ -157,6 +182,24 @@
             if (200 == httpResponse.statusCode && !error) {
                 NSArray *suggestions = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
                 completionHandler(YES, suggestions, nil);
+            }else{
+                completionHandler(NO, nil, nil);
+            }
+        }else{
+            completionHandler(NO, nil, error);
+        }
+    }];
+}
+
+- (void)patchConfig:(NSDictionary *)config withCompletionHandler:(void (^)(bool successful, NSDictionary *config, NSError *httpError))completionHandler{
+    NSMutableDictionary *httpAdditionalHeaders = [[NSMutableDictionary alloc] init];
+    NSString *endpoint = [self getUrlForEndpoint:@"config"];
+    [self patch:endpoint httpAdditionalHeaders:httpAdditionalHeaders data:config completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
+            NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+            if (200 == httpResponse.statusCode && !error) {
+                NSDictionary *config = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+                completionHandler(YES, config, nil);
             }else{
                 completionHandler(NO, nil, nil);
             }

@@ -21,9 +21,14 @@
 }
 
 - (void)sliderValueChanged:(UISlider *)sender{
-    if ([self.delegate respondsToSelector:@selector(sliderValueChanged:withTag:)]) {
-        [self.delegate sliderValueChanged:sender.value withTag:self.tag];
+    if ([self.delegate respondsToSelector:@selector(sliderValueChanged:withCellTitle:)]) {
+        [self.delegate sliderValueChanged:sender.value withCellTitle:self.lblTitle.text];
     }
 }
 
+- (IBAction)cancel:(UIButton *)sender {
+}
+
+- (IBAction)ok:(UIButton *)sender {
+}
 @end
