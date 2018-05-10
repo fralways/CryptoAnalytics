@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SettingsTableViewCell.h"
 
-@interface SettingsViewController : UIViewController
+@interface SettingsViewController : UIViewController<UITableViewDataSource, UITableViewDelegate, SettingsTableViewCellDelegate>
+
+@property (strong, nonatomic) IBOutlet UITableView *tableView;
+
 
 @end

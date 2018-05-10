@@ -8,6 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
+typedef enum{
+    SPEED,
+    MACD,
+    EMA,
+    SMA
+}STRATEGIES;
+
 @interface Context : NSObject
 
 + (Context *)sharedContext;

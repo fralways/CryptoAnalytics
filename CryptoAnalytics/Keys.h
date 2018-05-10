@@ -13,7 +13,8 @@ static NSString *STATIC_CELL_CURRENCY = @"currencyCell";
 static NSString *STATIC_CELL_CURRENCYDETAILS = @"CurrencyDetailsCell";
 static NSString *STATIC_CELL_CURRENCYDETAILSCHART = @"CurrencyDetailsShowChartCell";
 static NSString *STATIC_CELL_HISTORY = @"HistoryCell";
-
+static NSString *STATIC_CELL_SETTINGSSLIDER = @"SettingsSliderCell";
+static NSString *STATIC_CELL_SETTINGSSUBTITLE = @"SettingsSubtitleCell";
 
 //segues
 static NSString *STATIC_SEGUE_CURRENCYDETAIL = @"CurrencyDetailSegue";

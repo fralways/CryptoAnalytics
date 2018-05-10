@@ -16,5 +16,7 @@
 
 - (void)getHomeWithCompletionHandler:(void (^)(bool successful, NSError *httpError))completionHandler;
 - (void)getCurrenciesWithCompletionHandler:(void (^)(bool successful, NSArray *currencies, NSError *httpError))completionHandler;
+- (void)getConfigWithCompletionHandler:(void (^)(bool successful, NSDictionary *config, NSError *httpError))completionHandler;
+- (void)getSuggestionsWithCompletionHandler:(void (^)(bool successful, NSArray *suggestions, NSError *httpError))completionHandler;
 
 @end
