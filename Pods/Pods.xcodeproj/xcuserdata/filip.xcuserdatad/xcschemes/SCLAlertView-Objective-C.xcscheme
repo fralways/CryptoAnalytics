@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "A01F612B0B4F949550CC53DA87E29AA8"
-               BuildableName = "Pods_CryptoAnalytics.framework"
-               BlueprintName = "Pods-CryptoAnalytics"
+               BlueprintIdentifier = "62DC7BCA18D1F9AB3B2BE453B3A6D68B"
+               BuildableName = "SCLAlertView_Objective_C.framework"
+               BlueprintName = "SCLAlertView-Objective-C"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -45,9 +45,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "A01F612B0B4F949550CC53DA87E29AA8"
-            BuildableName = "Pods_CryptoAnalytics.framework"
-            BlueprintName = "Pods-CryptoAnalytics"
+            BlueprintIdentifier = "62DC7BCA18D1F9AB3B2BE453B3A6D68B"
+            BuildableName = "SCLAlertView_Objective_C.framework"
+            BlueprintName = "SCLAlertView-Objective-C"
             ReferencedContainer = "container:Pods.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

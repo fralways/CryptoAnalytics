@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AnalyzerTableViewCell.h"
 
-@interface AnalyzerViewController : UIViewController
+@interface AnalyzerViewController : UIViewController<UITableViewDelegate, UITableViewDataSource, AnalyzerTableViewCellDelegate, UITextFieldDelegate>
+
+@property (strong, nonatomic) IBOutlet UITableView *tableView;
 
 @end

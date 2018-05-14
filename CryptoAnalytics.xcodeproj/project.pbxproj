@@ -141,6 +141,10 @@
 		DC795C332089236C00F394BE /* CurrencyHistagram.json in Resources */ = {isa = PBXBuildFile; fileRef = DC795C322089236C00F394BE /* CurrencyHistagram.json */; };
 		DC795C37208D1F3200F394BE /* HistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC795C36208D1F3200F394BE /* HistoryViewController.m */; };
 		DC795C3A208D215000F394BE /* HistoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DC795C39208D215000F394BE /* HistoryTableViewCell.m */; };
+		DC9AAEC020A9927600A904B7 /* AnalyzerTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DC9AAEBF20A9927600A904B7 /* AnalyzerTableViewCell.m */; };
+		DC9AAEC220A994D200A904B7 /* suggestions.json in Resources */ = {isa = PBXBuildFile; fileRef = DC9AAEC120A994D200A904B7 /* suggestions.json */; };
+		DC9AAEC520A9998C00A904B7 /* Suggestion.m in Sources */ = {isa = PBXBuildFile; fileRef = DC9AAEC420A9998C00A904B7 /* Suggestion.m */; };
+		DC9AAECB20A9A45100A904B7 /* NSDate+AnalyzerDate.m in Sources */ = {isa = PBXBuildFile; fileRef = DC9AAECA20A9A45100A904B7 /* NSDate+AnalyzerDate.m */; };
 		DCCCAE80204F1B1300990407 /* Currency.m in Sources */ = {isa = PBXBuildFile; fileRef = DCCCAE7F204F1B1300990407 /* Currency.m */; };
 		DCDD466620A4F4BA00CA271F /* config.json in Resources */ = {isa = PBXBuildFile; fileRef = DCDD466520A4F4BA00CA271F /* config.json */; };
 		DCF11B9D2049952C00E6807F /* CurrencyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DCF11B9C2049952C00E6807F /* CurrencyTableViewCell.m */; };
@@ -300,6 +304,13 @@
 		DC795C36208D1F3200F394BE /* HistoryViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HistoryViewController.m; sourceTree = "<group>"; };
 		DC795C38208D215000F394BE /* HistoryTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HistoryTableViewCell.h; sourceTree = "<group>"; };
 		DC795C39208D215000F394BE /* HistoryTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HistoryTableViewCell.m; sourceTree = "<group>"; };
+		DC9AAEBE20A9927600A904B7 /* AnalyzerTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AnalyzerTableViewCell.h; sourceTree = "<group>"; };
+		DC9AAEBF20A9927600A904B7 /* AnalyzerTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AnalyzerTableViewCell.m; sourceTree = "<group>"; };
+		DC9AAEC120A994D200A904B7 /* suggestions.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = suggestions.json; sourceTree = "<group>"; };
+		DC9AAEC320A9998C00A904B7 /* Suggestion.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Suggestion.h; sourceTree = "<group>"; };
+		DC9AAEC420A9998C00A904B7 /* Suggestion.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Suggestion.m; sourceTree = "<group>"; };
+		DC9AAEC920A9A45100A904B7 /* NSDate+AnalyzerDate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSDate+AnalyzerDate.h"; sourceTree = "<group>"; };
+		DC9AAECA20A9A45100A904B7 /* NSDate+AnalyzerDate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSDate+AnalyzerDate.m"; sourceTree = "<group>"; };
 		DCCCAE7E204F1B1300990407 /* Currency.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Currency.h; sourceTree = "<group>"; };
 		DCCCAE7F204F1B1300990407 /* Currency.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Currency.m; sourceTree = "<group>"; };
 		DCDD466520A4F4BA00CA271F /* config.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = config.json; sourceTree = "<group>"; };
@@ -369,6 +380,7 @@
 				DCF11B9E2049953100E6807F /* Cells */,
 				DCF11BA52049972D00E6807F /* Network */,
 				DCCCAE81204F1B2100990407 /* ObjectClasses */,
+				DC9AAECC20A9A45A00A904B7 /* Extensions */,
 				DC06E9652046F72B008B2F82 /* AppDelegate.h */,
 				DC06E9662046F72B008B2F82 /* AppDelegate.m */,
 				DC06E9682046F72B008B2F82 /* CurrencyViewController.h */,
@@ -615,8 +627,18 @@
 			children = (
 				DC795C322089236C00F394BE /* CurrencyHistagram.json */,
 				DCDD466520A4F4BA00CA271F /* config.json */,
+				DC9AAEC120A994D200A904B7 /* suggestions.json */,
 			);
 			path = Mock;
+			sourceTree = "<group>";
+		};
+		DC9AAECC20A9A45A00A904B7 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				DC9AAEC920A9A45100A904B7 /* NSDate+AnalyzerDate.h */,
+				DC9AAECA20A9A45100A904B7 /* NSDate+AnalyzerDate.m */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		DCCCAE81204F1B2100990407 /* ObjectClasses */ = {
@@ -626,6 +648,8 @@
 				DCCCAE7F204F1B1300990407 /* Currency.m */,
 				DC6BB81220A44F4B003C2D62 /* Config.h */,
 				DC6BB81320A44F4B003C2D62 /* Config.m */,
+				DC9AAEC320A9998C00A904B7 /* Suggestion.h */,
+				DC9AAEC420A9998C00A904B7 /* Suggestion.m */,
 			);
 			path = ObjectClasses;
 			sourceTree = "<group>";
@@ -641,6 +665,8 @@
 				DC795C39208D215000F394BE /* HistoryTableViewCell.m */,
 				DC6BB80F20A44620003C2D62 /* SettingsTableViewCell.h */,
 				DC6BB81020A44620003C2D62 /* SettingsTableViewCell.m */,
+				DC9AAEBE20A9927600A904B7 /* AnalyzerTableViewCell.h */,
+				DC9AAEBF20A9927600A904B7 /* AnalyzerTableViewCell.m */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -717,6 +743,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DC2686F4208681ED00F18663 /* Info.plist in Resources */,
+				DC9AAEC220A994D200A904B7 /* suggestions.json in Resources */,
 				DC06E9722046F72B008B2F82 /* LaunchScreen.storyboard in Resources */,
 				DC06E96F2046F72B008B2F82 /* Assets.xcassets in Resources */,
 				DC06E96D2046F72B008B2F82 /* Main.storyboard in Resources */,
@@ -735,10 +762,12 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-CryptoAnalytics/Pods-CryptoAnalytics-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/SCLAlertView-Objective-C/SCLAlertView_Objective_C.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SCLAlertView_Objective_C.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -799,6 +828,7 @@
 				DC2686ED208681ED00F18663 /* ChartTextUtils.swift in Sources */,
 				DC268709208681ED00F18663 /* ChartAxisLabelsConflictSolver.swift in Sources */,
 				DC268724208681ED00F18663 /* ChartPoint.swift in Sources */,
+				DC9AAEC520A9998C00A904B7 /* Suggestion.m in Sources */,
 				DC2686F3208681ED00F18663 /* Globals.swift in Sources */,
 				DC54DDF8206AD8920076ABFB /* AnalyzerViewController.m in Sources */,
 				DC2686FA208681ED00F18663 /* ChartAxisXLowLayerDefault.swift in Sources */,
@@ -899,6 +929,7 @@
 				DC2686D7208681ED00F18663 /* GroupedBarsCompanionsLayer.swift in Sources */,
 				DC268728208681ED00F18663 /* ChartViewGrowAnimator.swift in Sources */,
 				DC268715208681ED00F18663 /* ChartAxisLabelsGeneratorNumber.swift in Sources */,
+				DC9AAEC020A9927600A904B7 /* AnalyzerTableViewCell.m in Sources */,
 				DC268713208681ED00F18663 /* ChartAxisXLayerDefault.swift in Sources */,
 				DC26871C208681ED00F18663 /* LineChart.swift in Sources */,
 				DC2686EF208681ED00F18663 /* TrendlineGenerator.swift in Sources */,
@@ -910,6 +941,7 @@
 				DC06E9672046F72B008B2F82 /* AppDelegate.m in Sources */,
 				DC2686EB208681ED00F18663 /* ChartViewSelectorAlpha.swift in Sources */,
 				DC26870A208681ED00F18663 /* ChartAxisValuesGeneratorXDividers.swift in Sources */,
+				DC9AAECB20A9A45100A904B7 /* NSDate+AnalyzerDate.m in Sources */,
 				DC268703208681ED00F18663 /* ChartAxisXHighLayerDefault.swift in Sources */,
 				DC795C37208D1F3200F394BE /* HistoryViewController.m in Sources */,
 				DC26870D208681ED00F18663 /* ChartAxisLabelsGeneratorBase.swift in Sources */,

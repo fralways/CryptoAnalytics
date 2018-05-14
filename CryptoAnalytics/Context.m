@@ -8,6 +8,10 @@
 
 #import "Context.h"
 
+@interface Context ()
+
+@end
+
 @implementation Context
 
 + (Context *)sharedContext {
@@ -22,7 +26,8 @@
 
 - (void)initParams{
     self.host = @"http://192.168.0.14:8080/crypto_war_exploded";
-    self.testing = YES;
+    self.testing = NO;
+    self.myCurrencies = [NSMutableDictionary new];
 }
 
 - (NSString *)strategyToString:(STRATEGIES)strategy{
@@ -43,6 +48,15 @@
             
     }
     return title;
+}
+
+- (void)addCurrency:(NSString *)currency amount:(double)amount{
+    double finalAmount = amount;
+    if ([self.myCurrencies objectForKey:currency]){
+        double currentAmount = [[self.myCurrencies objectForKey:currency] doubleValue];
+        finalAmount += currentAmount;
+    }
+    self.myCurrencies[currency] = @(finalAmount);
 }
 
 @end

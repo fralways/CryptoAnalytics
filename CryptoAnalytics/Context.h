@@ -21,7 +21,9 @@ typedef enum: NSInteger{
 
 @property NSString *host;
 @property BOOL testing;
+@property NSMutableDictionary *myCurrencies;
 
 - (NSString *)strategyToString:(STRATEGIES)strategy;
+- (void)addCurrency:(NSString *)currency amount:(double)amount;
 
 @end

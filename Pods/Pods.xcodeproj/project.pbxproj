@@ -7,69 +7,148 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0615D59BF9D36B4876ED84BDE0585B32 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */; };
-		5644241A9742AF4E3AFCEA76F22310D4 /* Pods-CryptoAnalytics-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = FB0068EB3339E627FE2190B998182304 /* Pods-CryptoAnalytics-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		689470800F40C009D1ABAE02791B845C /* SwiftyJSON-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 32B9BBA8F5B33E56C38F5546432F66B7 /* SwiftyJSON-dummy.m */; };
-		8B666C038AFAE0AFC3B3507ACDF0F776 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */; };
-		EC930A3FE3C80142768A42E2312DEC8D /* SwiftyJSON-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 05CA09B061E193906653AC21FD3A94F1 /* SwiftyJSON-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		ECDBFC597D32A6538AF31E041DD0F1D5 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDE506ECE97701EBA44FDBFF401C1A04 /* SwiftyJSON.swift */; };
-		FB2AE2F52188D4D2DA2AFB36BD21B234 /* Pods-CryptoAnalytics-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = FDD2B5813931A3CDFD28751EA29DE83E /* Pods-CryptoAnalytics-dummy.m */; };
+		014A201B96D31F5A673AED46D31EC84C /* SCLAlertViewResponder.h in Headers */ = {isa = PBXBuildFile; fileRef = 06E495CCF648B7636B547469984AFB8C /* SCLAlertViewResponder.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		19C2AB73CEE13844ECF01BDD618BAD90 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D77D3BC7A7E542A1F7489D546EB88A /* SwiftyJSON.swift */; };
+		1FFECEBF7F612109DB8D3D317FD6DB86 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2859BC85402AEDE24DB74F79B83A8F38 /* Accelerate.framework */; };
+		2DD24F37E4628726349080DAE78E898D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 944C2CE7783B3119D5A38115A6BE920E /* Foundation.framework */; };
+		2EDE9CAA461C5F306FD958D6E6A573A6 /* Pods-CryptoAnalytics-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = FB0068EB3339E627FE2190B998182304 /* Pods-CryptoAnalytics-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3600C3565326D8D2D3627C934BF5EFE8 /* SCLAlertViewStyleKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 4AD19944ADCDB0B03C67497F5D742EC5 /* SCLAlertViewStyleKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3F917B6BC07F3566A720E610B7C87CE9 /* SCLTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = EDCA1B133A32DE037C3D441EF7E0F342 /* SCLTextView.m */; };
+		5D79D0369683325DF77ACDEEA92E60C5 /* Pods-CryptoAnalytics-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = FDD2B5813931A3CDFD28751EA29DE83E /* Pods-CryptoAnalytics-dummy.m */; };
+		6BA4CF28A1EB6D09C05C792DF9AA2FB8 /* SCLSwitchView.m in Sources */ = {isa = PBXBuildFile; fileRef = E5292F87D73E8B783406F452620386AC /* SCLSwitchView.m */; };
+		6C5060E8E52DAD5CBED0E213D98383FD /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C370011DCAEDB8D4D4FBD87D2949710F /* CoreGraphics.framework */; };
+		6CCA2FC2D1B850D4AD519020337CC080 /* SwiftyJSON-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F04B88130B45C94DCA65BB53973924A /* SwiftyJSON-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		755A3196F0CBCDAAE914C1DE1E4F9E77 /* UIImage+ImageEffects.h in Headers */ = {isa = PBXBuildFile; fileRef = 56CD7821E0AA7660BA6281410A3119CA /* UIImage+ImageEffects.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		87393DD129310C542B9438CD8463BD4D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEF03D30385E2DF6C66213D07797EF8B /* UIKit.framework */; };
+		8FC7337D1434EF497D6D96184B22B669 /* SCLAlertView.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C24D2A2688EA8F2AAB99B2E2EAC84CD /* SCLAlertView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		98C3AB6F98270BBF97E32612A64A0416 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 944C2CE7783B3119D5A38115A6BE920E /* Foundation.framework */; };
+		9A82A86066542473CB01BB778AF07F29 /* SCLAlertViewResponder.m in Sources */ = {isa = PBXBuildFile; fileRef = D852EDA59ED54AAD2C12EEAA9A6E9C76 /* SCLAlertViewResponder.m */; };
+		9F235294C6976C9A896BD11259752883 /* SCLTimerDisplay.m in Sources */ = {isa = PBXBuildFile; fileRef = B256FC56D30A338987573B943B576598 /* SCLTimerDisplay.m */; };
+		A080D79E384FBF2428EFBF8DF98B3F71 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 944C2CE7783B3119D5A38115A6BE920E /* Foundation.framework */; };
+		A4965B2E1198DDEA6FB9582762DC8631 /* SCLTimerDisplay.h in Headers */ = {isa = PBXBuildFile; fileRef = 05032DDF70BBF59A7D5C8D6038DB60F2 /* SCLTimerDisplay.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ADF764478B2584C997DBEAD4CCBC2A3E /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 611D6C8139F9DFA21714310C98ED91DD /* UIImage+ImageEffects.m */; };
+		AE763EE8FF3E8F97005986467C260687 /* SCLAlertView-Objective-C-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 1E51F9A547E451A90945B00F664372AF /* SCLAlertView-Objective-C-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B56916C7D7F9E37F1A1DF5507E27713D /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FC3E6E558B22227E3FE77DD43D38E54 /* AudioToolbox.framework */; };
+		B92800E016B9063637FF5C717D83A5B3 /* SCLAlertViewStyleKit.m in Sources */ = {isa = PBXBuildFile; fileRef = D37BE1CB180698FCBF56A4B64970F9D0 /* SCLAlertViewStyleKit.m */; };
+		C08797243B15BBA7FB1C57F1B47C8EA5 /* SCLAlertView-Objective-C-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F5F1E4DB695FAF3EF204491D49A3933 /* SCLAlertView-Objective-C-dummy.m */; };
+		C1C475D54D2DCEAC9D86FB3854C091EF /* SCLAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79E8D44E3382FFCBFB5BC39E0E7A6FB5 /* SCLAlertView.m */; };
+		C80DE920B00CFC82AC3CF1986C2342B0 /* SCLSwitchView.h in Headers */ = {isa = PBXBuildFile; fileRef = 53705B902CD73B6A6B5704F4BB75C798 /* SCLSwitchView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CEA2934135D299C48D346448658F5562 /* SCLTextView.h in Headers */ = {isa = PBXBuildFile; fileRef = 096DFE622E2D39D4C7FF802AD7746D96 /* SCLTextView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D4A154EFA1F0B1F2962CE0B4D4D8FFE4 /* SCLButton.m in Sources */ = {isa = PBXBuildFile; fileRef = DC980D5D5701A161F6FF8CF3F7B03510 /* SCLButton.m */; };
+		D8AE41E83451216ECEF6BC6F261DA733 /* SCLButton.h in Headers */ = {isa = PBXBuildFile; fileRef = DC4885B716563A349404BE3A6141010A /* SCLButton.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DD4DF37059D8BADA2AA8A6ABAAD9FE21 /* SwiftyJSON-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C92A4DBD36AB3225195CBDBC966F882 /* SwiftyJSON-dummy.m */; };
+		EC9097B22AD4F3E34B23819151EF8140 /* SCLMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = CF97FBDC8A59CE8A7AC96F0DFF87A7F1 /* SCLMacros.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		4B5185344EEE28F0C8C5127418FBBC17 /* PBXContainerItemProxy */ = {
+		53F3C7A82C39705D45EC7E327B7FFD1F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 68B6720C0BAC7E65A2B6F2843F57C0C3;
+			remoteGlobalIDString = 62DC7BCA18D1F9AB3B2BE453B3A6D68B;
+			remoteInfo = "SCLAlertView-Objective-C";
+		};
+		D6AFDAE754121800D2F31A505D7109C2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4309005E81BE670020D883455AC6C3EE;
 			remoteInfo = SwiftyJSON;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		05CA09B061E193906653AC21FD3A94F1 /* SwiftyJSON-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftyJSON-umbrella.h"; sourceTree = "<group>"; };
+		05032DDF70BBF59A7D5C8D6038DB60F2 /* SCLTimerDisplay.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SCLTimerDisplay.h; path = SCLAlertView/SCLTimerDisplay.h; sourceTree = "<group>"; };
+		06E495CCF648B7636B547469984AFB8C /* SCLAlertViewResponder.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SCLAlertViewResponder.h; path = SCLAlertView/SCLAlertViewResponder.h; sourceTree = "<group>"; };
+		096DFE622E2D39D4C7FF802AD7746D96 /* SCLTextView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SCLTextView.h; path = SCLAlertView/SCLTextView.h; sourceTree = "<group>"; };
+		09A1E0889FCB03AFFC7A06D177D1F590 /* SCLAlertView-Objective-C.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "SCLAlertView-Objective-C.modulemap"; sourceTree = "<group>"; };
 		1164AF83BAB6712521801DA5C20F2994 /* Pods-CryptoAnalytics-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-CryptoAnalytics-resources.sh"; sourceTree = "<group>"; };
-		161BB9F0D713B09CA18B824441F75D45 /* Pods_CryptoAnalytics.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_CryptoAnalytics.framework; path = "Pods-CryptoAnalytics.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		2E7F7C62EE34D2D271E6E1234A2002B2 /* SwiftyJSON.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SwiftyJSON.xcconfig; sourceTree = "<group>"; };
-		32B9BBA8F5B33E56C38F5546432F66B7 /* SwiftyJSON-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SwiftyJSON-dummy.m"; sourceTree = "<group>"; };
+		1E51F9A547E451A90945B00F664372AF /* SCLAlertView-Objective-C-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SCLAlertView-Objective-C-umbrella.h"; sourceTree = "<group>"; };
+		2859BC85402AEDE24DB74F79B83A8F38 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/Accelerate.framework; sourceTree = DEVELOPER_DIR; };
+		28E3EE2B9E9BB8671A0AD5DF999CAE00 /* Pods_CryptoAnalytics.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_CryptoAnalytics.framework; path = "Pods-CryptoAnalytics.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2C2772039543543E2BBA88D2F2F520BD /* SCLAlertView-Objective-C.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "SCLAlertView-Objective-C.xcconfig"; sourceTree = "<group>"; };
+		37D77D3BC7A7E542A1F7489D546EB88A /* SwiftyJSON.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftyJSON.swift; path = Source/SwiftyJSON.swift; sourceTree = "<group>"; };
 		3D9B2598ABBFE99FB9B0EEAFB92997E0 /* Pods-CryptoAnalytics.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-CryptoAnalytics.release.xcconfig"; sourceTree = "<group>"; };
 		3DA095C49DB0E0ECFAD834CFD17E520E /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3DDEAECFCC8444A4AB62CEB72BA012DD /* SCLAlertView_Objective_C.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = SCLAlertView_Objective_C.framework; path = "SCLAlertView-Objective-C.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4AD19944ADCDB0B03C67497F5D742EC5 /* SCLAlertViewStyleKit.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SCLAlertViewStyleKit.h; path = SCLAlertView/SCLAlertViewStyleKit.h; sourceTree = "<group>"; };
+		53705B902CD73B6A6B5704F4BB75C798 /* SCLSwitchView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SCLSwitchView.h; path = SCLAlertView/SCLSwitchView.h; sourceTree = "<group>"; };
+		56CD7821E0AA7660BA6281410A3119CA /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIImage+ImageEffects.h"; path = "SCLAlertView/UIImage+ImageEffects.h"; sourceTree = "<group>"; };
 		5EEB19DB5E32E7BA8D9F5F6422786BE2 /* Pods-CryptoAnalytics-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-CryptoAnalytics-frameworks.sh"; sourceTree = "<group>"; };
-		6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		5F04B88130B45C94DCA65BB53973924A /* SwiftyJSON-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftyJSON-umbrella.h"; sourceTree = "<group>"; };
+		611D6C8139F9DFA21714310C98ED91DD /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIImage+ImageEffects.m"; path = "SCLAlertView/UIImage+ImageEffects.m"; sourceTree = "<group>"; };
+		65B2FD6293E1DF90797FFE704594AD98 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6FC3E6E558B22227E3FE77DD43D38E54 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/AudioToolbox.framework; sourceTree = DEVELOPER_DIR; };
+		79E8D44E3382FFCBFB5BC39E0E7A6FB5 /* SCLAlertView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SCLAlertView.m; path = SCLAlertView/SCLAlertView.m; sourceTree = "<group>"; };
+		7C92A4DBD36AB3225195CBDBC966F882 /* SwiftyJSON-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SwiftyJSON-dummy.m"; sourceTree = "<group>"; };
+		7F5F1E4DB695FAF3EF204491D49A3933 /* SCLAlertView-Objective-C-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SCLAlertView-Objective-C-dummy.m"; sourceTree = "<group>"; };
 		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		A36B0D6AFDEBEA1CD5DE5F336F781F2B /* SwiftyJSON.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = SwiftyJSON.framework; path = SwiftyJSON.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		BBF610E40BDF6E542FA21FF7E5491205 /* SwiftyJSON-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftyJSON-prefix.pch"; sourceTree = "<group>"; };
-		BDE506ECE97701EBA44FDBFF401C1A04 /* SwiftyJSON.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftyJSON.swift; path = Source/SwiftyJSON.swift; sourceTree = "<group>"; };
-		C4A9A658C966F6BB111BEDBDEA1F874A /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		944C2CE7783B3119D5A38115A6BE920E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		946035BC27A6998030F5C941AF038809 /* SwiftyJSON.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SwiftyJSON.xcconfig; sourceTree = "<group>"; };
+		9763AB6AD2854F424A96EC3A087176A9 /* SwiftyJSON-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftyJSON-prefix.pch"; sourceTree = "<group>"; };
+		986B4634ACE3A987E31EDD0B59A936AA /* SwiftyJSON.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = SwiftyJSON.framework; path = SwiftyJSON.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9C24D2A2688EA8F2AAB99B2E2EAC84CD /* SCLAlertView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SCLAlertView.h; path = SCLAlertView/SCLAlertView.h; sourceTree = "<group>"; };
+		AAFE65DB607CE691D4B3469247DD69B4 /* SwiftyJSON.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = SwiftyJSON.modulemap; sourceTree = "<group>"; };
+		B256FC56D30A338987573B943B576598 /* SCLTimerDisplay.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SCLTimerDisplay.m; path = SCLAlertView/SCLTimerDisplay.m; sourceTree = "<group>"; };
+		C370011DCAEDB8D4D4FBD87D2949710F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
 		C9F37A6E39593D9F91F8A93C31748676 /* Pods-CryptoAnalytics-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-CryptoAnalytics-acknowledgements.markdown"; sourceTree = "<group>"; };
-		D032A29E584B77AE187E586922267CF5 /* SwiftyJSON.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = SwiftyJSON.modulemap; sourceTree = "<group>"; };
+		CCC9F1C073A7596FE4D2DA45C5F1E682 /* SCLAlertView-Objective-C-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SCLAlertView-Objective-C-prefix.pch"; sourceTree = "<group>"; };
+		CF97FBDC8A59CE8A7AC96F0DFF87A7F1 /* SCLMacros.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SCLMacros.h; path = SCLAlertView/SCLMacros.h; sourceTree = "<group>"; };
+		D37BE1CB180698FCBF56A4B64970F9D0 /* SCLAlertViewStyleKit.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SCLAlertViewStyleKit.m; path = SCLAlertView/SCLAlertViewStyleKit.m; sourceTree = "<group>"; };
 		D44183A6D2237A351529B67149F20990 /* Pods-CryptoAnalytics-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-CryptoAnalytics-acknowledgements.plist"; sourceTree = "<group>"; };
+		D852EDA59ED54AAD2C12EEAA9A6E9C76 /* SCLAlertViewResponder.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SCLAlertViewResponder.m; path = SCLAlertView/SCLAlertViewResponder.m; sourceTree = "<group>"; };
+		DC4885B716563A349404BE3A6141010A /* SCLButton.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SCLButton.h; path = SCLAlertView/SCLButton.h; sourceTree = "<group>"; };
+		DC980D5D5701A161F6FF8CF3F7B03510 /* SCLButton.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SCLButton.m; path = SCLAlertView/SCLButton.m; sourceTree = "<group>"; };
+		E5292F87D73E8B783406F452620386AC /* SCLSwitchView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SCLSwitchView.m; path = SCLAlertView/SCLSwitchView.m; sourceTree = "<group>"; };
+		E5E36725F6241079EF38D9310BB9D378 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E751501FD4BF843609F0E65A1FBFE0D7 /* Pods-CryptoAnalytics.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-CryptoAnalytics.modulemap"; sourceTree = "<group>"; };
+		EDCA1B133A32DE037C3D441EF7E0F342 /* SCLTextView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SCLTextView.m; path = SCLAlertView/SCLTextView.m; sourceTree = "<group>"; };
+		EEF03D30385E2DF6C66213D07797EF8B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		F5029728E50F11725B78CBB6098B830E /* Pods-CryptoAnalytics.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-CryptoAnalytics.debug.xcconfig"; sourceTree = "<group>"; };
 		FB0068EB3339E627FE2190B998182304 /* Pods-CryptoAnalytics-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-CryptoAnalytics-umbrella.h"; sourceTree = "<group>"; };
 		FDD2B5813931A3CDFD28751EA29DE83E /* Pods-CryptoAnalytics-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-CryptoAnalytics-dummy.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		C8981BB5AA74BFD94F7883CC0FE663EA /* Frameworks */ = {
+		10FA3334E1570C1F584AB93AB745D5DF /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0615D59BF9D36B4876ED84BDE0585B32 /* Foundation.framework in Frameworks */,
+				1FFECEBF7F612109DB8D3D317FD6DB86 /* Accelerate.framework in Frameworks */,
+				B56916C7D7F9E37F1A1DF5507E27713D /* AudioToolbox.framework in Frameworks */,
+				6C5060E8E52DAD5CBED0E213D98383FD /* CoreGraphics.framework in Frameworks */,
+				98C3AB6F98270BBF97E32612A64A0416 /* Foundation.framework in Frameworks */,
+				87393DD129310C542B9438CD8463BD4D /* UIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		FC1DBAE69AA4689FB0843537335197A9 /* Frameworks */ = {
+		7A0100A71CBB72AEAF96334BF6CADFF8 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8B666C038AFAE0AFC3B3507ACDF0F776 /* Foundation.framework in Frameworks */,
+				A080D79E384FBF2428EFBF8DF98B3F71 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CB607B514F912EA9A0990F2D065D1F60 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2DD24F37E4628726349080DAE78E898D /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		20B56609144CE204DFA8221F742B2D76 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F3C66894D42C79764FC9C81DED875921 /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		2CF44E9D21386E47B2E6800F21B9922D /* Targets Support Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -96,70 +175,108 @@
 			path = "Target Support Files/Pods-CryptoAnalytics";
 			sourceTree = "<group>";
 		};
-		6501F8A7E7E1449474EE821015BCA71D /* Products */ = {
+		4B6B203E9F9E9AA0A071B67A06181FEA /* SwiftyJSON */ = {
 			isa = PBXGroup;
 			children = (
-				161BB9F0D713B09CA18B824441F75D45 /* Pods_CryptoAnalytics.framework */,
-				A36B0D6AFDEBEA1CD5DE5F336F781F2B /* SwiftyJSON.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		70A8E4D3C62B6C203D238581DA091C21 /* SwiftyJSON */ = {
-			isa = PBXGroup;
-			children = (
-				BDE506ECE97701EBA44FDBFF401C1A04 /* SwiftyJSON.swift */,
-				8EC39E1DC11846207722B71AAFE40F98 /* Support Files */,
+				37D77D3BC7A7E542A1F7489D546EB88A /* SwiftyJSON.swift */,
+				595981F0C93677B554FB9DAAF9BF320E /* Support Files */,
 			);
 			name = SwiftyJSON;
 			path = SwiftyJSON;
+			sourceTree = "<group>";
+		};
+		5618A9962E32E9445D39486C7A9241BC /* SCLAlertView-Objective-C */ = {
+			isa = PBXGroup;
+			children = (
+				9C24D2A2688EA8F2AAB99B2E2EAC84CD /* SCLAlertView.h */,
+				79E8D44E3382FFCBFB5BC39E0E7A6FB5 /* SCLAlertView.m */,
+				06E495CCF648B7636B547469984AFB8C /* SCLAlertViewResponder.h */,
+				D852EDA59ED54AAD2C12EEAA9A6E9C76 /* SCLAlertViewResponder.m */,
+				4AD19944ADCDB0B03C67497F5D742EC5 /* SCLAlertViewStyleKit.h */,
+				D37BE1CB180698FCBF56A4B64970F9D0 /* SCLAlertViewStyleKit.m */,
+				DC4885B716563A349404BE3A6141010A /* SCLButton.h */,
+				DC980D5D5701A161F6FF8CF3F7B03510 /* SCLButton.m */,
+				CF97FBDC8A59CE8A7AC96F0DFF87A7F1 /* SCLMacros.h */,
+				53705B902CD73B6A6B5704F4BB75C798 /* SCLSwitchView.h */,
+				E5292F87D73E8B783406F452620386AC /* SCLSwitchView.m */,
+				096DFE622E2D39D4C7FF802AD7746D96 /* SCLTextView.h */,
+				EDCA1B133A32DE037C3D441EF7E0F342 /* SCLTextView.m */,
+				05032DDF70BBF59A7D5C8D6038DB60F2 /* SCLTimerDisplay.h */,
+				B256FC56D30A338987573B943B576598 /* SCLTimerDisplay.m */,
+				56CD7821E0AA7660BA6281410A3119CA /* UIImage+ImageEffects.h */,
+				611D6C8139F9DFA21714310C98ED91DD /* UIImage+ImageEffects.m */,
+				BB7A5DAAF6093295B1F87182F1E53EE6 /* Support Files */,
+			);
+			name = "SCLAlertView-Objective-C";
+			path = "SCLAlertView-Objective-C";
+			sourceTree = "<group>";
+		};
+		595981F0C93677B554FB9DAAF9BF320E /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				65B2FD6293E1DF90797FFE704594AD98 /* Info.plist */,
+				AAFE65DB607CE691D4B3469247DD69B4 /* SwiftyJSON.modulemap */,
+				946035BC27A6998030F5C941AF038809 /* SwiftyJSON.xcconfig */,
+				7C92A4DBD36AB3225195CBDBC966F882 /* SwiftyJSON-dummy.m */,
+				9763AB6AD2854F424A96EC3A087176A9 /* SwiftyJSON-prefix.pch */,
+				5F04B88130B45C94DCA65BB53973924A /* SwiftyJSON-umbrella.h */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/SwiftyJSON";
 			sourceTree = "<group>";
 		};
 		7DB346D0F39D3F0E887471402A8071AB = {
 			isa = PBXGroup;
 			children = (
 				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
-				BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */,
-				BD1E3C710F12F4B4C092FC8E2AD22110 /* Pods */,
-				6501F8A7E7E1449474EE821015BCA71D /* Products */,
+				20B56609144CE204DFA8221F742B2D76 /* Frameworks */,
+				A3C076032E73D26D5EFF5F38A6B17888 /* Pods */,
+				BA7EA84194F37523303BB00060BC897C /* Products */,
 				2CF44E9D21386E47B2E6800F21B9922D /* Targets Support Files */,
 			);
 			sourceTree = "<group>";
 		};
-		8EC39E1DC11846207722B71AAFE40F98 /* Support Files */ = {
+		A3C076032E73D26D5EFF5F38A6B17888 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				C4A9A658C966F6BB111BEDBDEA1F874A /* Info.plist */,
-				D032A29E584B77AE187E586922267CF5 /* SwiftyJSON.modulemap */,
-				2E7F7C62EE34D2D271E6E1234A2002B2 /* SwiftyJSON.xcconfig */,
-				32B9BBA8F5B33E56C38F5546432F66B7 /* SwiftyJSON-dummy.m */,
-				BBF610E40BDF6E542FA21FF7E5491205 /* SwiftyJSON-prefix.pch */,
-				05CA09B061E193906653AC21FD3A94F1 /* SwiftyJSON-umbrella.h */,
-			);
-			name = "Support Files";
-			path = "../Target Support Files/SwiftyJSON";
-			sourceTree = "<group>";
-		};
-		BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				D35AF013A5F0BAD4F32504907A52519E /* iOS */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		BD1E3C710F12F4B4C092FC8E2AD22110 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				70A8E4D3C62B6C203D238581DA091C21 /* SwiftyJSON */,
+				5618A9962E32E9445D39486C7A9241BC /* SCLAlertView-Objective-C */,
+				4B6B203E9F9E9AA0A071B67A06181FEA /* SwiftyJSON */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		D35AF013A5F0BAD4F32504907A52519E /* iOS */ = {
+		BA7EA84194F37523303BB00060BC897C /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */,
+				28E3EE2B9E9BB8671A0AD5DF999CAE00 /* Pods_CryptoAnalytics.framework */,
+				3DDEAECFCC8444A4AB62CEB72BA012DD /* SCLAlertView_Objective_C.framework */,
+				986B4634ACE3A987E31EDD0B59A936AA /* SwiftyJSON.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		BB7A5DAAF6093295B1F87182F1E53EE6 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				E5E36725F6241079EF38D9310BB9D378 /* Info.plist */,
+				09A1E0889FCB03AFFC7A06D177D1F590 /* SCLAlertView-Objective-C.modulemap */,
+				2C2772039543543E2BBA88D2F2F520BD /* SCLAlertView-Objective-C.xcconfig */,
+				7F5F1E4DB695FAF3EF204491D49A3933 /* SCLAlertView-Objective-C-dummy.m */,
+				CCC9F1C073A7596FE4D2DA45C5F1E682 /* SCLAlertView-Objective-C-prefix.pch */,
+				1E51F9A547E451A90945B00F664372AF /* SCLAlertView-Objective-C-umbrella.h */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/SCLAlertView-Objective-C";
+			sourceTree = "<group>";
+		};
+		F3C66894D42C79764FC9C81DED875921 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				2859BC85402AEDE24DB74F79B83A8F38 /* Accelerate.framework */,
+				6FC3E6E558B22227E3FE77DD43D38E54 /* AudioToolbox.framework */,
+				C370011DCAEDB8D4D4FBD87D2949710F /* CoreGraphics.framework */,
+				944C2CE7783B3119D5A38115A6BE920E /* Foundation.framework */,
+				EEF03D30385E2DF6C66213D07797EF8B /* UIKit.framework */,
 			);
 			name = iOS;
 			sourceTree = "<group>";
@@ -167,32 +284,49 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		141B76BF7C2707E7E7F5D54F570FBE1E /* Headers */ = {
+		44C322435BC49A878EBE95C1715E8CA4 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EC930A3FE3C80142768A42E2312DEC8D /* SwiftyJSON-umbrella.h in Headers */,
+				2EDE9CAA461C5F306FD958D6E6A573A6 /* Pods-CryptoAnalytics-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		48087F069D6B32667ABD906B7A6F6E67 /* Headers */ = {
+		B53C66C93D710348B1E78A0F93E7D551 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5644241A9742AF4E3AFCEA76F22310D4 /* Pods-CryptoAnalytics-umbrella.h in Headers */,
+				6CCA2FC2D1B850D4AD519020337CC080 /* SwiftyJSON-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BF29E334D9BE61E9B230A0B950B19D7F /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AE763EE8FF3E8F97005986467C260687 /* SCLAlertView-Objective-C-umbrella.h in Headers */,
+				8FC7337D1434EF497D6D96184B22B669 /* SCLAlertView.h in Headers */,
+				014A201B96D31F5A673AED46D31EC84C /* SCLAlertViewResponder.h in Headers */,
+				3600C3565326D8D2D3627C934BF5EFE8 /* SCLAlertViewStyleKit.h in Headers */,
+				D8AE41E83451216ECEF6BC6F261DA733 /* SCLButton.h in Headers */,
+				EC9097B22AD4F3E34B23819151EF8140 /* SCLMacros.h in Headers */,
+				C80DE920B00CFC82AC3CF1986C2342B0 /* SCLSwitchView.h in Headers */,
+				CEA2934135D299C48D346448658F5562 /* SCLTextView.h in Headers */,
+				A4965B2E1198DDEA6FB9582762DC8631 /* SCLTimerDisplay.h in Headers */,
+				755A3196F0CBCDAAE914C1DE1E4F9E77 /* UIImage+ImageEffects.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		68B6720C0BAC7E65A2B6F2843F57C0C3 /* SwiftyJSON */ = {
+		4309005E81BE670020D883455AC6C3EE /* SwiftyJSON */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 631BCE43D7484D380E86ADDC7A9AC4D4 /* Build configuration list for PBXNativeTarget "SwiftyJSON" */;
+			buildConfigurationList = D8AACBC0457EE46ED029215A06599134 /* Build configuration list for PBXNativeTarget "SwiftyJSON" */;
 			buildPhases = (
-				DF7F5391F304613BEADB05A139542F0C /* Sources */,
-				FC1DBAE69AA4689FB0843537335197A9 /* Frameworks */,
-				141B76BF7C2707E7E7F5D54F570FBE1E /* Headers */,
+				AE6D6227C863DB77263EC7D248C26097 /* Sources */,
+				CB607B514F912EA9A0990F2D065D1F60 /* Frameworks */,
+				B53C66C93D710348B1E78A0F93E7D551 /* Headers */,
 			);
 			buildRules = (
 			);
@@ -200,25 +334,43 @@
 			);
 			name = SwiftyJSON;
 			productName = SwiftyJSON;
-			productReference = A36B0D6AFDEBEA1CD5DE5F336F781F2B /* SwiftyJSON.framework */;
+			productReference = 986B4634ACE3A987E31EDD0B59A936AA /* SwiftyJSON.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		BEF63EA517FFB5F18DA049B8076C1C22 /* Pods-CryptoAnalytics */ = {
+		62DC7BCA18D1F9AB3B2BE453B3A6D68B /* SCLAlertView-Objective-C */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 9A1F5E5A11F833487A9DF1C91666F3F2 /* Build configuration list for PBXNativeTarget "Pods-CryptoAnalytics" */;
+			buildConfigurationList = 6AC26DD44ED494DE9E161A719B1EF4D7 /* Build configuration list for PBXNativeTarget "SCLAlertView-Objective-C" */;
 			buildPhases = (
-				EF09F955D0BCB93DF1E7A70DB7A49D7D /* Sources */,
-				C8981BB5AA74BFD94F7883CC0FE663EA /* Frameworks */,
-				48087F069D6B32667ABD906B7A6F6E67 /* Headers */,
+				23BBD85D1E1A33DE124755B062593B98 /* Sources */,
+				10FA3334E1570C1F584AB93AB745D5DF /* Frameworks */,
+				BF29E334D9BE61E9B230A0B950B19D7F /* Headers */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				9C72243A7C0BFC77D083A2E642B6EBF7 /* PBXTargetDependency */,
+			);
+			name = "SCLAlertView-Objective-C";
+			productName = "SCLAlertView-Objective-C";
+			productReference = 3DDEAECFCC8444A4AB62CEB72BA012DD /* SCLAlertView_Objective_C.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		A01F612B0B4F949550CC53DA87E29AA8 /* Pods-CryptoAnalytics */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 76DBF18E1878D1B472E3E22059951AB4 /* Build configuration list for PBXNativeTarget "Pods-CryptoAnalytics" */;
+			buildPhases = (
+				BC71F1817CCF19BA07E0D0DF62912462 /* Sources */,
+				7A0100A71CBB72AEAF96334BF6CADFF8 /* Frameworks */,
+				44C322435BC49A878EBE95C1715E8CA4 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				01135BAC7DC57A0C7DA4194AF0BCDDA9 /* PBXTargetDependency */,
+				8A1A443ACBECE71514FB52367855EB91 /* PBXTargetDependency */,
 			);
 			name = "Pods-CryptoAnalytics";
 			productName = "Pods-CryptoAnalytics";
-			productReference = 161BB9F0D713B09CA18B824441F75D45 /* Pods_CryptoAnalytics.framework */;
+			productReference = 28E3EE2B9E9BB8671A0AD5DF999CAE00 /* Pods_CryptoAnalytics.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -238,42 +390,65 @@
 				en,
 			);
 			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
-			productRefGroup = 6501F8A7E7E1449474EE821015BCA71D /* Products */;
+			productRefGroup = BA7EA84194F37523303BB00060BC897C /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				BEF63EA517FFB5F18DA049B8076C1C22 /* Pods-CryptoAnalytics */,
-				68B6720C0BAC7E65A2B6F2843F57C0C3 /* SwiftyJSON */,
+				A01F612B0B4F949550CC53DA87E29AA8 /* Pods-CryptoAnalytics */,
+				62DC7BCA18D1F9AB3B2BE453B3A6D68B /* SCLAlertView-Objective-C */,
+				4309005E81BE670020D883455AC6C3EE /* SwiftyJSON */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
-		DF7F5391F304613BEADB05A139542F0C /* Sources */ = {
+		23BBD85D1E1A33DE124755B062593B98 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				689470800F40C009D1ABAE02791B845C /* SwiftyJSON-dummy.m in Sources */,
-				ECDBFC597D32A6538AF31E041DD0F1D5 /* SwiftyJSON.swift in Sources */,
+				C08797243B15BBA7FB1C57F1B47C8EA5 /* SCLAlertView-Objective-C-dummy.m in Sources */,
+				C1C475D54D2DCEAC9D86FB3854C091EF /* SCLAlertView.m in Sources */,
+				9A82A86066542473CB01BB778AF07F29 /* SCLAlertViewResponder.m in Sources */,
+				B92800E016B9063637FF5C717D83A5B3 /* SCLAlertViewStyleKit.m in Sources */,
+				D4A154EFA1F0B1F2962CE0B4D4D8FFE4 /* SCLButton.m in Sources */,
+				6BA4CF28A1EB6D09C05C792DF9AA2FB8 /* SCLSwitchView.m in Sources */,
+				3F917B6BC07F3566A720E610B7C87CE9 /* SCLTextView.m in Sources */,
+				9F235294C6976C9A896BD11259752883 /* SCLTimerDisplay.m in Sources */,
+				ADF764478B2584C997DBEAD4CCBC2A3E /* UIImage+ImageEffects.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		EF09F955D0BCB93DF1E7A70DB7A49D7D /* Sources */ = {
+		AE6D6227C863DB77263EC7D248C26097 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FB2AE2F52188D4D2DA2AFB36BD21B234 /* Pods-CryptoAnalytics-dummy.m in Sources */,
+				DD4DF37059D8BADA2AA8A6ABAAD9FE21 /* SwiftyJSON-dummy.m in Sources */,
+				19C2AB73CEE13844ECF01BDD618BAD90 /* SwiftyJSON.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BC71F1817CCF19BA07E0D0DF62912462 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5D79D0369683325DF77ACDEEA92E60C5 /* Pods-CryptoAnalytics-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		9C72243A7C0BFC77D083A2E642B6EBF7 /* PBXTargetDependency */ = {
+		01135BAC7DC57A0C7DA4194AF0BCDDA9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "SCLAlertView-Objective-C";
+			target = 62DC7BCA18D1F9AB3B2BE453B3A6D68B /* SCLAlertView-Objective-C */;
+			targetProxy = 53F3C7A82C39705D45EC7E327B7FFD1F /* PBXContainerItemProxy */;
+		};
+		8A1A443ACBECE71514FB52367855EB91 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = SwiftyJSON;
-			target = 68B6720C0BAC7E65A2B6F2843F57C0C3 /* SwiftyJSON */;
-			targetProxy = 4B5185344EEE28F0C8C5127418FBBC17 /* PBXContainerItemProxy */;
+			target = 4309005E81BE670020D883455AC6C3EE /* SwiftyJSON */;
+			targetProxy = D6AFDAE754121800D2F31A505D7109C2 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -333,9 +508,43 @@
 			};
 			name = Release;
 		};
-		3F662EB13A116AC763180DCC7840AC45 /* Release */ = {
+		29B21725A5B21A57D8D7FF84B4C23D6E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2E7F7C62EE34D2D271E6E1234A2002B2 /* SwiftyJSON.xcconfig */;
+			baseConfigurationReference = F5029728E50F11725B78CBB6098B830E /* Pods-CryptoAnalytics.debug.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-CryptoAnalytics/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-CryptoAnalytics/Pods-CryptoAnalytics.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = Pods_CryptoAnalytics;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		2BD2AA65304721A264257E956E7DCD84 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 946035BC27A6998030F5C941AF038809 /* SwiftyJSON.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -364,6 +573,37 @@
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
+		};
+		3869F2F394ADA0E03BCB6CCC09465418 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 946035BC27A6998030F5C941AF038809 /* SwiftyJSON.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/SwiftyJSON/SwiftyJSON-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/SwiftyJSON/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/SwiftyJSON/SwiftyJSON.modulemap";
+				PRODUCT_NAME = SwiftyJSON;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
 		};
 		59F0302F2371FCC6B73EF0A418D40734 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -425,7 +665,38 @@
 			};
 			name = Debug;
 		};
-		8F1A9B5097D78255AF4B057E8F041624 /* Release */ = {
+		E500714C4B760315F838F08E9906D75A /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2C2772039543543E2BBA88D2F2F520BD /* SCLAlertView-Objective-C.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/SCLAlertView-Objective-C/SCLAlertView-Objective-C-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/SCLAlertView-Objective-C/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/SCLAlertView-Objective-C/SCLAlertView-Objective-C.modulemap";
+				PRODUCT_NAME = SCLAlertView_Objective_C;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		E6A4D31FDFB04A4DF270333E372C0875 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3D9B2598ABBFE99FB9B0EEAFB92997E0 /* Pods-CryptoAnalytics.release.xcconfig */;
 			buildSettings = {
@@ -459,9 +730,9 @@
 			};
 			name = Release;
 		};
-		AB5AB24F62884481BB854B1ECE5E03E5 /* Debug */ = {
+		EA84B0C7A926B6903918B0CC121B81E2 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2E7F7C62EE34D2D271E6E1234A2002B2 /* SwiftyJSON.xcconfig */;
+			baseConfigurationReference = 2C2772039543543E2BBA88D2F2F520BD /* SCLAlertView-Objective-C.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -472,52 +743,17 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/SwiftyJSON/SwiftyJSON-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/SwiftyJSON/Info.plist";
+				GCC_PREFIX_HEADER = "Target Support Files/SCLAlertView-Objective-C/SCLAlertView-Objective-C-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/SCLAlertView-Objective-C/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/SwiftyJSON/SwiftyJSON.modulemap";
-				PRODUCT_NAME = SwiftyJSON;
+				MODULEMAP_FILE = "Target Support Files/SCLAlertView-Objective-C/SCLAlertView-Objective-C.modulemap";
+				PRODUCT_NAME = SCLAlertView_Objective_C;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		BBD4CC458A4A6EA042B3BC154FB0A4FD /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = F5029728E50F11725B78CBB6098B830E /* Pods-CryptoAnalytics.debug.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-CryptoAnalytics/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-CryptoAnalytics/Pods-CryptoAnalytics.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = Pods_CryptoAnalytics;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -536,20 +772,29 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		631BCE43D7484D380E86ADDC7A9AC4D4 /* Build configuration list for PBXNativeTarget "SwiftyJSON" */ = {
+		6AC26DD44ED494DE9E161A719B1EF4D7 /* Build configuration list for PBXNativeTarget "SCLAlertView-Objective-C" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				AB5AB24F62884481BB854B1ECE5E03E5 /* Debug */,
-				3F662EB13A116AC763180DCC7840AC45 /* Release */,
+				EA84B0C7A926B6903918B0CC121B81E2 /* Debug */,
+				E500714C4B760315F838F08E9906D75A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		9A1F5E5A11F833487A9DF1C91666F3F2 /* Build configuration list for PBXNativeTarget "Pods-CryptoAnalytics" */ = {
+		76DBF18E1878D1B472E3E22059951AB4 /* Build configuration list for PBXNativeTarget "Pods-CryptoAnalytics" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				BBD4CC458A4A6EA042B3BC154FB0A4FD /* Debug */,
-				8F1A9B5097D78255AF4B057E8F041624 /* Release */,
+				29B21725A5B21A57D8D7FF84B4C23D6E /* Debug */,
+				E6A4D31FDFB04A4DF270333E372C0875 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D8AACBC0457EE46ED029215A06599134 /* Build configuration list for PBXNativeTarget "SwiftyJSON" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3869F2F394ADA0E03BCB6CCC09465418 /* Debug */,
+				2BD2AA65304721A264257E956E7DCD84 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

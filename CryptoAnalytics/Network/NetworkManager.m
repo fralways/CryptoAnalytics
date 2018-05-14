@@ -175,7 +175,7 @@
 
 - (void)getSuggestionsWithCompletionHandler:(void (^)(bool successful, NSArray *suggestions, NSError *httpError))completionHandler{
     NSMutableDictionary *httpAdditionalHeaders = [[NSMutableDictionary alloc] init];
-    NSString *endpoint = [self getUrlForEndpoint:@"config"];
+    NSString *endpoint = [self getUrlForEndpoint:@"strategy"];
     [self get:endpoint httpAdditionalHeaders:httpAdditionalHeaders completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
             NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
