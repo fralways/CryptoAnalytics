@@ -27,7 +27,7 @@
 - (void)initParams{
     self.host = @"http://192.168.0.14:8080/crypto_war_exploded";
     self.testing = NO;
-    self.myCurrencies = [NSMutableDictionary new];
+    self.myCurrencies = [[[NSUserDefaults standardUserDefaults] objectForKey:STATIC_USERDEFAULTS_MYCURRENCY] mutableCopy];
 }
 
 - (NSString *)strategyToString:(STRATEGIES)strategy{
@@ -57,6 +57,9 @@
         finalAmount += currentAmount;
     }
     self.myCurrencies[currency] = @(finalAmount);
+    
+    [[NSUserDefaults standardUserDefaults] setObject:self.myCurrencies forKey:STATIC_USERDEFAULTS_MYCURRENCY];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 @end

@@ -5,7 +5,6 @@
     </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -234,28 +233,40 @@
                                 <rect key="frame" x="0.0" y="126" width="375" height="492"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="HistoryCell" id="Rwa-3B-pKw" customClass="HistoryTableViewCell">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="HistoryCell" rowHeight="79" id="Rwa-3B-pKw" customClass="HistoryTableViewCell">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="79"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Rwa-3B-pKw" id="Vry-69-zky">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="78.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QlF-aP-Zv3">
-                                                    <rect key="frame" x="31" y="15" width="313" height="13.5"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Ce2-Qn-P6s">
+                                                    <rect key="frame" x="16" y="16" width="343" height="46.5"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5eI-26-lcy">
+                                                            <rect key="frame" x="0.0" y="0.0" width="343" height="26"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QlF-aP-Zv3">
+                                                            <rect key="frame" x="0.0" y="26" width="343" height="20.5"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </stackView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailingMargin" secondItem="QlF-aP-Zv3" secondAttribute="trailing" constant="16" id="5Kd-rC-Jhm"/>
-                                                <constraint firstAttribute="bottom" secondItem="QlF-aP-Zv3" secondAttribute="bottom" constant="15" id="YHy-NY-53p"/>
-                                                <constraint firstItem="QlF-aP-Zv3" firstAttribute="leading" secondItem="Vry-69-zky" secondAttribute="leadingMargin" constant="16" id="i9I-R4-FOr"/>
-                                                <constraint firstItem="QlF-aP-Zv3" firstAttribute="top" secondItem="Vry-69-zky" secondAttribute="top" constant="15" id="j61-Ba-gpM"/>
+                                                <constraint firstItem="Ce2-Qn-P6s" firstAttribute="leading" secondItem="Vry-69-zky" secondAttribute="leading" constant="16" id="BNa-U9-PZq"/>
+                                                <constraint firstAttribute="bottom" secondItem="Ce2-Qn-P6s" secondAttribute="bottom" constant="16" id="Mdh-6a-tch"/>
+                                                <constraint firstItem="Ce2-Qn-P6s" firstAttribute="top" secondItem="Vry-69-zky" secondAttribute="top" constant="16" id="POo-XT-ugA"/>
+                                                <constraint firstAttribute="trailing" secondItem="Ce2-Qn-P6s" secondAttribute="trailing" constant="16" id="Za4-Va-pVH"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="lblDate" destination="5eI-26-lcy" id="bWw-va-4LX"/>
                                             <outlet property="lblText" destination="QlF-aP-Zv3" id="Jh4-OK-psh"/>
                                         </connections>
                                     </tableViewCell>
@@ -306,7 +317,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kus-Qf-DqY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1801" y="911"/>
+            <point key="canvasLocation" x="1800.8" y="910.79460269865069"/>
         </scene>
         <!--Analyzer View Controller-->
         <scene sceneID="L7V-DJ-Lbs">

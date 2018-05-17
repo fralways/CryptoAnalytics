@@ -17,6 +17,18 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    if (![userDefaults objectForKey:STATIC_USERDEFAULTS_TRADEHISTORY]){
+        [userDefaults setObject:[NSArray new] forKey:STATIC_USERDEFAULTS_TRADEHISTORY];
+        [userDefaults synchronize];
+    }
+    
+    if (![userDefaults objectForKey:STATIC_USERDEFAULTS_MYCURRENCY]){
+        [userDefaults setObject:[NSDictionary new] forKey:STATIC_USERDEFAULTS_MYCURRENCY];
+        [userDefaults synchronize];
+    }
+    
     return YES;
 }
 

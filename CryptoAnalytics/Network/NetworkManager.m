@@ -209,5 +209,45 @@
     }];
 }
 
+- (void)buyCurrency:(NSString *)currency forAmount:(NSInteger)amount withCompletionHandler:(void (^)(bool successful, NSDictionary *trade, NSError *httpError))completionHandler{
+    NSMutableDictionary *httpAdditionalHeaders = [[NSMutableDictionary alloc] init];
+    NSString *endpoint = [self getUrlForEndpoint:@"buy"];
+    endpoint = [endpoint stringByReplacingOccurrencesOfString:@"{currencyId}" withString:currency];
+    endpoint = [endpoint stringByAppendingString:[NSString stringWithFormat:@"?amount=%ld", (long)amount]];
+    [self get:endpoint httpAdditionalHeaders:httpAdditionalHeaders completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
+            NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+            if (200 == httpResponse.statusCode && !error) {
+                NSDictionary *trade = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+                completionHandler(YES, trade, nil);
+            }else{
+                completionHandler(NO, nil, nil);
+            }
+        }else{
+            completionHandler(NO, nil, error);
+        }
+    }];
+}
+
+- (void)sellCurrency:(NSString *)currency forAmount:(double)amount withCompletionHandler:(void (^)(bool successful, NSDictionary *trade, NSError *httpError))completionHandler{
+    NSMutableDictionary *httpAdditionalHeaders = [[NSMutableDictionary alloc] init];
+    NSString *endpoint = [self getUrlForEndpoint:@"sell"];
+    endpoint = [endpoint stringByReplacingOccurrencesOfString:@"{currencyId}" withString:currency];
+    endpoint = [endpoint stringByAppendingString:[NSString stringWithFormat:@"?amount=%f", amount]];
+    [self get:endpoint httpAdditionalHeaders:httpAdditionalHeaders completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
+            NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+            if (200 == httpResponse.statusCode && !error) {
+                NSDictionary *trade = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+                completionHandler(YES, trade, nil);
+            }else{
+                completionHandler(NO, nil, nil);
+            }
+        }else{
+            completionHandler(NO, nil, error);
+        }
+    }];
+}
+
 
 @end

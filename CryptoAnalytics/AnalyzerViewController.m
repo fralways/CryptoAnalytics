@@ -10,6 +10,7 @@
 #import "Suggestion.h"
 #import "NSDate+AnalyzerDate.h"
 #import "SCLAlertView.h"
+#import "History.h"
 
 @interface AnalyzerViewController ()
 
@@ -17,6 +18,7 @@
 @property NSMutableArray<Suggestion *> *suggestions;
 @property UIRefreshControl *refreshControl;
 @property BOOL loading;
+@property NSUserDefaults *userDefaults;
 
 //alert
 @property UILabel *lblSlider;
@@ -31,6 +33,7 @@
     // Do any additional setup after loading the view.
     
     self.title = @"BUY/SELL Suggestions";
+    self.userDefaults = [NSUserDefaults standardUserDefaults];
     
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
@@ -55,11 +58,42 @@
 #pragma mark - Network
 
 - (void)buyCurrency:(NSString *)currency forAmount:(NSInteger)amount{
-    
+    [[NetworkManager sharedManager]buyCurrency:currency forAmount:amount withCompletionHandler:^(bool successful, NSDictionary *trade, NSError *httpError) {
+        if (successful){
+            dispatch_async(dispatch_get_main_queue(), ^{
+                History *history = [[History alloc]initWithTradeDictionary:trade];
+                NSMutableArray *tradeDefaults = [[self.userDefaults objectForKey:STATIC_USERDEFAULTS_TRADEHISTORY] mutableCopy];
+                [tradeDefaults addObject:[history toTradeDictionary]];
+                [self.userDefaults setObject:tradeDefaults forKey:STATIC_USERDEFAULTS_TRADEHISTORY];
+                [self.userDefaults synchronize];
+                
+                [[Context sharedContext]addCurrency:currency amount:history.amount/history.price];
+                
+                [[NSNotificationCenter defaultCenter]postNotificationName:STATIC_NOT_BUYCURRENCY object:history];
+                [self presentAlertBuySuccess:history.amount];
+            });
+            
+        }
+    }];
 }
 
 - (void)sellCurrency:(NSString *)currency forAmount:(double)amount{
-    
+    [[NetworkManager sharedManager]sellCurrency:currency forAmount:amount withCompletionHandler:^(bool successful, NSDictionary *trade, NSError *httpError) {
+        if (successful){
+            dispatch_async(dispatch_get_main_queue(), ^{
+                History *history = [[History alloc]initWithTradeDictionary:trade];
+                NSMutableArray *tradeDefaults = [[self.userDefaults objectForKey:STATIC_USERDEFAULTS_TRADEHISTORY] mutableCopy];
+                [tradeDefaults addObject:[history toTradeDictionary]];
+                [self.userDefaults setObject:tradeDefaults forKey:STATIC_USERDEFAULTS_TRADEHISTORY];
+                [self.userDefaults synchronize];
+                
+                [[Context sharedContext]addCurrency:currency amount:-amount];
+                
+                [[NSNotificationCenter defaultCenter]postNotificationName:STATIC_NOT_SELLCURRENCY object:history];
+                [self presentAlertSellSuccess:history.amount];
+            });
+        }
+    }];
 }
 
 - (void)getSuggestions{
@@ -97,6 +131,8 @@
         [cell.btnAction setTitle:@"SELL" forState:UIControlStateNormal];
         [cell.btnAction setBackgroundColor:[UIColor redColor]];
     }
+    
+    cell.btnAction.layer.cornerRadius = 3.0;
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
 }
@@ -154,7 +190,7 @@
     UIView *holder = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 215, 30)];
     
     UISlider *slider = [UISlider new];
-    slider.minimumValue = 1.0;
+    slider.minimumValue = 10.0;
     slider.maximumValue = 100.0;
     slider.value = 20.0;
     slider.frame = CGRectMake(0, 0, 215 - 50, 30);
@@ -195,7 +231,7 @@
     UISlider *slider = [UISlider new];
     slider.minimumValue = 0.0;
     slider.maximumValue = [myAmount doubleValue];
-    slider.value = 20.0;
+    slider.value = 0.0;
     slider.frame = CGRectMake(0, 0, 215 - 80, 30);
     [slider addTarget:self action:@selector(sliderDoubleValueChanged:) forControlEvents:UIControlEventValueChanged];
     
@@ -230,6 +266,31 @@
     [showBuilder showAlertView:builder.alertView onViewController:self];
 }
 
+- (void)presentAlertBuySuccess:(double)amount{
+    SCLAlertViewBuilder *builder = [SCLAlertViewBuilder new]
+    .shouldDismissOnTapOutside(YES);
+    
+    SCLAlertViewShowBuilder *showBuilder = [SCLAlertViewShowBuilder new]
+    .style(SCLAlertViewStyleSuccess)
+    .title([NSString stringWithFormat:@"Success!"])
+    .subTitle([NSString stringWithFormat:@"You have successfully bought %f %@", amount, self.suggestionClicked.currency])
+    .closeButtonTitle(@"Ok")
+    .duration(0);
+    [showBuilder showAlertView:builder.alertView onViewController:self];
+}
+
+- (void)presentAlertSellSuccess:(double)amount{
+    SCLAlertViewBuilder *builder = [SCLAlertViewBuilder new]
+    .shouldDismissOnTapOutside(YES);
+    
+    SCLAlertViewShowBuilder *showBuilder = [SCLAlertViewShowBuilder new]
+    .style(SCLAlertViewStyleSuccess)
+    .title([NSString stringWithFormat:@"Success!"])
+    .subTitle([NSString stringWithFormat:@"You have successfully sold %@ for %f$", self.suggestionClicked.currency, amount])
+    .closeButtonTitle(@"Ok")
+    .duration(0);
+    [showBuilder showAlertView:builder.alertView onViewController:self];
+}
 
 
 @end

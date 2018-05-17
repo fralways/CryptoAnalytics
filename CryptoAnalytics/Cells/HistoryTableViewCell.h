@@ -11,5 +11,6 @@
 @interface HistoryTableViewCell : UITableViewCell
 
 @property (strong, nonatomic) IBOutlet UILabel *lblText;
+@property (strong, nonatomic) IBOutlet UILabel *lblDate;
 
 @end

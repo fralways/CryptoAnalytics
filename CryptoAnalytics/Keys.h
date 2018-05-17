@@ -23,6 +23,15 @@ static NSString *STATIC_CELL_ANALYZER = @"AnalyzerCell";
 static NSString *STATIC_SEGUE_CURRENCYDETAIL = @"CurrencyDetailSegue";
 static NSString *STATIC_SEGUE_CURRENCYDETAILCHART = @"CurrencyChartSegue";
 
+//notifications
+static NSString *STATIC_NOT_BUYCURRENCY = @"CurrencyBoughtNotification";
+static NSString *STATIC_NOT_SELLCURRENCY = @"CurrencySoldNotification";
+
+
+//other
+static NSString *STATIC_USERDEFAULTS_TRADEHISTORY = @"CryptoAnalyticsUserDefaultsTradeHistory";
+static NSString *STATIC_USERDEFAULTS_MYCURRENCY = @"CryptoAnalyticsUserDefaultsMyCurrency";
+
 @interface Keys : NSObject
 
 @end
