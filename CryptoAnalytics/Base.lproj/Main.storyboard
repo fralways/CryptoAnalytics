@@ -285,23 +285,37 @@
                                     <action selector="filter:" destination="Ust-SJ-Ojd" eventType="touchUpInside" id="5rh-jI-Mb4"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gain: 0.00$" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="axI-cQ-z0S">
-                                <rect key="frame" x="16" y="80.5" width="187" height="30"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RlT-1O-Hts">
+                                <rect key="frame" x="16" y="80.5" width="187" height="30.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gain: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fVZ-Ie-99N">
+                                        <rect key="frame" x="0.0" y="0.0" width="44" height="30.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="0.00$" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="axI-cQ-z0S">
+                                        <rect key="frame" x="44" y="0.0" width="143" height="30.5"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="ZcY-0a-PeP"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="ZcY-0a-PeP"/>
+                                    <constraint firstAttribute="height" constant="30" id="7cC-sF-Pfe"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="NlK-cE-8fA" firstAttribute="top" secondItem="LAS-j6-RHs" secondAttribute="bottom" constant="16" id="56I-aM-ohd"/>
-                            <constraint firstItem="LAS-j6-RHs" firstAttribute="leading" secondItem="axI-cQ-z0S" secondAttribute="trailing" constant="16" id="OZ8-2E-Ps1"/>
-                            <constraint firstItem="axI-cQ-z0S" firstAttribute="centerY" secondItem="LAS-j6-RHs" secondAttribute="centerY" id="cfn-IZ-KSR"/>
+                            <constraint firstItem="RlT-1O-Hts" firstAttribute="leading" secondItem="ixi-Mm-AKm" secondAttribute="leading" constant="16" id="Ysj-yx-gdX"/>
+                            <constraint firstItem="LAS-j6-RHs" firstAttribute="leading" secondItem="RlT-1O-Hts" secondAttribute="trailing" constant="16" id="drD-4a-3tH"/>
                             <constraint firstItem="NlK-cE-8fA" firstAttribute="trailing" secondItem="ixi-Mm-AKm" secondAttribute="trailing" id="ef5-sc-cea"/>
-                            <constraint firstItem="axI-cQ-z0S" firstAttribute="leading" secondItem="ixi-Mm-AKm" secondAttribute="leading" constant="16" id="s3s-2f-8fk"/>
+                            <constraint firstItem="RlT-1O-Hts" firstAttribute="centerY" secondItem="LAS-j6-RHs" secondAttribute="centerY" id="pej-pE-6uC"/>
                             <constraint firstItem="NlK-cE-8fA" firstAttribute="leading" secondItem="ixi-Mm-AKm" secondAttribute="leading" id="tWk-zo-04o"/>
                             <constraint firstItem="ixi-Mm-AKm" firstAttribute="trailing" secondItem="LAS-j6-RHs" secondAttribute="trailing" constant="16" id="uCu-Oe-9mm"/>
                             <constraint firstItem="ixi-Mm-AKm" firstAttribute="bottom" secondItem="NlK-cE-8fA" secondAttribute="bottom" id="uH3-YZ-lm2"/>
@@ -312,6 +326,8 @@
                     <navigationItem key="navigationItem" id="2fX-7e-Tfp"/>
                     <connections>
                         <outlet property="btnFilter" destination="LAS-j6-RHs" id="orD-25-lgB"/>
+                        <outlet property="lblGainAmount" destination="axI-cQ-z0S" id="X9m-Ge-bto"/>
+                        <outlet property="lblGainText" destination="fVZ-Ie-99N" id="21D-U7-8Iw"/>
                         <outlet property="tableView" destination="NlK-cE-8fA" id="9yB-qm-I9n"/>
                     </connections>
                 </viewController>

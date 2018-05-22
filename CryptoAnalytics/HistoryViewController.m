@@ -10,10 +10,12 @@
 #import "HistoryTableViewCell.h"
 #import "History.h"
 #import "NSDate+AnalyzerDate.h"
+#import "Currency.h"
 
 @interface HistoryViewController ()
 
 @property NSMutableArray<History *> *history;
+@property NSDictionary<NSString *, Currency *> *currencies;
 
 @end
 
@@ -31,9 +33,10 @@
     self.tableView.dataSource = self;
     
     [self setupUI];
-    
+        
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(boughtCurrency:) name:STATIC_NOT_BUYCURRENCY object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(soldCurrency:) name:STATIC_NOT_SELLCURRENCY object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(fetchCurrencies:) name:STATIC_NOT_FETCHCURRENCIES object:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -60,6 +63,7 @@
     self.btnFilter.layer.borderColor = [[UIColor darkTextColor] CGColor];
     self.btnFilter.layer.borderWidth = 1;
     self.btnFilter.layer.cornerRadius = 8;
+    [self.btnFilter setHidden:YES];
 }
 
 #pragma mark - Table view
@@ -84,7 +88,7 @@
         cell.lblText.text = [NSString stringWithFormat:@"Sold %f %@ for $%f at the cost of $%f", currencyAmountSold, history.currencyId, history.amount, history.price];
     }
     
-    cell.lblDate.text = [NSDate stringFromDate:history.time];
+    cell.lblDate.text = [NSDate historyStringFromDate:history.time];
     
     return cell;
 }
@@ -105,6 +109,35 @@
         [self.history insertObject:history atIndex:0];
         [self refreshTableView];
     });
+}
+
+- (void)fetchCurrencies:(NSNotification *)notification{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        self.currencies = [self currencyArrayToDictionary:notification.object];
+        double gain = [self calculateGain];
+        self.lblGainAmount.text = [NSString stringWithFormat:@"$%f", gain];
+    });
+}
+
+#pragma mark - Helper
+
+- (double)calculateGain{
+    double gain = 0;
+    for (History *history in self.history) {
+        if ([self.currencies objectForKey:history.currencyId]){
+            Currency *currency = [self.currencies objectForKey:history.currencyId];
+            gain += [history moneyChanged] - currency.price * [history tradedCurrencyAmount];
+        }
+    }
+    return gain;
+}
+
+- (NSDictionary<NSString *, Currency *> *)currencyArrayToDictionary:(NSArray *)currencyArray{
+    NSMutableDictionary<NSString *, Currency *> *currencyDictionary = [NSMutableDictionary new];
+    for (Currency *currency in currencyArray) {
+        [currencyDictionary setValue:currency forKey:currency.fromSymbol];
+    }
+    return currencyDictionary;
 }
 
 /*

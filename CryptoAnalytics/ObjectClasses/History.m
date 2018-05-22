@@ -56,4 +56,20 @@
     return returnType;
 }
 
+- (double)moneyChanged{
+    if (self.type == TRADEBUY){
+        return self.amount * self.price;
+    }else{
+        return self.amount / self.price;
+    }
+}
+
+- (double)tradedCurrencyAmount{
+    if (self.type == TRADEBUY){
+        return self.amount;
+    }else{
+        return self.amount / self.price;
+    }
+}
+
 @end

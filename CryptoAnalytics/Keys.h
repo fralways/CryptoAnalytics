@@ -26,6 +26,7 @@ static NSString *STATIC_SEGUE_CURRENCYDETAILCHART = @"CurrencyChartSegue";
 //notifications
 static NSString *STATIC_NOT_BUYCURRENCY = @"CurrencyBoughtNotification";
 static NSString *STATIC_NOT_SELLCURRENCY = @"CurrencySoldNotification";
+static NSString *STATIC_NOT_FETCHCURRENCIES = @"FetchNewCurrencyValues";
 
 
 //other

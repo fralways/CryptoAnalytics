@@ -23,5 +23,7 @@ typedef enum {
 
 - (id)initWithTradeDictionary:(NSDictionary *)trade;
 - (NSDictionary *)toTradeDictionary;
+- (double)moneyChanged;
+- (double)tradedCurrencyAmount;
 
 @end

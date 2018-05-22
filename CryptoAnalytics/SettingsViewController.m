@@ -31,6 +31,7 @@ typedef enum: NSInteger{
 @property BOOL settingsChanged;
 @property BOOL optionsExpanded;
 @property NSMutableArray *options;
+@property BOOL useTestData;
 
 @end
 
@@ -119,109 +120,141 @@ typedef enum: NSInteger{
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    if (self.config != NULL){
-        return self.options.count;
+    if (section == 0){
+        return 1;
     }else{
-        return 0;
+        if (self.config != NULL){
+            return self.options.count;
+        }else{
+            return 0;
+        }
     }
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 2;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    NSString *option = self.options[indexPath.row];
-    
-    SettingsTableViewCell *cell;
-    
-    if ([option isEqualToString:[self sectionToTitle:OPTIONS_SELECTED_STRATEGY]]){
-        cell = [tableView dequeueReusableCellWithIdentifier:STATIC_CELL_SETTINGSSUBTITLE];
-    }else if ([option isEqualToString:[self sectionToTitle:OPTIONS_SELECT_STRATEGY]]){
-        cell = [tableView dequeueReusableCellWithIdentifier:STATIC_CELL_SETTINGSPICKER];
+    if (indexPath.section == 0){
+        SettingsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:STATIC_CELL_SETTINGSSUBTITLE];
+        
+        cell.lblTitle.text = @"Use test data";
+        if (self.useTestData){
+            cell.lblSubtitle.text = @"YES";
+        }else{
+            cell.lblSubtitle.text = @"NO";
+        }
+        
+        return cell;
     }else{
-        cell = [tableView dequeueReusableCellWithIdentifier:STATIC_CELL_SETTINGSSLIDER];
+        NSString *option = self.options[indexPath.row];
+        
+        SettingsTableViewCell *cell;
+        
+        if ([option isEqualToString:[self sectionToTitle:OPTIONS_SELECTED_STRATEGY]]){
+            cell = [tableView dequeueReusableCellWithIdentifier:STATIC_CELL_SETTINGSSUBTITLE];
+        }else if ([option isEqualToString:[self sectionToTitle:OPTIONS_SELECT_STRATEGY]]){
+            cell = [tableView dequeueReusableCellWithIdentifier:STATIC_CELL_SETTINGSPICKER];
+        }else{
+            cell = [tableView dequeueReusableCellWithIdentifier:STATIC_CELL_SETTINGSSLIDER];
+        }
+        
+        if ([option isEqualToString:[self sectionToTitle:OPTIONS_EMA_LONG]]){
+            cell.slider.maximumValue = 100;
+            cell.slider.minimumValue = 20;
+            cell.slider.value = self.config.emaLongCount;
+            cell.lblValue.text = [NSString stringWithFormat:@"%d", (int)cell.slider.value];
+        }else if ([option isEqualToString:[self sectionToTitle:OPTIONS_SMA_LONG]]){
+            cell.slider.maximumValue = 100;
+            cell.slider.minimumValue = 20;
+            cell.slider.value = self.config.smaLongCount;
+            cell.lblValue.text = [NSString stringWithFormat:@"%d", (int)cell.slider.value];
+        }else if ([option isEqualToString:[self sectionToTitle:OPTIONS_EMA_SHORT]]){
+            cell.slider.maximumValue = 20;
+            cell.slider.minimumValue = 5;
+            cell.slider.value = self.config.emaShortCount;
+            cell.lblValue.text = [NSString stringWithFormat:@"%d", (int)cell.slider.value];
+        }else if ([option isEqualToString:[self sectionToTitle:OPTIONS_SMA_SHORT]]){
+            cell.slider.maximumValue = 20;
+            cell.slider.minimumValue = 5;
+            cell.slider.value = self.config.smaShortCount;
+            cell.lblValue.text = [NSString stringWithFormat:@"%d", (int)cell.slider.value];
+        }else if ([option isEqualToString:[self sectionToTitle:OPTIONS_EMA_INTERVAL]]){
+            cell.slider.minimumValue = 5;
+            cell.slider.maximumValue = 60 * 5;
+            cell.slider.value = self.config.emaStrategyInterval;
+            cell.lblValue.text = [NSString stringWithFormat:@"%d", (int)cell.slider.value];
+        }else if ([option isEqualToString:[self sectionToTitle:OPTIONS_SMA_INTERVAL]]){
+            cell.slider.minimumValue = 5;
+            cell.slider.maximumValue = 60 * 5;
+            cell.slider.value = self.config.smaStrategyInterval;
+            cell.lblValue.text = [NSString stringWithFormat:@"%d", (int)cell.slider.value];
+        }else if ([option isEqualToString:[self sectionToTitle:OPTIONS_SPEED_INTERVAL]]){
+            cell.slider.minimumValue = 5;
+            cell.slider.maximumValue = 60 * 5;
+            cell.slider.value = self.config.speedStrategyInterval;
+            cell.lblValue.text = [NSString stringWithFormat:@"%d", (int)cell.slider.value];
+        }else if ([option isEqualToString:[self sectionToTitle:OPTIONS_SPEED_NEEDPERC]]){
+            cell.slider.minimumValue = 0.01;
+            cell.slider.maximumValue = 0.5;
+            cell.slider.value = self.config.speedStrategyPercentChangeNeeded;
+            cell.lblValue.text = [NSString stringWithFormat:@"%d%%", (int)(cell.slider.value * 100)];
+        }else if ([option isEqualToString:[self sectionToTitle:OPTIONS_SELECTED_STRATEGY]]){
+            cell.lblSubtitle.text = [[Context sharedContext] strategyToString:self.config.selectedStrategy];
+        }else if ([option isEqualToString:[self sectionToTitle:OPTIONS_SELECT_STRATEGY]]){
+            cell.pickerView.dataSource = self;
+            cell.pickerView.delegate = self;
+            [cell.pickerView selectRow:self.config.selectedStrategy inComponent:0 animated:NO];
+        }else{
+            NSLog(@"Settings: Cell type not found at row: %ld", (long)indexPath.row);
+        }
+        
+        if ([option isEqualToString:[self sectionToTitle:OPTIONS_SELECTED_STRATEGY]]){
+            cell.selectionStyle = UITableViewCellSelectionStyleDefault;
+        }else{
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        }
+        
+        cell.lblTitle.text = option;
+        
+        cell.delegate = self;
+        
+        return cell;
     }
-    
-    if ([option isEqualToString:[self sectionToTitle:OPTIONS_EMA_LONG]]){
-        cell.slider.maximumValue = 100;
-        cell.slider.minimumValue = 20;
-        cell.slider.value = self.config.emaLongCount;
-        cell.lblValue.text = [NSString stringWithFormat:@"%d", (int)cell.slider.value];
-    }else if ([option isEqualToString:[self sectionToTitle:OPTIONS_SMA_LONG]]){
-        cell.slider.maximumValue = 100;
-        cell.slider.minimumValue = 20;
-        cell.slider.value = self.config.smaLongCount;
-        cell.lblValue.text = [NSString stringWithFormat:@"%d", (int)cell.slider.value];
-    }else if ([option isEqualToString:[self sectionToTitle:OPTIONS_EMA_SHORT]]){
-        cell.slider.maximumValue = 20;
-        cell.slider.minimumValue = 5;
-        cell.slider.value = self.config.emaShortCount;
-        cell.lblValue.text = [NSString stringWithFormat:@"%d", (int)cell.slider.value];
-    }else if ([option isEqualToString:[self sectionToTitle:OPTIONS_SMA_SHORT]]){
-        cell.slider.maximumValue = 20;
-        cell.slider.minimumValue = 5;
-        cell.slider.value = self.config.smaShortCount;
-        cell.lblValue.text = [NSString stringWithFormat:@"%d", (int)cell.slider.value];
-    }else if ([option isEqualToString:[self sectionToTitle:OPTIONS_EMA_INTERVAL]]){
-        cell.slider.minimumValue = 5;
-        cell.slider.maximumValue = 60 * 5;
-        cell.slider.value = self.config.emaStrategyInterval;
-        cell.lblValue.text = [NSString stringWithFormat:@"%d", (int)cell.slider.value];
-    }else if ([option isEqualToString:[self sectionToTitle:OPTIONS_SMA_INTERVAL]]){
-        cell.slider.minimumValue = 5;
-        cell.slider.maximumValue = 60 * 5;
-        cell.slider.value = self.config.smaStrategyInterval;
-        cell.lblValue.text = [NSString stringWithFormat:@"%d", (int)cell.slider.value];
-    }else if ([option isEqualToString:[self sectionToTitle:OPTIONS_SPEED_INTERVAL]]){
-        cell.slider.minimumValue = 5;
-        cell.slider.maximumValue = 60 * 5;
-        cell.slider.value = self.config.speedStrategyInterval;
-        cell.lblValue.text = [NSString stringWithFormat:@"%d", (int)cell.slider.value];
-    }else if ([option isEqualToString:[self sectionToTitle:OPTIONS_SPEED_NEEDPERC]]){
-        cell.slider.minimumValue = 0.01;
-        cell.slider.maximumValue = 0.5;
-        cell.slider.value = self.config.speedStrategyPercentChangeNeeded;
-        cell.lblValue.text = [NSString stringWithFormat:@"%d%%", (int)(cell.slider.value * 100)];
-    }else if ([option isEqualToString:[self sectionToTitle:OPTIONS_SELECTED_STRATEGY]]){
-        cell.lblSubtitle.text = [[Context sharedContext] strategyToString:self.config.selectedStrategy];
-    }else if ([option isEqualToString:[self sectionToTitle:OPTIONS_SELECT_STRATEGY]]){
-        cell.pickerView.dataSource = self;
-        cell.pickerView.delegate = self;
-        [cell.pickerView selectRow:self.config.selectedStrategy inComponent:0 animated:NO];
-    }else{
-        NSLog(@"Settings: Cell type not found at row: %ld", (long)indexPath.row);
-    }
-
-    
-    if ([option isEqualToString:[self sectionToTitle:OPTIONS_SELECTED_STRATEGY]]){
-        cell.selectionStyle = UITableViewCellSelectionStyleDefault;
-    }else{
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    }
-    
-    cell.lblTitle.text = option;
-    
-    cell.delegate = self;
-    
-    return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    NSString *option = self.options[indexPath.row];
+    if (indexPath.section == 0){
+        self.useTestData = !self.useTestData;
+        [Context sharedContext].testing = self.useTestData;
+        [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
+    }else{
+        NSString *option = self.options[indexPath.row];
 
-    if ([option isEqualToString:[self sectionToTitle:OPTIONS_SELECTED_STRATEGY]]){
-        self.optionsExpanded = !self.optionsExpanded;
-        
-        
-        if (self.optionsExpanded){
-            [self.options insertObject:[self sectionToTitle:OPTIONS_SELECT_STRATEGY] atIndex:1];
-            [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:1 inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
-        }else{
-            [self.options removeObjectAtIndex:1];
-            [self.tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:1 inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
+        if ([option isEqualToString:[self sectionToTitle:OPTIONS_SELECTED_STRATEGY]]){
+            self.optionsExpanded = !self.optionsExpanded;
+            if (self.optionsExpanded){
+                [self.options insertObject:[self sectionToTitle:OPTIONS_SELECT_STRATEGY] atIndex:1];
+                [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:1 inSection:indexPath.section]] withRowAnimation:UITableViewRowAnimationFade];
+            }else{
+                [self.options removeObjectAtIndex:1];
+                [self.tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:1 inSection:indexPath.section]] withRowAnimation:UITableViewRowAnimationFade];
+            }
         }
     }
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
+    if (section == 0){
+        return @"TESTING";
+    }else{
+        return @"SERVER CONFIGURATION";
+    }
 }
 
 #pragma mark - Delegates
@@ -230,7 +263,7 @@ typedef enum: NSInteger{
     
     NSInteger index = [self findIndexForTitle:title];
     NSString *option = self.options[index];
-    SettingsTableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0]];
+    SettingsTableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:1]];
     
     if ([option isEqualToString:[self sectionToTitle:OPTIONS_EMA_LONG]]){
         self.config.emaLongCount = value;
@@ -351,7 +384,7 @@ typedef enum: NSInteger{
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
     STRATEGIES strategy = row;
     self.config.selectedStrategy = strategy;
-    [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
+    [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:1]] withRowAnimation:UITableViewRowAnimationFade];
     self.navigationItem.rightBarButtonItem.enabled = YES;
     self.navigationItem.leftBarButtonItem.enabled = YES;
 }

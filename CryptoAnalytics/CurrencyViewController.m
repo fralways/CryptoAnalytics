@@ -17,6 +17,7 @@
 @property NSMutableArray<Currency *> *previousValues;
 @property UIRefreshControl *refreshControl;
 @property BOOL refreshing;
+@property NSTimer *refreshTimer;
 
 @end
 
@@ -33,7 +34,8 @@
 
     [self initRefreshControl];
     self.refreshing = YES;
-    [self getCurrencies];
+//    [self getCurrencies];
+    [self initTimer];
 }
 
 
@@ -44,10 +46,25 @@
 
 #pragma mark - Init
 
+- (void)initTimer{
+    self.refreshTimer = [NSTimer scheduledTimerWithTimeInterval:60 target:self selector:@selector(getCurrencies) userInfo:nil repeats:YES];
+    [self.refreshTimer fire];
+}
+
 - (void)initRefreshControl{
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl addTarget:self action:@selector(pullCurrencies) forControlEvents:UIControlEventValueChanged];
     [self.tableView addSubview:self.refreshControl];
+}
+
+#pragma mark - Refresh control
+
+- (void)pullCurrencies{
+    if (!self.refreshing){
+        self.refreshing = YES;
+        [self.refreshControl beginRefreshing];
+        [self getCurrencies];
+    }
 }
 
 #pragma mark - Table view
@@ -73,14 +90,21 @@
     cell.imgCurrency.image = [UIImage imageNamed:[currentValue.fromSymbol lowercaseString]];
 
     NSString *text = [NSString stringWithFormat:@"$ %.8g", currentValue.price];
-    if (previousValue){
-        if (previousValue.price > currentValue.price){
-            cell.lblPrice.textColor = [UIColor redColor];
-        }else if (previousValue.price < currentValue.price){
-            cell.lblPrice.textColor = [UIColor greenColor];
-        }else{
-            cell.lblPrice.textColor = [UIColor blackColor];
-        }
+//    if (previousValue){
+//        if (previousValue.price > currentValue.price){
+//            cell.lblPrice.textColor = [UIColor redColor];
+//        }else if (previousValue.price < currentValue.price){
+//            cell.lblPrice.textColor = [UIColor greenColor];
+//        }else{
+//            cell.lblPrice.textColor = [UIColor blackColor];
+//        }
+//    }else{
+//        cell.lblPrice.textColor = [UIColor blackColor];
+//    }
+    if (currentValue.change24HourPct > 0){
+        cell.lblPrice.textColor = [UIColor greenColor];
+    }else if (currentValue.change24HourPct < 0){
+        cell.lblPrice.textColor = [UIColor redColor];
     }else{
         cell.lblPrice.textColor = [UIColor blackColor];
     }
@@ -97,31 +121,38 @@
 
 - (void)getCurrencies{
     self.previousValues = self.currentValues;
-    [[NetworkManager sharedManager] getCurrenciesWithCompletionHandler:^(bool successful, NSArray *currencies, NSError *httpError) {
-        if (successful){
-            NSMutableArray<Currency *> *convertedCurrencies = [NSMutableArray new];
-            for (NSDictionary *currency in currencies) {
-                [convertedCurrencies addObject:[[Currency alloc]initWithCurrencyDictionary:currency]];
+    
+    if (![Context sharedContext].testing){
+        [[NetworkManager sharedManager] getCurrenciesWithCompletionHandler:^(bool successful, NSArray *currencies, NSError *httpError) {
+            if (successful){
+                NSMutableArray<Currency *> *convertedCurrencies = [NSMutableArray new];
+                for (NSDictionary *currency in currencies) {
+                    [convertedCurrencies addObject:[[Currency alloc]initWithCurrencyDictionary:currency]];
+                }
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    self.currentValues = convertedCurrencies;
+                    [self.tableView reloadData];
+                    [[NSNotificationCenter defaultCenter]postNotificationName:STATIC_NOT_FETCHCURRENCIES object:self.currentValues];
+                });
+            }else{
+                //error
             }
             dispatch_async(dispatch_get_main_queue(), ^{
-                self.currentValues = convertedCurrencies;
-                [self.tableView reloadData];
+                [self.refreshControl endRefreshing];
+                self.refreshing = NO;
             });
-        }else{
-            //error
+        }];
+    }else{
+        NSString *path = [[NSBundle mainBundle]pathForResource:@"currencies" ofType:@"json"];
+        NSData *data = [[NSData alloc]initWithContentsOfURL:[NSURL fileURLWithPath:path]];
+        NSArray *currencies = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+        NSLog(@"Currency: %@", currencies);
+        NSMutableArray<Currency *> *convertedCurrencies = [NSMutableArray new];
+        for (NSDictionary *currency in currencies) {
+            [convertedCurrencies addObject:[[Currency alloc]initWithCurrencyDictionary:currency]];
         }
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.refreshControl endRefreshing];
-            self.refreshing = NO;
-        });
-    }];
-}
-
-- (void)pullCurrencies{
-    if (!self.refreshing){
-        self.refreshing = YES;
-        [self.refreshControl beginRefreshing];
-        [self getCurrencies];
+        self.currentValues = convertedCurrencies;
+        [self.tableView reloadData];
     }
 }
 

@@ -18,11 +18,20 @@
 + (NSString *)stringFromDate:(NSDate *)date{
     if (formatter == NULL){
         formatter = [NSDateFormatter new];
-//        [formatter setDateFormat:@"YYYY-MM-dd\'T\'HH:mm:ssZZZZZ"];
+        //        [formatter setDateFormat:@"YYYY-MM-dd\'T\'HH:mm:ssZZZZZ"];
         [formatter setDateFormat:@"HH:mm:ss"];
     }
     
     return [formatter stringFromDate:date];
+}
+
++ (NSString *)historyStringFromDate:(NSDate *)date{
+    if (historyFormatter == NULL){
+        historyFormatter = [NSDateFormatter new];
+        [historyFormatter setDateFormat:@"dd. MMMM HH:mm"];
+    }
+    
+    return [historyFormatter stringFromDate:date];
 }
 
 + (NSString *)stringFromTimestamp:(long)timestamp{

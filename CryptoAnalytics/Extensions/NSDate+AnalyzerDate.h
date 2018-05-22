@@ -9,11 +9,13 @@
 #import <Foundation/Foundation.h>
 
 static NSDateFormatter *formatter;
+static NSDateFormatter *historyFormatter;
 
 @interface NSDate (AnalyzerDate)
 
 + (NSDate *)dateFromTimestamp:(long)timestamp;
-+ (NSString *)stringFromDate:(NSDate *)date;
++ (NSString *)historyStringFromDate:(NSDate *)date;
 + (NSString *)stringFromTimestamp:(long)timestamp;
++ (NSString *)stringFromDate:(NSDate *)date;
 
 @end

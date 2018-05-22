@@ -11,5 +11,7 @@
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 
++ (NSArray *)getCurrencies;
+
 @end
 

@@ -138,7 +138,7 @@ typedef enum CurrencyDetails: NSInteger {
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
-    return @"Details";
+    return @"DETAILS";
 }
 
 - (IBAction)showChart:(id)sender {

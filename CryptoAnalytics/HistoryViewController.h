@@ -12,6 +12,8 @@
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) IBOutlet UIButton *btnFilter;
+@property (strong, nonatomic) IBOutlet UILabel *lblGainAmount;
+@property (strong, nonatomic) IBOutlet UILabel *lblGainText;
 
 - (IBAction)filter:(UIButton *)sender;
 

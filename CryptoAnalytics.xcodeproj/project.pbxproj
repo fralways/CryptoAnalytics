@@ -146,6 +146,7 @@
 		DC9AAEC520A9998C00A904B7 /* Suggestion.m in Sources */ = {isa = PBXBuildFile; fileRef = DC9AAEC420A9998C00A904B7 /* Suggestion.m */; };
 		DC9AAECB20A9A45100A904B7 /* NSDate+AnalyzerDate.m in Sources */ = {isa = PBXBuildFile; fileRef = DC9AAECA20A9A45100A904B7 /* NSDate+AnalyzerDate.m */; };
 		DC9AAECF20AD86B400A904B7 /* History.m in Sources */ = {isa = PBXBuildFile; fileRef = DC9AAECE20AD86B400A904B7 /* History.m */; };
+		DC9AAED120B034A600A904B7 /* currencies.json in Resources */ = {isa = PBXBuildFile; fileRef = DC9AAED020B034A600A904B7 /* currencies.json */; };
 		DCCCAE80204F1B1300990407 /* Currency.m in Sources */ = {isa = PBXBuildFile; fileRef = DCCCAE7F204F1B1300990407 /* Currency.m */; };
 		DCDD466620A4F4BA00CA271F /* config.json in Resources */ = {isa = PBXBuildFile; fileRef = DCDD466520A4F4BA00CA271F /* config.json */; };
 		DCF11B9D2049952C00E6807F /* CurrencyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DCF11B9C2049952C00E6807F /* CurrencyTableViewCell.m */; };
@@ -314,6 +315,7 @@
 		DC9AAECA20A9A45100A904B7 /* NSDate+AnalyzerDate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSDate+AnalyzerDate.m"; sourceTree = "<group>"; };
 		DC9AAECD20AD86B400A904B7 /* History.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = History.h; sourceTree = "<group>"; };
 		DC9AAECE20AD86B400A904B7 /* History.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = History.m; sourceTree = "<group>"; };
+		DC9AAED020B034A600A904B7 /* currencies.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = currencies.json; sourceTree = "<group>"; };
 		DCCCAE7E204F1B1300990407 /* Currency.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Currency.h; sourceTree = "<group>"; };
 		DCCCAE7F204F1B1300990407 /* Currency.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Currency.m; sourceTree = "<group>"; };
 		DCDD466520A4F4BA00CA271F /* config.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = config.json; sourceTree = "<group>"; };
@@ -631,6 +633,7 @@
 				DC795C322089236C00F394BE /* CurrencyHistagram.json */,
 				DCDD466520A4F4BA00CA271F /* config.json */,
 				DC9AAEC120A994D200A904B7 /* suggestions.json */,
+				DC9AAED020B034A600A904B7 /* currencies.json */,
 			);
 			path = Mock;
 			sourceTree = "<group>";
@@ -749,6 +752,7 @@
 			files = (
 				DC2686F4208681ED00F18663 /* Info.plist in Resources */,
 				DC9AAEC220A994D200A904B7 /* suggestions.json in Resources */,
+				DC9AAED120B034A600A904B7 /* currencies.json in Resources */,
 				DC06E9722046F72B008B2F82 /* LaunchScreen.storyboard in Resources */,
 				DC06E96F2046F72B008B2F82 /* Assets.xcassets in Resources */,
 				DC06E96D2046F72B008B2F82 /* Main.storyboard in Resources */,

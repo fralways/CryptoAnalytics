@@ -32,7 +32,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.title = @"BUY/SELL Suggestions";
+    self.title = @"Suggestions";
     self.userDefaults = [NSUserDefaults standardUserDefaults];
     
     self.tableView.delegate = self;
@@ -99,22 +99,39 @@
 - (void)getSuggestions{
     if (!self.loading){
         self.loading = YES;
-        [[NetworkManager sharedManager]getSuggestionsWithCompletionHandler:^(bool successful, NSArray *suggestions, NSError *httpError) {
-            if (successful){
-                NSLog(@"Analyzer: got suggestions: %@", suggestions);
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    self.loading = NO;
-                    self.suggestionsArray = suggestions;
-                    self.suggestions = [NSMutableArray new];
-                    for (NSDictionary *suggestionDictionary in suggestions) {
-                        Suggestion *suggestion = [[Suggestion alloc]initWithSuggestionDictionary:suggestionDictionary];
-                        [self.suggestions addObject:suggestion];
-                    }
-                    [self refreshTable];
-                    [self.refreshControl endRefreshing];
-                });
+        
+        if (![Context sharedContext].testing){
+            [[NetworkManager sharedManager]getSuggestionsWithCompletionHandler:^(bool successful, NSArray *suggestions, NSError *httpError) {
+                if (successful){
+                    NSLog(@"Analyzer: got suggestions: %@", suggestions);
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        self.loading = NO;
+                        self.suggestionsArray = suggestions;
+                        self.suggestions = [NSMutableArray new];
+                        for (NSDictionary *suggestionDictionary in suggestions) {
+                            Suggestion *suggestion = [[Suggestion alloc]initWithSuggestionDictionary:suggestionDictionary];
+                            [self.suggestions addObject:suggestion];
+                        }
+                        [self refreshTable];
+                        [self.refreshControl endRefreshing];
+                    });
+                }
+            }];
+        }else{
+            NSString *path = [[NSBundle mainBundle]pathForResource:@"suggestions" ofType:@"json"];
+            NSData *data = [[NSData alloc]initWithContentsOfURL:[NSURL fileURLWithPath:path]];
+            NSArray *suggestions = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+            NSLog(@"Analyzer: %@", suggestions);
+            self.loading = NO;
+            self.suggestionsArray = suggestions;
+            self.suggestions = [NSMutableArray new];
+            for (NSDictionary *suggestionDictionary in suggestions) {
+                Suggestion *suggestion = [[Suggestion alloc]initWithSuggestionDictionary:suggestionDictionary];
+                [self.suggestions addObject:suggestion];
             }
-        }];
+            [self refreshTable];
+            [self.refreshControl endRefreshing];
+        }
     }else{
         [self.refreshControl endRefreshing];
     }
