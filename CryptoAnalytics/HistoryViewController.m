@@ -60,13 +60,28 @@
 }
 
 - (void)setupUI{
+    self.view.backgroundColor = AppStyle.primaryLightColor;
+    self.lblGainText.textColor = AppStyle.primaryTextColor;
+    self.lblGainAmount.textColor = AppStyle.primaryTextColor;
     self.btnFilter.layer.borderColor = [[UIColor darkTextColor] CGColor];
     self.btnFilter.layer.borderWidth = 1;
     self.btnFilter.layer.cornerRadius = 8;
     [self.btnFilter setHidden:YES];
+    self.tableView.backgroundColor = AppStyle.primaryLightColor;
 }
 
 #pragma mark - Table view
+
+- (void)setupCellGraphics:(HistoryTableViewCell *)cell{
+    cell.lblText.font = [UIFont systemFontOfSize:AppStyle.cellFontSize];
+//    cell.lblDate.font = [UIFont systemFontOfSize:AppStyle.cellFontSize];
+    
+    cell.lblText.textColor = AppStyle.primaryTextColor;
+    cell.lblDate.textColor = AppStyle.primaryTextColor;
+    cell.backgroundColor = AppStyle.primaryLightColor;
+    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+}
 
 - (void)refreshTableView{
     [self.tableView reloadData];
@@ -89,6 +104,8 @@
     }
     
     cell.lblDate.text = [NSDate historyStringFromDate:history.time];
+    
+    [self setupCellGraphics:cell];
     
     return cell;
 }

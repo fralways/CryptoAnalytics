@@ -10,6 +10,7 @@
 #import "Currency.h"
 #import "CurrencyTableViewCell.h"
 #import "CurrencyDetailsViewController.h"
+#import "UIImage+AnalyzerImage.h"
 
 @interface CurrencyViewController ()
 
@@ -31,6 +32,7 @@
     
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    self.tableView.backgroundColor = AppStyle.primaryLightColor;
 
     [self initRefreshControl];
     self.refreshing = YES;
@@ -69,6 +71,24 @@
 
 #pragma mark - Table view
 
+- (void)setupCellGraphics:(CurrencyTableViewCell *)cell withValue:(Currency *)value{
+    if (value.change24HourPct > 0){
+        cell.lblPrice.textColor = AppStyle.primaryIncreaseColor;
+    }else if (value.change24HourPct < 0){
+        cell.lblPrice.textColor = AppStyle.primaryDecreaseColor;
+    }else{
+        cell.lblPrice.textColor = AppStyle.primaryTextColor;
+    }
+    cell.lblPrice.font = [UIFont systemFontOfSize:AppStyle.cellFontSize];
+    cell.lblName.font = [UIFont systemFontOfSize:AppStyle.cellFontSize];
+    cell.lblName.textColor = AppStyle.primaryTextColor;
+    
+    UIView *selection = [[UIView alloc]init];
+    selection.backgroundColor = AppStyle.primaryColor;
+    cell.selectedBackgroundView = selection;
+    cell.backgroundColor = AppStyle.primaryLightColor;
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
 }
@@ -87,34 +107,19 @@
     }
     
     cell.lblName.text = currentValue.fromSymbol;
-    cell.imgCurrency.image = [UIImage imageNamed:[currentValue.fromSymbol lowercaseString]];
+    cell.imgCurrency.image = [[UIImage imageNamed:[currentValue.fromSymbol lowercaseString]] convertImageToGrayScale];
 
     NSString *text = [NSString stringWithFormat:@"$ %.8g", currentValue.price];
-//    if (previousValue){
-//        if (previousValue.price > currentValue.price){
-//            cell.lblPrice.textColor = [UIColor redColor];
-//        }else if (previousValue.price < currentValue.price){
-//            cell.lblPrice.textColor = [UIColor greenColor];
-//        }else{
-//            cell.lblPrice.textColor = [UIColor blackColor];
-//        }
-//    }else{
-//        cell.lblPrice.textColor = [UIColor blackColor];
-//    }
-    if (currentValue.change24HourPct > 0){
-        cell.lblPrice.textColor = [UIColor greenColor];
-    }else if (currentValue.change24HourPct < 0){
-        cell.lblPrice.textColor = [UIColor redColor];
-    }else{
-        cell.lblPrice.textColor = [UIColor blackColor];
-    }
     cell.lblPrice.text = text;
+
+    [self setupCellGraphics:cell withValue:currentValue];
 
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [self performSegueWithIdentifier:STATIC_SEGUE_CURRENCYDETAIL sender:self.currentValues[indexPath.row]];
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 #pragma mark - Network
@@ -151,9 +156,11 @@
         for (NSDictionary *currency in currencies) {
             [convertedCurrencies addObject:[[Currency alloc]initWithCurrencyDictionary:currency]];
         }
+        self.refreshing = NO;
         [self.refreshControl endRefreshing];
         self.currentValues = convertedCurrencies;
         [self.tableView reloadData];
+        [[NSNotificationCenter defaultCenter]postNotificationName:STATIC_NOT_FETCHCURRENCIES object:self.currentValues];
     }
 }
 

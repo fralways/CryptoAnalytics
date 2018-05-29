@@ -37,6 +37,7 @@
     
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    self.tableView.backgroundColor = AppStyle.primaryLightColor;
     
     [self initRefreshControl];
     [self getSuggestions];
@@ -143,13 +144,22 @@
     [cell.btnAction setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     if (type == BUY){
         [cell.btnAction setTitle:@"BUY" forState:UIControlStateNormal];
-        [cell.btnAction setBackgroundColor:[UIColor greenColor]];
+        [cell.btnAction setBackgroundColor:AppStyle.primaryIncreaseColor];
     }else{
         [cell.btnAction setTitle:@"SELL" forState:UIControlStateNormal];
-        [cell.btnAction setBackgroundColor:[UIColor redColor]];
+        [cell.btnAction setBackgroundColor:AppStyle.primaryDecreaseColor];
     }
     
     cell.btnAction.layer.cornerRadius = 3.0;
+    
+    cell.lblText.font = [UIFont systemFontOfSize:AppStyle.cellFontSize];
+    cell.lblCurrency.font = [UIFont systemFontOfSize:AppStyle.cellFontSize];
+    cell.lblTimestamp.font = [UIFont systemFontOfSize:AppStyle.cellFontSize];
+    cell.btnAction.titleLabel.font = [UIFont systemFontOfSize:AppStyle.cellFontSize];
+    cell.lblText.textColor = AppStyle.primaryTextColor;
+    cell.lblCurrency.textColor = AppStyle.primaryTextColor;
+    cell.lblTimestamp.textColor = AppStyle.primaryTextColor;
+    cell.backgroundColor = AppStyle.primaryLightColor;
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
 }
@@ -216,13 +226,32 @@
     UILabel *amount = [[UILabel alloc]initWithFrame:CGRectMake(215 - 50, 0, 50, 30)];
     amount.text = @"20$";
     amount.textAlignment = NSTextAlignmentRight;
+    amount.textColor = AppStyle.primaryTextColor;
     self.lblSlider = amount;
     
     [holder addSubview:slider];
     [holder addSubview:amount];
     
+    UILabel *title = [[UILabel alloc]initWithFrame:CGRectMake(12, 0, 240 - 24, 50)];
+    title.textColor = AppStyle.primaryTextColor;
+    title.font = [UIFont systemFontOfSize:20];
+    title.textAlignment = NSTextAlignmentCenter;
+    title.contentMode = UIViewContentModeBottom;
+    title.text = [NSString stringWithFormat:@"Buy %@", self.suggestionClicked.currency];
+    
+    UILabel *subtitle = [[UILabel alloc]initWithFrame:CGRectMake(12, 0, 240 - 24, 15)];
+    title.contentMode = UIViewContentModeTop;
+    subtitle.textColor = AppStyle.primaryTextColor;
+    subtitle.font = [UIFont systemFontOfSize:14];
+    subtitle.textAlignment = NSTextAlignmentCenter;
+    subtitle.text = @"Select amount to buy";
+    
     SCLAlertViewBuilder *builder = [SCLAlertViewBuilder new]
+    .customViewColor(AppStyle.primaryColor)
+    .backgroundViewColor(AppStyle.primaryLightColor)
     .shouldDismissOnTapOutside(YES)
+    .addCustomView(title)
+    .addCustomView(subtitle)
     .addCustomView(holder)
     .addButtonWithActionBlock(@"Confirm", ^{
         NSInteger amount = (int)slider.value;
@@ -230,8 +259,7 @@
     });
     SCLAlertViewShowBuilder *showBuilder = [SCLAlertViewShowBuilder new]
     .style(SCLAlertViewStyleInfo)
-    .title([NSString stringWithFormat:@"Buy %@", self.suggestionClicked.currency])
-    .subTitle(@"Select amount to buy")
+//    .subTitle(@"Select amount to buy")
     .closeButtonTitle(@"Cancel")
     .duration(0);
     [showBuilder showAlertView:builder.alertView onViewController:self];
@@ -266,8 +294,24 @@
     myAmountLbl.textAlignment = NSTextAlignmentCenter;
     myAmountLbl.font = [UIFont systemFontOfSize:14];
     
+    UILabel *title = [[UILabel alloc]initWithFrame:CGRectMake(12, 0, 240 - 24, 50)];
+    title.textColor = AppStyle.primaryTextColor;
+    title.font = [UIFont systemFontOfSize:20];
+    title.textAlignment = NSTextAlignmentCenter;
+    title.contentMode = UIViewContentModeBottom;
+    title.text = [NSString stringWithFormat:@"Sell %@", self.suggestionClicked.currency];
+    
+    UILabel *subtitle = [[UILabel alloc]initWithFrame:CGRectMake(12, 0, 240 - 24, 15)];
+    title.contentMode = UIViewContentModeTop;
+    subtitle.textColor = AppStyle.primaryTextColor;
+    subtitle.font = [UIFont systemFontOfSize:14];
+    subtitle.textAlignment = NSTextAlignmentCenter;
+    subtitle.text = @"Select amount to sell";
+    
     SCLAlertViewBuilder *builder = [SCLAlertViewBuilder new]
     .shouldDismissOnTapOutside(YES)
+    .addCustomView(title)
+    .addCustomView(subtitle)
     .addCustomView(myAmountLbl)
     .addCustomView(holder)
     .addButtonWithActionBlock(@"Confirm", ^{
@@ -276,8 +320,6 @@
     });
     SCLAlertViewShowBuilder *showBuilder = [SCLAlertViewShowBuilder new]
     .style(SCLAlertViewStyleInfo)
-    .title([NSString stringWithFormat:@"Sell %@", self.suggestionClicked.currency])
-    .subTitle(@"Select amount to sell")
     .closeButtonTitle(@"Cancel")
     .duration(0);
     [showBuilder showAlertView:builder.alertView onViewController:self];

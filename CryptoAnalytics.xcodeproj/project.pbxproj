@@ -153,6 +153,9 @@
 		DCF11BA12049954D00E6807F /* Keys.m in Sources */ = {isa = PBXBuildFile; fileRef = DCF11BA02049954D00E6807F /* Keys.m */; };
 		DCF11BA42049972800E6807F /* NetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DCF11BA32049972800E6807F /* NetworkManager.m */; };
 		DCF11BA82049984500E6807F /* Context.m in Sources */ = {isa = PBXBuildFile; fileRef = DCF11BA72049984500E6807F /* Context.m */; };
+		DCFBA32820BD92E70045A03B /* AppStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = DCFBA32720BD92E70045A03B /* AppStyle.m */; };
+		DCFBA32C20BDACBF0045A03B /* UIImage+AnalyzerImage.m in Sources */ = {isa = PBXBuildFile; fileRef = DCFBA32B20BDACBF0045A03B /* UIImage+AnalyzerImage.m */; };
+		DCFBA32F20BDAD110045A03B /* AnalyzerTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DCFBA32E20BDAD110045A03B /* AnalyzerTabBarViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -328,6 +331,12 @@
 		DCF11BA62049984500E6807F /* Context.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Context.h; sourceTree = "<group>"; };
 		DCF11BA72049984500E6807F /* Context.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Context.m; sourceTree = "<group>"; };
 		DCF11BA92049990E00E6807F /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		DCFBA32620BD92E70045A03B /* AppStyle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppStyle.h; sourceTree = "<group>"; };
+		DCFBA32720BD92E70045A03B /* AppStyle.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppStyle.m; sourceTree = "<group>"; };
+		DCFBA32A20BDACBF0045A03B /* UIImage+AnalyzerImage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+AnalyzerImage.h"; sourceTree = "<group>"; };
+		DCFBA32B20BDACBF0045A03B /* UIImage+AnalyzerImage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+AnalyzerImage.m"; sourceTree = "<group>"; };
+		DCFBA32D20BDAD110045A03B /* AnalyzerTabBarViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AnalyzerTabBarViewController.h; sourceTree = "<group>"; };
+		DCFBA32E20BDAD110045A03B /* AnalyzerTabBarViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AnalyzerTabBarViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -386,6 +395,8 @@
 				DCF11BA52049972D00E6807F /* Network */,
 				DCCCAE81204F1B2100990407 /* ObjectClasses */,
 				DC9AAECC20A9A45A00A904B7 /* Extensions */,
+				DCFBA32920BD93170045A03B /* Params */,
+				DCFBA33020BDAD170045A03B /* Common&Control */,
 				DC06E9652046F72B008B2F82 /* AppDelegate.h */,
 				DC06E9662046F72B008B2F82 /* AppDelegate.m */,
 				DC06E9682046F72B008B2F82 /* CurrencyViewController.h */,
@@ -399,10 +410,6 @@
 				DC54DDF4206AD8870076ABFB /* SettingsViewController.m */,
 				DC795C35208D1F3200F394BE /* HistoryViewController.h */,
 				DC795C36208D1F3200F394BE /* HistoryViewController.m */,
-				DCF11BA62049984500E6807F /* Context.h */,
-				DCF11BA72049984500E6807F /* Context.m */,
-				DCF11B9F2049954D00E6807F /* Keys.h */,
-				DCF11BA02049954D00E6807F /* Keys.m */,
 				DCF11BA92049990E00E6807F /* PrefixHeader.pch */,
 				DC06E96B2046F72B008B2F82 /* Main.storyboard */,
 				DC06E96E2046F72B008B2F82 /* Assets.xcassets */,
@@ -643,6 +650,8 @@
 			children = (
 				DC9AAEC920A9A45100A904B7 /* NSDate+AnalyzerDate.h */,
 				DC9AAECA20A9A45100A904B7 /* NSDate+AnalyzerDate.m */,
+				DCFBA32A20BDACBF0045A03B /* UIImage+AnalyzerImage.h */,
+				DCFBA32B20BDACBF0045A03B /* UIImage+AnalyzerImage.m */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -686,6 +695,28 @@
 				DCF11BA32049972800E6807F /* NetworkManager.m */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		DCFBA32920BD93170045A03B /* Params */ = {
+			isa = PBXGroup;
+			children = (
+				DCF11BA62049984500E6807F /* Context.h */,
+				DCF11BA72049984500E6807F /* Context.m */,
+				DCF11B9F2049954D00E6807F /* Keys.h */,
+				DCF11BA02049954D00E6807F /* Keys.m */,
+				DCFBA32620BD92E70045A03B /* AppStyle.h */,
+				DCFBA32720BD92E70045A03B /* AppStyle.m */,
+			);
+			path = Params;
+			sourceTree = "<group>";
+		};
+		DCFBA33020BDAD170045A03B /* Common&Control */ = {
+			isa = PBXGroup;
+			children = (
+				DCFBA32D20BDAD110045A03B /* AnalyzerTabBarViewController.h */,
+				DCFBA32E20BDAD110045A03B /* AnalyzerTabBarViewController.m */,
+			);
+			path = "Common&Control";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -834,6 +865,7 @@
 				DC2686D0208681ED00F18663 /* ChartCandleStickLayer.swift in Sources */,
 				DC2686F1208681ED00F18663 /* Chart.swift in Sources */,
 				DC2686F0208681ED00F18663 /* ChartLineModel.swift in Sources */,
+				DCFBA32F20BDAD110045A03B /* AnalyzerTabBarViewController.m in Sources */,
 				DC2686C9208681ED00F18663 /* ChartPointsSingleViewLayer.swift in Sources */,
 				DC2686ED208681ED00F18663 /* ChartTextUtils.swift in Sources */,
 				DC268709208681ED00F18663 /* ChartAxisLabelsConflictSolver.swift in Sources */,
@@ -871,6 +903,7 @@
 				DC26872E208681ED00F18663 /* ChartPointTextCircleView.swift in Sources */,
 				DC268704208681ED00F18663 /* ChartAxisLabel.swift in Sources */,
 				DC26870E208681ED00F18663 /* ChartAxisYLayerDefault.swift in Sources */,
+				DCFBA32820BD92E70045A03B /* AppStyle.m in Sources */,
 				DC268730208681ED00F18663 /* ChartPointViewBarStacked.swift in Sources */,
 				DC2686CC208681ED00F18663 /* ChartGuideLinesLayer.swift in Sources */,
 				DC54DDFB206ADBA60076ABFB /* CurrencyDetailsViewController.m in Sources */,
@@ -912,6 +945,7 @@
 				DC268723208681ED00F18663 /* ChartPointCandleStick.swift in Sources */,
 				DC268708208681ED00F18663 /* ChartAxisValuesGenerator.swift in Sources */,
 				DC2686D1208681ED00F18663 /* ChartDividersLayer.swift in Sources */,
+				DCFBA32C20BDACBF0045A03B /* UIImage+AnalyzerImage.m in Sources */,
 				DC54DE00206AF91B0076ABFB /* CurrencyChart.swift in Sources */,
 				DC54DDFE206AE0950076ABFB /* CurrencyDetailsTableViewCell.m in Sources */,
 				DC2686FF208681ED00F18663 /* ChartAxisModel.swift in Sources */,

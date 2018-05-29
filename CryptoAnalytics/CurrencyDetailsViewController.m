@@ -10,6 +10,7 @@
 #import "CurrencyDetailsTableViewCell.h"
 //#import "CurrencyChart.swift"
 #import "CryptoAnalytics-Swift.h"
+#import "UIImage+AnalyzerImage.h"
 
 typedef enum CurrencyDetails: NSInteger {
     
@@ -37,7 +38,8 @@ typedef enum CurrencyDetails: NSInteger {
     [self setupBarButton];
     
     self.tableView.delegate = self;
-    self.tableView.dataSource = self;    
+    self.tableView.dataSource = self;
+    self.tableView.backgroundColor = AppStyle.primaryLightColor;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -54,11 +56,12 @@ typedef enum CurrencyDetails: NSInteger {
     
     UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[self.currency.fromSymbol lowercaseString]]];
     [imageView setContentMode:UIViewContentModeScaleAspectFit];
-    UIImage *image = [self imageWithImage:[UIImage imageNamed:[self.currency.fromSymbol lowercaseString]] convertToSize:CGSizeMake(40, 40)];
+    UIImage *image = [[self imageWithImage:[UIImage imageNamed:[self.currency.fromSymbol lowercaseString]] convertToSize:CGSizeMake(40, 40)] convertImageToGrayScale];
     [imageView setImage:image];
 
     UILabel *label = [UILabel new];
     label.text = self.currency.fromSymbol;
+    label.textColor = AppStyle.primaryTextColor;
     [label setTextAlignment:NSTextAlignmentLeft];
     
     [stackView setSpacing:4.0];
@@ -84,6 +87,15 @@ typedef enum CurrencyDetails: NSInteger {
 }
 
 #pragma mark - Table view
+
+- (void)setupCellGraphics:(CurrencyDetailsTableViewCell *)cell{
+    cell.lblText.font = [UIFont systemFontOfSize:AppStyle.cellFontSize];
+    cell.lblDetails.font = [UIFont systemFontOfSize:AppStyle.cellFontSize];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.lblDetails.textColor = AppStyle.primaryTextColor;
+    cell.lblText.textColor = AppStyle.primaryTextColor;
+    cell.backgroundColor = AppStyle.primaryLightColor;
+}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return DETAILSEND;
@@ -128,18 +140,26 @@ typedef enum CurrencyDetails: NSInteger {
     }
     
     CurrencyDetailsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellType];
+    cell.lblText.text = text;
+    cell.lblDetails.text = details;
     
-//    if (indexPath.row != DETAILSCHART){
-        cell.lblText.text = text;
-        cell.lblDetails.text = details;
-//    }
+    [self setupCellGraphics:cell];
     
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
 
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
-    return @"DETAILS";
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    UILabel *header = [UILabel new];
+    header.text = @"DETAILS";
+    header.backgroundColor = AppStyle.primaryColor;
+    header.textColor = AppStyle.primaryTextColor;
+    header.textAlignment = NSTextAlignmentCenter;
+    header.font = [UIFont systemFontOfSize:18];
+    return header;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return 40;
 }
 
 - (IBAction)showChart:(id)sender {

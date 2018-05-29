@@ -15,5 +15,6 @@
 #include "Context.h"
 #include "Keys.h"
 #include "NetworkManager.h"
+#include "AppStyle.h"
 
 #endif /* PrefixHeader_pch */

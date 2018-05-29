@@ -181,10 +181,10 @@
             </objects>
             <point key="canvasLocation" x="2601" y="133"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Analyzer Tab Bar View Controller-->
         <scene sceneID="5qO-Aj-mUC">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="8q3-TG-j4v" sceneMemberID="viewController">
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="8q3-TG-j4v" customClass="AnalyzerTabBarViewController" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="nJi-Bh-EBu">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>

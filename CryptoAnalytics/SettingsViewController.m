@@ -43,8 +43,11 @@ typedef enum: NSInteger{
     
     self.title = @"Settings";
     
+    self.useTestData = [Context sharedContext].testing;
+    
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    self.tableView.backgroundColor = AppStyle.primaryLightColor;
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Save" style:UIBarButtonItemStyleDone target:self action:@selector(save)];
     [self.navigationItem.rightBarButtonItem setEnabled:NO];
@@ -115,6 +118,25 @@ typedef enum: NSInteger{
 
 #pragma mark - Table view
 
+- (void)setupCellGraphics:(SettingsTableViewCell *)cell withOption:(NSString *)option{
+    if ( (option != NULL && [option isEqualToString:[self sectionToTitle:OPTIONS_SELECTED_STRATEGY]] ) || option == NULL){
+        cell.selectionStyle = UITableViewCellSelectionStyleDefault;
+    }else{
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    }
+    cell.lblTitle.font = [UIFont systemFontOfSize:AppStyle.cellFontSize];
+    cell.lblValue.font = [UIFont systemFontOfSize:AppStyle.cellFontSize];
+    cell.lblSubtitle.font = [UIFont systemFontOfSize:AppStyle.cellFontSize];
+    
+    cell.lblTitle.textColor = AppStyle.primaryTextColor;
+    cell.lblValue.textColor = AppStyle.primaryTextColor;
+    cell.lblSubtitle.textColor = AppStyle.primaryTextColor;
+    cell.backgroundColor = AppStyle.primaryLightColor;
+    UIView *selection = [[UIView alloc]init];
+    selection.backgroundColor = AppStyle.primaryColor;
+    cell.selectedBackgroundView = selection;
+}
+
 - (void)refreshTableView{
     [self.tableView reloadData];
 }
@@ -146,6 +168,8 @@ typedef enum: NSInteger{
         }else{
             cell.lblSubtitle.text = @"NO";
         }
+        
+        [self setupCellGraphics:cell withOption:NULL];
         
         return cell;
     }else{
@@ -211,14 +235,9 @@ typedef enum: NSInteger{
             NSLog(@"Settings: Cell type not found at row: %ld", (long)indexPath.row);
         }
         
-        if ([option isEqualToString:[self sectionToTitle:OPTIONS_SELECTED_STRATEGY]]){
-            cell.selectionStyle = UITableViewCellSelectionStyleDefault;
-        }else{
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        }
+        [self setupCellGraphics:cell withOption:option];
         
         cell.lblTitle.text = option;
-        
         cell.delegate = self;
         
         return cell;
@@ -255,12 +274,26 @@ typedef enum: NSInteger{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
-    if (section == 0){
-        return @"TESTING";
-    }else{
-        return @"SERVER CONFIGURATION";
-    }
+//- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
+//    if (section == 0){
+//        return @"TESTING";
+//    }else{
+//        return @"SERVER CONFIGURATION";
+//    }
+//}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    UILabel *header = [UILabel new];
+    header.text = (section == 0) ? @"TESTING":@"SERVER CONFIGURATION";
+    header.backgroundColor = AppStyle.primaryColor;
+    header.textColor = AppStyle.primaryTextColor;
+    header.textAlignment = NSTextAlignmentCenter;
+    header.font = [UIFont systemFontOfSize:18];
+    return header;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return 40;
 }
 
 #pragma mark - Delegates
@@ -382,10 +415,20 @@ typedef enum: NSInteger{
     return 4;
 }
 
-- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component{
+- (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view{
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, pickerView.frame.size.width, 44)];
+    label.textColor = AppStyle.primaryTextColor;
+    label.font = [UIFont systemFontOfSize:18];
+    label.textAlignment = NSTextAlignmentCenter;
     STRATEGIES strategy = row;
-    return [[Context sharedContext] strategyToString:strategy];
+    label.text = [[Context sharedContext] strategyToString:strategy];
+    return label;
 }
+
+//- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component{
+//    STRATEGIES strategy = row;
+//    return [[Context sharedContext] strategyToString:strategy];
+//}
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
     STRATEGIES strategy = row;
