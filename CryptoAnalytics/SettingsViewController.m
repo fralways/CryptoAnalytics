@@ -230,7 +230,13 @@ typedef enum: NSInteger{
     if (indexPath.section == 0){
         self.useTestData = !self.useTestData;
         [Context sharedContext].testing = self.useTestData;
+        
+//        (self.useTestData) ? [self.tableView reloadSections:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, 2)] withRowAnimation:UITableViewRowAnimationFade] : [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
+        
         [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
+        
+        [self getConfig];
+        
     }else{
         NSString *option = self.options[indexPath.row];
 

@@ -134,6 +134,7 @@ typedef enum CurrencyDetails: NSInteger {
         cell.lblDetails.text = details;
 //    }
     
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
 

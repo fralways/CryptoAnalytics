@@ -151,6 +151,7 @@
         for (NSDictionary *currency in currencies) {
             [convertedCurrencies addObject:[[Currency alloc]initWithCurrencyDictionary:currency]];
         }
+        [self.refreshControl endRefreshing];
         self.currentValues = convertedCurrencies;
         [self.tableView reloadData];
     }

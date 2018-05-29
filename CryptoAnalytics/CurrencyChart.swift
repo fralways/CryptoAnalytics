@@ -107,10 +107,28 @@ import SwiftyJSON
             return filler
         }
         
+        var minValue = 100000.0, maxValue = 0.0;
         var chartPoints = Array<ChartPointCandleStick>()
+        
+        //clear all dates older than 1 month
+        //TODO: change value from -4 to -1 when you update mock data
         for i in 0...json.count {
-            chartPoints.append(ChartPointCandleStick(date: Date(timeIntervalSince1970: json[i]["timestamp"].doubleValue), formatter: displayFormatter, high: json[i]["high"].doubleValue, low: json[i]["low"].doubleValue, open: json[i]["open"].doubleValue, close: json[i]["close"].doubleValue))
+            var date = Date(timeIntervalSince1970: json[i]["timestamp"].doubleValue)
+            let oneMonthBeforeToday = Calendar.current.date(byAdding: .month, value: -4, to: Date());
+            if oneMonthBeforeToday! <= date {
+                chartPoints.append(ChartPointCandleStick(date: Date(timeIntervalSince1970: json[i]["timestamp"].doubleValue), formatter: displayFormatter, high: json[i]["high"].doubleValue, low: json[i]["low"].doubleValue, open: json[i]["open"].doubleValue, close: json[i]["close"].doubleValue))
+                
+                if json[i]["high"].doubleValue > maxValue {
+                    maxValue = json[i]["high"].doubleValue
+                }
+                if json[i]["low"].doubleValue < minValue {
+                    minValue = json[i]["low"].doubleValue
+                }
+            }
         }
+        
+        print(minValue)
+        print(maxValue)
         
 //        for i in 0...10 {
 //            chartPoints.append(ChartPointCandleStick(date: Date(timeIntervalSince1970: json[i]["timestamp"].doubleValue), formatter: displayFormatter, high: json[i]["high"].doubleValue, low: json[i]["low"].doubleValue, open: json[i]["open"].doubleValue, close: json[i]["close"].doubleValue))
@@ -155,19 +173,23 @@ import SwiftyJSON
             return arr.map {day in
                 let date = dateWithComponents(day, month, year)
                 let axisValue = ChartAxisValueDate(date: date, formatter: displayFormatter, labelSettings: labelSettings)
-                axisValue.hidden = !(day % 20 == 0)
+                if day == 5 || day == 15 || day == 25 {
+                    axisValue.hidden = false
+                }else{
+                    axisValue.hidden = true
+                }
                 return axisValue
             }
         }
         
-//        var xValues = generateDateAxisValues(10, year: 2015)
+        let currentDate = Date()
+        let month = calendar.component(.month, from: currentDate)
+        let year = calendar.component(.year, from: currentDate)
 
         var xValues = Array<ChartAxisValueDate>()
-        for i in 2018...2018 {
-            for j in 1...1 {
-                xValues.append(contentsOf: generateDateAxisValues(j, year: i))
-            }
-        }
+        //TODO: use month instead of number 3
+        xValues.append(contentsOf: generateDateAxisValues(3, year: year))
+        
 //        xValues.append(contentsOf: (generateDateAxisValues(10, year: 2015)))
 //        xValues.append(contentsOf: (generateDateAxisValues(11, year: 2015)))
 //        xValues.append(contentsOf: (generateDateAxisValues(12, year: 2015)))
@@ -177,13 +199,14 @@ import SwiftyJSON
 //        let height = UIScreen.main.bounds.height
         
         
-        let yValues = stride(from: 0, through: 20000, by: 5000).map {ChartAxisValueDouble(Double($0), labelSettings: labelSettings)}
         
-        let xModel = ChartAxisModel(axisValues: xValues, axisTitleLabel: ChartAxisLabel(text: "Axis title", settings: labelSettings))
-        let yModel = ChartAxisModel(axisValues: yValues, axisTitleLabel: ChartAxisLabel(text: "Axis title", settings: labelSettings.defaultVertical()))
+        let yValues = stride(from: minValue, through: maxValue, by: (maxValue - minValue) / 5).map {ChartAxisValueDouble(Double($0), labelSettings: labelSettings)}
+        
+        let xModel = ChartAxisModel(axisValues: xValues, axisTitleLabel: ChartAxisLabel(text: "Date", settings: labelSettings))
+        let yModel = ChartAxisModel(axisValues: yValues, axisTitleLabel: ChartAxisLabel(text: "Price", settings: labelSettings.defaultVertical()))
         
         let defaultChartFrame = chartFrameTest(view.bounds)
-        let infoViewHeight: CGFloat = 50
+        let infoViewHeight: CGFloat = 40
         let chartFrame = CGRect(x: defaultChartFrame.origin.x, y: defaultChartFrame.origin.y + infoViewHeight, width: defaultChartFrame.width, height: defaultChartFrame.height - infoViewHeight)
         
         let coordsSpace = ChartCoordsSpaceRightBottomSingleAxis(chartSettings: iPhoneChartSettings, chartFrame: chartFrame, xModel: xModel, yModel: yModel)
@@ -271,7 +294,7 @@ private class InfoView: UIView {
         statusView.layer.borderWidth = 1
         statusView.layer.cornerRadius = 8
         
-        let font = UIFont.systemFont(ofSize: 13);
+        let font = UIFont.systemFont(ofSize: 10);
         
         dateLabel = UILabel()
         dateLabel.font = font
@@ -375,7 +398,7 @@ private class InfoWithIntroView: UIView {
     fileprivate override func didMoveToSuperview() {
         let label = UILabel(frame: CGRect(x: 0, y: bounds.origin.y, width: bounds.width, height: bounds.height))
         label.text = "Drag the line to see chartpoint data"
-        label.font = UIFont.systemFont(ofSize: 13);
+        label.font = UIFont.systemFont(ofSize: 10);
         label.backgroundColor = UIColor.white
         introView = label
         
