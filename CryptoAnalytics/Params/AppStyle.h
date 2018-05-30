@@ -12,6 +12,7 @@
 @interface AppStyle : NSObject
 
 @property (readonly, class) float cellFontSize;
+@property (readonly, class) float cellDetailsFontSize;
 @property (readonly, class) UIColor *primaryColor;
 @property (readonly, class) UIColor *primaryLightColor;
 @property (readonly, class) UIColor *primaryDarkColor;

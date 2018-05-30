@@ -10,7 +10,6 @@
 #import "Currency.h"
 #import "CurrencyTableViewCell.h"
 #import "CurrencyDetailsViewController.h"
-#import "UIImage+AnalyzerImage.h"
 
 @interface CurrencyViewController ()
 
@@ -79,7 +78,7 @@
     }else{
         cell.lblPrice.textColor = AppStyle.primaryTextColor;
     }
-    cell.lblPrice.font = [UIFont systemFontOfSize:AppStyle.cellFontSize];
+    cell.lblPrice.font = [UIFont systemFontOfSize:AppStyle.cellDetailsFontSize];
     cell.lblName.font = [UIFont systemFontOfSize:AppStyle.cellFontSize];
     cell.lblName.textColor = AppStyle.primaryTextColor;
     
@@ -107,7 +106,7 @@
     }
     
     cell.lblName.text = currentValue.fromSymbol;
-    cell.imgCurrency.image = [[UIImage imageNamed:[currentValue.fromSymbol lowercaseString]] convertImageToGrayScale];
+    cell.imgCurrency.image = [UIImage imageNamed:[currentValue.fromSymbol lowercaseString]];
 
     NSString *text = [NSString stringWithFormat:@"$ %.8g", currentValue.price];
     cell.lblPrice.text = text;

@@ -54,7 +54,7 @@
     NSURL *url = [NSURL URLWithString:absoluteURL];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url
                                                            cachePolicy:NSURLRequestUseProtocolCachePolicy
-                                                       timeoutInterval:60.0];
+                                                       timeoutInterval:20.0];
     
     for (NSString *key in httpAdditionalHeaders) {
         [request setValue:httpAdditionalHeaders[key] forHTTPHeaderField:key];
@@ -71,7 +71,7 @@
     NSURL *url = [NSURL URLWithString:absoluteURL];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url
                                                            cachePolicy:NSURLRequestUseProtocolCachePolicy
-                                                       timeoutInterval:60.0];
+                                                       timeoutInterval:20.0];
     
     for (NSString *key in httpAdditionalHeaders) {
         [request setValue:httpAdditionalHeaders[key] forHTTPHeaderField:key];

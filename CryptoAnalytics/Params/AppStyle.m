@@ -11,6 +11,7 @@
 @implementation AppStyle
 
 static float _cellFontSize;
+static float _cellDetailsFontSize;
 static UIColor *_primaryColor;
 static UIColor *_primaryLightColor;
 static UIColor *_primaryDarkColor;
@@ -20,9 +21,16 @@ static UIColor *_primaryDecreaseColor;
 
 + (float)cellFontSize {
     if (_cellFontSize == 0) {
-        _cellFontSize = 14;
+        _cellFontSize = 16;
     }
     return _cellFontSize;
+}
+
++ (float)cellDetailsFontSize {
+    if (_cellDetailsFontSize == 0) {
+        _cellDetailsFontSize = 18;
+    }
+    return _cellDetailsFontSize;
 }
 
 + (UIColor *)primaryColor {

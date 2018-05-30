@@ -10,7 +10,11 @@
 
 @interface HistoryTableViewCell : UITableViewCell
 
-@property (strong, nonatomic) IBOutlet UILabel *lblText;
 @property (strong, nonatomic) IBOutlet UILabel *lblDate;
+@property (strong, nonatomic) IBOutlet UILabel *lblType;
+@property (strong, nonatomic) IBOutlet UILabel *lblCurrency;
+@property (strong, nonatomic) IBOutlet UILabel *lblAmount;
+@property (strong, nonatomic) IBOutlet UILabel *lblPrice;
+@property (strong, nonatomic) IBOutlet UILabel *lblGain;
 
 @end

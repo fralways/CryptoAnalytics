@@ -73,11 +73,18 @@
 #pragma mark - Table view
 
 - (void)setupCellGraphics:(HistoryTableViewCell *)cell{
-    cell.lblText.font = [UIFont systemFontOfSize:AppStyle.cellFontSize];
-//    cell.lblDate.font = [UIFont systemFontOfSize:AppStyle.cellFontSize];
-    
-    cell.lblText.textColor = AppStyle.primaryTextColor;
+    cell.lblCurrency.font = [UIFont systemFontOfSize:AppStyle.cellFontSize];
+    cell.lblAmount.font = [UIFont systemFontOfSize:AppStyle.cellFontSize];
+    cell.lblPrice.font = [UIFont systemFontOfSize:AppStyle.cellFontSize];
+    cell.lblType.font = [UIFont systemFontOfSize:AppStyle.cellFontSize];
+    cell.lblGain.font = [UIFont systemFontOfSize:AppStyle.cellFontSize];
+
+    cell.lblType.textColor = AppStyle.primaryTextColor;
     cell.lblDate.textColor = AppStyle.primaryTextColor;
+    cell.lblPrice.textColor = AppStyle.primaryTextColor;
+    cell.lblAmount.textColor = AppStyle.primaryTextColor;
+    cell.lblCurrency.textColor = AppStyle.primaryTextColor;
+    cell.lblGain.textColor = AppStyle.primaryTextColor;
     cell.backgroundColor = AppStyle.primaryLightColor;
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -97,10 +104,18 @@
     History *history = self.history[indexPath.row];
     if (history.type == TRADEBUY){
         double spentMoney = history.amount * history.price;
-        cell.lblText.text = [NSString stringWithFormat:@"Bought %f %@ for $%f at the cost of $%f", history.amount, history.currencyId, spentMoney, history.price];
+        cell.lblType.text = @"Type: BUY";
+        cell.lblCurrency.text = [NSString stringWithFormat:@"Currency: %@", history.currencyId];
+        cell.lblPrice.text = [NSString stringWithFormat:@"Price: %f", history.price];
+        cell.lblAmount.text = [NSString stringWithFormat:@"Bough units: %f", history.amount];
+        cell.lblGain.text = [NSString stringWithFormat:@"Spent: $%f", spentMoney];
     }else{
         double currencyAmountSold = history.amount / history.price;
-        cell.lblText.text = [NSString stringWithFormat:@"Sold %f %@ for $%f at the cost of $%f", currencyAmountSold, history.currencyId, history.amount, history.price];
+        cell.lblType.text = @"Type: SELL";
+        cell.lblCurrency.text = [NSString stringWithFormat:@"Currency: %@", history.currencyId];
+        cell.lblPrice.text = [NSString stringWithFormat:@"Price: %f", history.price];
+        cell.lblAmount.text = [NSString stringWithFormat:@"Sold units: %f", currencyAmountSold];
+        cell.lblGain.text = [NSString stringWithFormat:@"Gain: $%f", history.amount];
     }
     
     cell.lblDate.text = [NSDate historyStringFromDate:history.time];

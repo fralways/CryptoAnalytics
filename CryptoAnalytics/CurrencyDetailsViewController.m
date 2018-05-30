@@ -10,7 +10,6 @@
 #import "CurrencyDetailsTableViewCell.h"
 //#import "CurrencyChart.swift"
 #import "CryptoAnalytics-Swift.h"
-#import "UIImage+AnalyzerImage.h"
 
 typedef enum CurrencyDetails: NSInteger {
     
@@ -56,7 +55,7 @@ typedef enum CurrencyDetails: NSInteger {
     
     UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[self.currency.fromSymbol lowercaseString]]];
     [imageView setContentMode:UIViewContentModeScaleAspectFit];
-    UIImage *image = [[self imageWithImage:[UIImage imageNamed:[self.currency.fromSymbol lowercaseString]] convertToSize:CGSizeMake(40, 40)] convertImageToGrayScale];
+    UIImage *image = [self imageWithImage:[UIImage imageNamed:[self.currency.fromSymbol lowercaseString]] convertToSize:CGSizeMake(40, 40)];
     [imageView setImage:image];
 
     UILabel *label = [UILabel new];

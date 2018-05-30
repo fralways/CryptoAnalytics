@@ -293,6 +293,7 @@
     myAmountLbl.text = [NSString stringWithFormat:@"You own: %@", [myAmount stringValue]];
     myAmountLbl.textAlignment = NSTextAlignmentCenter;
     myAmountLbl.font = [UIFont systemFontOfSize:14];
+    myAmountLbl.textColor = AppStyle.primaryTextColor;
     
     UILabel *title = [[UILabel alloc]initWithFrame:CGRectMake(12, 0, 240 - 24, 50)];
     title.textColor = AppStyle.primaryTextColor;
@@ -309,6 +310,8 @@
     subtitle.text = @"Select amount to sell";
     
     SCLAlertViewBuilder *builder = [SCLAlertViewBuilder new]
+    .customViewColor(AppStyle.primaryColor)
+    .backgroundViewColor(AppStyle.primaryLightColor)
     .shouldDismissOnTapOutside(YES)
     .addCustomView(title)
     .addCustomView(subtitle)
@@ -326,26 +329,61 @@
 }
 
 - (void)presentAlertBuySuccess:(double)amount{
+    UILabel *title = [[UILabel alloc]initWithFrame:CGRectMake(12, 0, 240 - 24, 50)];
+    title.textColor = AppStyle.primaryTextColor;
+    title.font = [UIFont systemFontOfSize:20];
+    title.textAlignment = NSTextAlignmentCenter;
+    title.contentMode = UIViewContentModeBottom;
+    title.text = [NSString stringWithFormat:@"Success"];
+    
+    UILabel *subtitle = [[UILabel alloc]initWithFrame:CGRectMake(12, 0, 240 - 24, 50)];
+    subtitle.textColor = AppStyle.primaryTextColor;
+    subtitle.font = [UIFont systemFontOfSize:14];
+    subtitle.textAlignment = NSTextAlignmentCenter;
+    subtitle.text = [NSString stringWithFormat:@"You have successfully bought %f %@", amount, self.suggestionClicked.currency];
+    subtitle.numberOfLines = 2;
+    subtitle.lineBreakMode = NSLineBreakByWordWrapping;
+
     SCLAlertViewBuilder *builder = [SCLAlertViewBuilder new]
-    .shouldDismissOnTapOutside(YES);
+    .shouldDismissOnTapOutside(YES)
+    .customViewColor(AppStyle.primaryColor)
+    .backgroundViewColor(AppStyle.primaryLightColor)
+    .addCustomView(title)
+    .addCustomView(subtitle);
+    
     
     SCLAlertViewShowBuilder *showBuilder = [SCLAlertViewShowBuilder new]
     .style(SCLAlertViewStyleSuccess)
-    .title([NSString stringWithFormat:@"Success!"])
-    .subTitle([NSString stringWithFormat:@"You have successfully bought %f %@", amount, self.suggestionClicked.currency])
     .closeButtonTitle(@"Ok")
     .duration(0);
     [showBuilder showAlertView:builder.alertView onViewController:self];
 }
 
 - (void)presentAlertSellSuccess:(double)amount{
+    UILabel *title = [[UILabel alloc]initWithFrame:CGRectMake(12, 0, 240 - 24, 50)];
+    title.textColor = AppStyle.primaryTextColor;
+    title.font = [UIFont systemFontOfSize:20];
+    title.textAlignment = NSTextAlignmentCenter;
+    title.contentMode = UIViewContentModeBottom;
+    title.text = [NSString stringWithFormat:@"Success"];
+    
+    UILabel *subtitle = [[UILabel alloc]initWithFrame:CGRectMake(12, 0, 240 - 24, 50)];
+    subtitle.textColor = AppStyle.primaryTextColor;
+    subtitle.font = [UIFont systemFontOfSize:14];
+    subtitle.textAlignment = NSTextAlignmentCenter;
+    subtitle.text = [NSString stringWithFormat:@"You have successfully sold %@ for %f$", self.suggestionClicked.currency, amount];
+    subtitle.numberOfLines = 2;
+    subtitle.lineBreakMode = NSLineBreakByWordWrapping;
+    
     SCLAlertViewBuilder *builder = [SCLAlertViewBuilder new]
-    .shouldDismissOnTapOutside(YES);
+    .shouldDismissOnTapOutside(YES)
+    .customViewColor(AppStyle.primaryColor)
+    .backgroundViewColor(AppStyle.primaryLightColor)
+    .addCustomView(title)
+    .addCustomView(subtitle);
     
     SCLAlertViewShowBuilder *showBuilder = [SCLAlertViewShowBuilder new]
     .style(SCLAlertViewStyleSuccess)
-    .title([NSString stringWithFormat:@"Success!"])
-    .subTitle([NSString stringWithFormat:@"You have successfully sold %@ for %f$", self.suggestionClicked.currency, amount])
     .closeButtonTitle(@"Ok")
     .duration(0);
     [showBuilder showAlertView:builder.alertView onViewController:self];

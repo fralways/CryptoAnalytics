@@ -125,8 +125,8 @@ typedef enum: NSInteger{
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     cell.lblTitle.font = [UIFont systemFontOfSize:AppStyle.cellFontSize];
-    cell.lblValue.font = [UIFont systemFontOfSize:AppStyle.cellFontSize];
-    cell.lblSubtitle.font = [UIFont systemFontOfSize:AppStyle.cellFontSize];
+    cell.lblValue.font = [UIFont systemFontOfSize:AppStyle.cellDetailsFontSize];
+    cell.lblSubtitle.font = [UIFont systemFontOfSize:AppStyle.cellDetailsFontSize];
     
     cell.lblTitle.textColor = AppStyle.primaryTextColor;
     cell.lblValue.textColor = AppStyle.primaryTextColor;
