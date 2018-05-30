@@ -171,6 +171,7 @@ typedef enum CurrencyDetails: NSInteger {
     if ([segue.identifier isEqualToString:STATIC_SEGUE_CURRENCYDETAILCHART]){
         CurrencyChart *vc = segue.destinationViewController;
         vc.currency = sender;
+        vc.isTesting = [Context sharedContext].testing;
     }
 }
 

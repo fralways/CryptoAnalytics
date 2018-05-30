@@ -15,6 +15,7 @@ import SwiftyJSON
     @IBOutlet var spinner: UIActivityIndicatorView!
     
     @objc var currency: String!
+    @objc var isTesting: Bool = false
     
     override func viewDidLoad() {
         loadData()
@@ -26,35 +27,39 @@ import SwiftyJSON
     }
     
     func loadData(){
-        //napravi url da bude od this.currency
-//        let url = URL(string: "http://192.168.0.14:8080/crypto_war_exploded/currency/BTC/history?tocurrencyid=USD")
-//        let task = URLSession.shared.dataTask(with: url!) {(data, response, error) in
-//            do{
-//                let json = try JSON(data: data!)
-//                print(json[0]["type"])
-//                DispatchQueue.main.async {
-//                    self.spinner.stopAnimating()
-//                    self.createChart2(json: json)
-//                }
-//
-//
-//            }catch let error as NSError {
-//                print(error.localizedDescription)
-//                print(data!)
-//            }
-//        }
-//        task.resume()
         
-        if let path = Bundle.main.path(forResource: "CurrencyHistagram", ofType: "json") {
-            do {
-                let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
-                let json = try JSON(data: data)
-                DispatchQueue.main.async {
-                    self.spinner.stopAnimating()
-                    self.createChart2(json: json)
+        if !isTesting {
+        //napravi url da bude od this.currency
+            let url = URL(string: String(format: "http://192.168.0.14:8080/crypto_war_exploded/currency/%@/history?tocurrencyid=USD", currency))
+            let task = URLSession.shared.dataTask(with: url!) {(data, response, error) in
+                do{
+                    let json = try JSON(data: data!)
+                    DispatchQueue.main.async {
+                        self.spinner.stopAnimating()
+                        self.createChart2(json: json)
+                    }
+
+
+                }catch let error as NSError {
+                    print(error.localizedDescription)
+                    print(data!)
                 }
-            } catch {
-                // handle error
+            }
+            task.resume()
+        }else{
+            if let path = Bundle.main.path(forResource: "CurrencyHistagram", ofType: "json") {
+                do {
+                    let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
+                    let json = try JSON(data: data)
+                    DispatchQueue.main.async {
+                        self.spinner.stopAnimating()
+                        self.createChart2(json: json)
+                    }
+                } catch {
+                    // handle error
+                }
+            }else{
+                print("Error opening json file")
             }
         }
         
@@ -110,12 +115,12 @@ import SwiftyJSON
         var minValue = 100000.0, maxValue = 0.0;
         var chartPoints = Array<ChartPointCandleStick>()
         
-        //clear all dates older than 1 month
-        //TODO: change value from -4 to -1 when you update mock data
+        //clear all dates older than 2 month
+        //CHECKPOINT
         for i in 0...json.count {
             var date = Date(timeIntervalSince1970: json[i]["timestamp"].doubleValue)
-            let oneMonthBeforeToday = Calendar.current.date(byAdding: .month, value: -4, to: Date());
-            if oneMonthBeforeToday! <= date {
+            let twoMonthBeforeToday = Calendar.current.date(byAdding: .month, value: -2, to: Date());
+            if twoMonthBeforeToday! <= date {
                 chartPoints.append(ChartPointCandleStick(date: Date(timeIntervalSince1970: json[i]["timestamp"].doubleValue), formatter: displayFormatter, high: json[i]["high"].doubleValue, low: json[i]["low"].doubleValue, open: json[i]["open"].doubleValue, close: json[i]["close"].doubleValue))
                 
                 if json[i]["high"].doubleValue > maxValue {
@@ -183,12 +188,22 @@ import SwiftyJSON
         }
         
         let currentDate = Date()
+        let day = calendar.component(.day, from: currentDate)
         let month = calendar.component(.month, from: currentDate)
         let year = calendar.component(.year, from: currentDate)
-
+        
         var xValues = Array<ChartAxisValueDate>()
-        //TODO: use month instead of number 3
-        xValues.append(contentsOf: generateDateAxisValues(3, year: year))
+        //CHECKPOINT
+        
+        if day < 10 {
+            if month > 1 {
+                xValues.append(contentsOf: generateDateAxisValues(month - 1, year: year))
+            }else{
+                xValues.append(contentsOf: generateDateAxisValues(12, year: year - 1))
+            }
+        }else{
+            xValues.append(contentsOf: generateDateAxisValues(month, year: year))
+        }
         
 //        xValues.append(contentsOf: (generateDateAxisValues(10, year: 2015)))
 //        xValues.append(contentsOf: (generateDateAxisValues(11, year: 2015)))
