@@ -19,6 +19,7 @@
 @property UIRefreshControl *refreshControl;
 @property BOOL loading;
 @property NSUserDefaults *userDefaults;
+@property NSTimer *refreshTimer;
 
 //alert
 @property UILabel *lblSlider;
@@ -40,7 +41,7 @@
     self.tableView.backgroundColor = AppStyle.primaryLightColor;
     
     [self initRefreshControl];
-    [self getSuggestions];
+    [self initTimer];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -54,6 +55,11 @@
     self.refreshControl = [UIRefreshControl new];
     [self.refreshControl addTarget:self action:@selector(getSuggestions) forControlEvents:UIControlEventValueChanged];
     self.tableView.refreshControl = self.refreshControl;
+}
+
+- (void)initTimer{
+    self.refreshTimer = [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(getSuggestions) userInfo:nil repeats:YES];
+    [self.refreshTimer fire];
 }
 
 #pragma mark - Network
@@ -103,38 +109,47 @@
         
         if (![Context sharedContext].testing){
             [[NetworkManager sharedManager]getSuggestionsWithCompletionHandler:^(bool successful, NSArray *suggestions, NSError *httpError) {
-                if (successful){
-                    NSLog(@"Analyzer: got suggestions: %@", suggestions);
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        self.loading = NO;
-                        self.suggestionsArray = suggestions;
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    if (successful){
+                        NSLog(@"Analyzer: got suggestions: %@", suggestions);
+                        
+                        NSSortDescriptor *sortByName = [NSSortDescriptor sortDescriptorWithKey:@"timestamp" ascending:NO];
+                        NSArray *sortDescriptors = [NSArray arrayWithObject:sortByName];
+                        NSArray *sortedSuggestions = [suggestions sortedArrayUsingDescriptors:sortDescriptors];
+                        
+                        self.suggestionsArray = sortedSuggestions;
                         self.suggestions = [NSMutableArray new];
-                        for (NSDictionary *suggestionDictionary in suggestions) {
+                        for (NSDictionary *suggestionDictionary in sortedSuggestions) {
                             Suggestion *suggestion = [[Suggestion alloc]initWithSuggestionDictionary:suggestionDictionary];
                             [self.suggestions addObject:suggestion];
                         }
-                        [self refreshTable];
-                        [self.refreshControl endRefreshing];
-                    });
-                }
+                    }
+                
+                    [self refreshTable];
+                    [self.refreshControl endRefreshing];
+                    self.loading = NO;
+                });
             }];
         }else{
             NSString *path = [[NSBundle mainBundle]pathForResource:@"suggestions" ofType:@"json"];
             NSData *data = [[NSData alloc]initWithContentsOfURL:[NSURL fileURLWithPath:path]];
             NSArray *suggestions = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
             NSLog(@"Analyzer: %@", suggestions);
+            
+            NSSortDescriptor *sortByName = [NSSortDescriptor sortDescriptorWithKey:@"timestamp" ascending:NO];
+            NSArray *sortDescriptors = [NSArray arrayWithObject:sortByName];
+            NSArray *sortedSuggestions = [suggestions sortedArrayUsingDescriptors:sortDescriptors];
+            
             self.loading = NO;
-            self.suggestionsArray = suggestions;
+            self.suggestionsArray = sortedSuggestions;
             self.suggestions = [NSMutableArray new];
-            for (NSDictionary *suggestionDictionary in suggestions) {
+            for (NSDictionary *suggestionDictionary in sortedSuggestions) {
                 Suggestion *suggestion = [[Suggestion alloc]initWithSuggestionDictionary:suggestionDictionary];
                 [self.suggestions addObject:suggestion];
             }
             [self refreshTable];
             [self.refreshControl endRefreshing];
         }
-    }else{
-        [self.refreshControl endRefreshing];
     }
 }
 
@@ -284,6 +299,7 @@
     amount.text = @"0";
     amount.textAlignment = NSTextAlignmentRight;
     amount.font = [UIFont systemFontOfSize:12];
+    amount.textColor = AppStyle.primaryTextColor;
     self.lblSlider = amount;
     
     [holder addSubview:slider];
