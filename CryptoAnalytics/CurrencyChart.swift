@@ -117,9 +117,13 @@ import SwiftyJSON
         
         //clear all dates older than 2 month
         //CHECKPOINT
+        var monthsInPast = -2;
+        if isTesting {
+            monthsInPast = -4
+        }
         for i in 0...json.count {
             var date = Date(timeIntervalSince1970: json[i]["timestamp"].doubleValue)
-            let twoMonthBeforeToday = Calendar.current.date(byAdding: .month, value: -2, to: Date());
+            let twoMonthBeforeToday = Calendar.current.date(byAdding: .month, value: monthsInPast, to: Date());
             if twoMonthBeforeToday! <= date {
                 chartPoints.append(ChartPointCandleStick(date: Date(timeIntervalSince1970: json[i]["timestamp"].doubleValue), formatter: displayFormatter, high: json[i]["high"].doubleValue, low: json[i]["low"].doubleValue, open: json[i]["open"].doubleValue, close: json[i]["close"].doubleValue))
                 
@@ -189,11 +193,15 @@ import SwiftyJSON
         
         let currentDate = Date()
         let day = calendar.component(.day, from: currentDate)
-        let month = calendar.component(.month, from: currentDate)
+        var month = calendar.component(.month, from: currentDate)
         let year = calendar.component(.year, from: currentDate)
         
         var xValues = Array<ChartAxisValueDate>()
         //CHECKPOINT
+        
+        if isTesting {
+            month = 3
+        }
         
         if day < 10 {
             if month > 1 {
