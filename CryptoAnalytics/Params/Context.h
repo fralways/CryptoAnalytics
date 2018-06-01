@@ -7,13 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-
-typedef enum: NSInteger{
-    SPEED   = 0,
-    MACD,
-    EMA,
-    SMA
-}STRATEGIES;
+#import "SetupParams.h"
+#import "Enums.h"
 
 @interface Context : NSObject
 
@@ -22,6 +17,7 @@ typedef enum: NSInteger{
 @property NSString *host;
 @property BOOL testing;
 @property NSMutableDictionary *myCurrencies;
+@property SetupParams *setupParams;
 
 - (NSString *)strategyToString:(STRATEGIES)strategy;
 - (void)addCurrency:(NSString *)currency amount:(double)amount;

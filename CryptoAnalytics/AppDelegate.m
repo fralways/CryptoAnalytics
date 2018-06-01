@@ -91,7 +91,7 @@
     [[UITextField appearanceWhenContainedInInstancesOfClasses:@[[UISearchBar class]]] setDefaultTextAttributes:@{NSForegroundColorAttributeName: AppStyle.primaryTextColor}]; //search bar set text color
     
     [[UISwitch appearance] setOnTintColor:AppStyle.primaryDarkColor];
-    [[UISwitch appearance] setTintColor:AppStyle.primaryLightColor];
+    [[UISwitch appearance] setTintColor:AppStyle.primaryColor];
     [[UISwitch appearance] setThumbTintColor:AppStyle.primaryColor];
     
     [[UIButton appearance]setTintColor:AppStyle.primaryTextColor];

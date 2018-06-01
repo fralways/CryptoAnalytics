@@ -14,6 +14,12 @@
 		DC06E96F2046F72B008B2F82 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DC06E96E2046F72B008B2F82 /* Assets.xcassets */; };
 		DC06E9722046F72B008B2F82 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC06E9702046F72B008B2F82 /* LaunchScreen.storyboard */; };
 		DC06E9752046F72B008B2F82 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DC06E9742046F72B008B2F82 /* main.m */; };
+		DC1BC75620C1C95F00BADBFD /* SetupStartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC1BC75520C1C95F00BADBFD /* SetupStartViewController.m */; };
+		DC1BC75920C1C97200BADBFD /* SetupEnterStartMoneyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC1BC75820C1C97200BADBFD /* SetupEnterStartMoneyViewController.m */; };
+		DC1BC75C20C1C98100BADBFD /* SetupChooseStrategyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC1BC75B20C1C98100BADBFD /* SetupChooseStrategyViewController.m */; };
+		DC1BC75F20C1C99300BADBFD /* SetupStrategyConfigViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC1BC75E20C1C99300BADBFD /* SetupStrategyConfigViewController.m */; };
+		DC1BC76320C1CC7100BADBFD /* SetupParams.m in Sources */ = {isa = PBXBuildFile; fileRef = DC1BC76220C1CC7100BADBFD /* SetupParams.m */; };
+		DC1BC76620C1CF7200BADBFD /* Enums.m in Sources */ = {isa = PBXBuildFile; fileRef = DC1BC76520C1CF7200BADBFD /* Enums.m */; };
 		DC2686C5208681ED00F18663 /* ChartCoordsSpace.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC268645208681ED00F18663 /* ChartCoordsSpace.swift */; };
 		DC2686C6208681ED00F18663 /* Array_String.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC268646208681ED00F18663 /* Array_String.swift */; };
 		DC2686C7208681ED00F18663 /* ChartAxisValueArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC268647208681ED00F18663 /* ChartAxisValueArray.swift */; };
@@ -156,6 +162,7 @@
 		DCFBA32820BD92E70045A03B /* AppStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = DCFBA32720BD92E70045A03B /* AppStyle.m */; };
 		DCFBA32C20BDACBF0045A03B /* UIImage+AnalyzerImage.m in Sources */ = {isa = PBXBuildFile; fileRef = DCFBA32B20BDACBF0045A03B /* UIImage+AnalyzerImage.m */; };
 		DCFBA32F20BDAD110045A03B /* AnalyzerTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DCFBA32E20BDAD110045A03B /* AnalyzerTabBarViewController.m */; };
+		DCFBA33420C1C5120045A03B /* Wizard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DCFBA33320C1C5120045A03B /* Wizard.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -172,6 +179,18 @@
 		DC06E9712046F72B008B2F82 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DC06E9732046F72B008B2F82 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DC06E9742046F72B008B2F82 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		DC1BC75420C1C95F00BADBFD /* SetupStartViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SetupStartViewController.h; sourceTree = "<group>"; };
+		DC1BC75520C1C95F00BADBFD /* SetupStartViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SetupStartViewController.m; sourceTree = "<group>"; };
+		DC1BC75720C1C97200BADBFD /* SetupEnterStartMoneyViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SetupEnterStartMoneyViewController.h; sourceTree = "<group>"; };
+		DC1BC75820C1C97200BADBFD /* SetupEnterStartMoneyViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SetupEnterStartMoneyViewController.m; sourceTree = "<group>"; };
+		DC1BC75A20C1C98100BADBFD /* SetupChooseStrategyViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SetupChooseStrategyViewController.h; sourceTree = "<group>"; };
+		DC1BC75B20C1C98100BADBFD /* SetupChooseStrategyViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SetupChooseStrategyViewController.m; sourceTree = "<group>"; };
+		DC1BC75D20C1C99300BADBFD /* SetupStrategyConfigViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SetupStrategyConfigViewController.h; sourceTree = "<group>"; };
+		DC1BC75E20C1C99300BADBFD /* SetupStrategyConfigViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SetupStrategyConfigViewController.m; sourceTree = "<group>"; };
+		DC1BC76120C1CC7100BADBFD /* SetupParams.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SetupParams.h; sourceTree = "<group>"; };
+		DC1BC76220C1CC7100BADBFD /* SetupParams.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SetupParams.m; sourceTree = "<group>"; };
+		DC1BC76420C1CF7200BADBFD /* Enums.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Enums.h; sourceTree = "<group>"; };
+		DC1BC76520C1CF7200BADBFD /* Enums.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Enums.m; sourceTree = "<group>"; };
 		DC268645208681ED00F18663 /* ChartCoordsSpace.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartCoordsSpace.swift; sourceTree = "<group>"; };
 		DC268646208681ED00F18663 /* Array_String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Array_String.swift; sourceTree = "<group>"; };
 		DC268647208681ED00F18663 /* ChartAxisValueArray.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartAxisValueArray.swift; sourceTree = "<group>"; };
@@ -337,6 +356,7 @@
 		DCFBA32B20BDACBF0045A03B /* UIImage+AnalyzerImage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+AnalyzerImage.m"; sourceTree = "<group>"; };
 		DCFBA32D20BDAD110045A03B /* AnalyzerTabBarViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AnalyzerTabBarViewController.h; sourceTree = "<group>"; };
 		DCFBA32E20BDAD110045A03B /* AnalyzerTabBarViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AnalyzerTabBarViewController.m; sourceTree = "<group>"; };
+		DCFBA33320C1C5120045A03B /* Wizard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Wizard.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -399,6 +419,7 @@
 				DCFBA33020BDAD170045A03B /* Common&Control */,
 				DC06E9652046F72B008B2F82 /* AppDelegate.h */,
 				DC06E9662046F72B008B2F82 /* AppDelegate.m */,
+				DC1BC76020C1C99900BADBFD /* Setup */,
 				DC06E9682046F72B008B2F82 /* CurrencyViewController.h */,
 				DC06E9692046F72B008B2F82 /* CurrencyViewController.m */,
 				DC54DDF9206ADBA60076ABFB /* CurrencyDetailsViewController.h */,
@@ -419,6 +440,22 @@
 				DC408F812049A30B003FF8B8 /* CryptoAnalytics-Bridging-Header.h */,
 			);
 			path = CryptoAnalytics;
+			sourceTree = "<group>";
+		};
+		DC1BC76020C1C99900BADBFD /* Setup */ = {
+			isa = PBXGroup;
+			children = (
+				DCFBA33320C1C5120045A03B /* Wizard.storyboard */,
+				DC1BC75420C1C95F00BADBFD /* SetupStartViewController.h */,
+				DC1BC75520C1C95F00BADBFD /* SetupStartViewController.m */,
+				DC1BC75720C1C97200BADBFD /* SetupEnterStartMoneyViewController.h */,
+				DC1BC75820C1C97200BADBFD /* SetupEnterStartMoneyViewController.m */,
+				DC1BC75A20C1C98100BADBFD /* SetupChooseStrategyViewController.h */,
+				DC1BC75B20C1C98100BADBFD /* SetupChooseStrategyViewController.m */,
+				DC1BC75D20C1C99300BADBFD /* SetupStrategyConfigViewController.h */,
+				DC1BC75E20C1C99300BADBFD /* SetupStrategyConfigViewController.m */,
+			);
+			path = Setup;
 			sourceTree = "<group>";
 		};
 		DC268643208681DC00F18663 /* External */ = {
@@ -667,6 +704,8 @@
 				DC9AAEC420A9998C00A904B7 /* Suggestion.m */,
 				DC9AAECD20AD86B400A904B7 /* History.h */,
 				DC9AAECE20AD86B400A904B7 /* History.m */,
+				DC1BC76120C1CC7100BADBFD /* SetupParams.h */,
+				DC1BC76220C1CC7100BADBFD /* SetupParams.m */,
 			);
 			path = ObjectClasses;
 			sourceTree = "<group>";
@@ -706,6 +745,8 @@
 				DCF11BA02049954D00E6807F /* Keys.m */,
 				DCFBA32620BD92E70045A03B /* AppStyle.h */,
 				DCFBA32720BD92E70045A03B /* AppStyle.m */,
+				DC1BC76420C1CF7200BADBFD /* Enums.h */,
+				DC1BC76520C1CF7200BADBFD /* Enums.m */,
 			);
 			path = Params;
 			sourceTree = "<group>";
@@ -784,6 +825,7 @@
 				DC2686F4208681ED00F18663 /* Info.plist in Resources */,
 				DC9AAEC220A994D200A904B7 /* suggestions.json in Resources */,
 				DC9AAED120B034A600A904B7 /* currencies.json in Resources */,
+				DCFBA33420C1C5120045A03B /* Wizard.storyboard in Resources */,
 				DC06E9722046F72B008B2F82 /* LaunchScreen.storyboard in Resources */,
 				DC06E96F2046F72B008B2F82 /* Assets.xcassets in Resources */,
 				DC06E96D2046F72B008B2F82 /* Main.storyboard in Resources */,
@@ -863,6 +905,7 @@
 				DCF11BA12049954D00E6807F /* Keys.m in Sources */,
 				DC268729208681ED00F18663 /* ChartPointTargetingView.swift in Sources */,
 				DC2686D0208681ED00F18663 /* ChartCandleStickLayer.swift in Sources */,
+				DC1BC76320C1CC7100BADBFD /* SetupParams.m in Sources */,
 				DC2686F1208681ED00F18663 /* Chart.swift in Sources */,
 				DC2686F0208681ED00F18663 /* ChartLineModel.swift in Sources */,
 				DCFBA32F20BDAD110045A03B /* AnalyzerTabBarViewController.m in Sources */,
@@ -896,8 +939,10 @@
 				DC2686F5208681ED00F18663 /* NSDate.swift in Sources */,
 				DC26871D208681ED00F18663 /* BarsChart.swift in Sources */,
 				DC54DDF5206AD8880076ABFB /* SettingsViewController.m in Sources */,
+				DC1BC76620C1CF7200BADBFD /* Enums.m in Sources */,
 				DC268702208681ED00F18663 /* ChartAxisValuesGeneratorXFixedNonOverlapping.swift in Sources */,
 				DC268726208681ED00F18663 /* ChartAreasView.swift in Sources */,
+				DC1BC75C20C1C98100BADBFD /* SetupChooseStrategyViewController.m in Sources */,
 				DC2686D8208681ED00F18663 /* ChartShowCoordsLinesLayer.swift in Sources */,
 				DC2686F8208681ED00F18663 /* ChartAxisValueStaticGenerator.swift in Sources */,
 				DC26872E208681ED00F18663 /* ChartPointTextCircleView.swift in Sources */,
@@ -938,6 +983,7 @@
 				DC2686E4208681ED00F18663 /* ChartAxisValueString.swift in Sources */,
 				DC268717208681ED00F18663 /* String.swift in Sources */,
 				DC2686E7208681ED00F18663 /* ChartAxisValueFloat.swift in Sources */,
+				DC1BC75920C1C97200BADBFD /* SetupEnterStartMoneyViewController.m in Sources */,
 				DC2686DD208681ED00F18663 /* ChartPointsLayer.swift in Sources */,
 				DC2686C5208681ED00F18663 /* ChartCoordsSpace.swift in Sources */,
 				DC268706208681ED00F18663 /* ChartAxisValuesGeneratorNice.swift in Sources */,
@@ -948,6 +994,7 @@
 				DCFBA32C20BDACBF0045A03B /* UIImage+AnalyzerImage.m in Sources */,
 				DC54DE00206AF91B0076ABFB /* CurrencyChart.swift in Sources */,
 				DC54DDFE206AE0950076ABFB /* CurrencyDetailsTableViewCell.m in Sources */,
+				DC1BC75F20C1C99300BADBFD /* SetupStrategyConfigViewController.m in Sources */,
 				DC2686FF208681ED00F18663 /* ChartAxisModel.swift in Sources */,
 				DC2686E3208681ED00F18663 /* ChartAxisValueInt.swift in Sources */,
 				DC268737208681ED00F18663 /* ChartViewAnimator.swift in Sources */,
@@ -976,6 +1023,7 @@
 				DC9AAEC020A9927600A904B7 /* AnalyzerTableViewCell.m in Sources */,
 				DC268713208681ED00F18663 /* ChartAxisXLayerDefault.swift in Sources */,
 				DC26871C208681ED00F18663 /* LineChart.swift in Sources */,
+				DC1BC75620C1C95F00BADBFD /* SetupStartViewController.m in Sources */,
 				DC2686EF208681ED00F18663 /* TrendlineGenerator.swift in Sources */,
 				DC268701208681ED00F18663 /* ChartAxis.swift in Sources */,
 				DC2686EC208681ED00F18663 /* ChartTimeUtils.swift in Sources */,

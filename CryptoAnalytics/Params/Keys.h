@@ -22,6 +22,10 @@ static NSString *STATIC_CELL_ANALYZER = @"AnalyzerCell";
 //segues
 static NSString *STATIC_SEGUE_CURRENCYDETAIL = @"CurrencyDetailSegue";
 static NSString *STATIC_SEGUE_CURRENCYDETAILCHART = @"CurrencyChartSegue";
+static NSString *STATIC_SEGUE_SETUPTOCHOOSESTRATEGY = @"StartMoneyToChooseStrategySegue";
+static NSString *STATIC_SEGUE_SETUPTOSTRATEGYCONFIG = @"ChooseStrategyToStrategyConfigSegue";
+static NSString *STATIC_SEGUE_SETUPTOMAIN = @"StrategyConfigToMain";
+
 
 //notifications
 static NSString *STATIC_NOT_BUYCURRENCY = @"CurrencyBoughtNotification";

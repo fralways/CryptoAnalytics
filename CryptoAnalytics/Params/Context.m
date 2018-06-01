@@ -28,6 +28,7 @@
     self.host = @"http://192.168.0.14:8080/crypto_war_exploded";
     self.testing = YES;
     self.myCurrencies = [[[NSUserDefaults standardUserDefaults] objectForKey:STATIC_USERDEFAULTS_MYCURRENCY] mutableCopy];
+    self.setupParams = [SetupParams new];
 }
 
 - (NSString *)strategyToString:(STRATEGIES)strategy{
