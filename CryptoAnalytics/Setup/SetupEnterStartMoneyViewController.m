@@ -37,6 +37,7 @@
     self.txtMoney.textColor = AppStyle.primaryTextColor;
     self.txtMoney.borderStyle = UITextBorderStyleNone;
     [self.btnNext setTintColor:AppStyle.primaryDarkColor];
+    [self.txtMoney setTintColor:AppStyle.primaryTextColor];
 }
 
 #pragma mark - Delegates

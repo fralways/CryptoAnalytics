@@ -44,6 +44,9 @@
 
 - (IBAction)finish:(id)sender {
     [Context sharedContext].setupParams.automatic = self.switchAuto.isOn;
+    [Context sharedContext].didSetup = YES;
+    [[NSUserDefaults standardUserDefaults] setObject:@(1) forKey:STATIC_USERDEFAULTS_SETUPDONE];
+    [[NSUserDefaults standardUserDefaults] synchronize];
     [self performSegueWithIdentifier:STATIC_SEGUE_SETUPTOMAIN sender:nil];
 }
 

@@ -18,6 +18,7 @@
 @property BOOL testing;
 @property NSMutableDictionary *myCurrencies;
 @property SetupParams *setupParams;
+@property BOOL didSetup;
 
 - (NSString *)strategyToString:(STRATEGIES)strategy;
 - (void)addCurrency:(NSString *)currency amount:(double)amount;

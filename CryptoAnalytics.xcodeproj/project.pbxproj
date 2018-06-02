@@ -137,6 +137,7 @@
 		DC268737208681ED00F18663 /* ChartViewAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC2686C2208681ED00F18663 /* ChartViewAnimator.swift */; };
 		DC268738208681ED00F18663 /* ChartPointEllipseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC2686C3208681ED00F18663 /* ChartPointEllipseView.swift */; };
 		DC268739208681ED00F18663 /* Optional.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC2686C4208681ED00F18663 /* Optional.swift */; };
+		DC43081E20C2AAA100056240 /* StartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC43081D20C2AAA100056240 /* StartViewController.m */; };
 		DC54DDF5206AD8880076ABFB /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC54DDF4206AD8870076ABFB /* SettingsViewController.m */; };
 		DC54DDF8206AD8920076ABFB /* AnalyzerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC54DDF7206AD8920076ABFB /* AnalyzerViewController.m */; };
 		DC54DDFB206ADBA60076ABFB /* CurrencyDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC54DDFA206ADBA60076ABFB /* CurrencyDetailsViewController.m */; };
@@ -310,6 +311,8 @@
 		DC2686C3208681ED00F18663 /* ChartPointEllipseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartPointEllipseView.swift; sourceTree = "<group>"; };
 		DC2686C4208681ED00F18663 /* Optional.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Optional.swift; sourceTree = "<group>"; };
 		DC408F812049A30B003FF8B8 /* CryptoAnalytics-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CryptoAnalytics-Bridging-Header.h"; sourceTree = "<group>"; };
+		DC43081C20C2AAA100056240 /* StartViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StartViewController.h; sourceTree = "<group>"; };
+		DC43081D20C2AAA100056240 /* StartViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StartViewController.m; sourceTree = "<group>"; };
 		DC54DDF3206AD8870076ABFB /* SettingsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		DC54DDF4206AD8870076ABFB /* SettingsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		DC54DDF6206AD8920076ABFB /* AnalyzerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AnalyzerViewController.h; sourceTree = "<group>"; };
@@ -446,6 +449,8 @@
 			isa = PBXGroup;
 			children = (
 				DCFBA33320C1C5120045A03B /* Wizard.storyboard */,
+				DC43081C20C2AAA100056240 /* StartViewController.h */,
+				DC43081D20C2AAA100056240 /* StartViewController.m */,
 				DC1BC75420C1C95F00BADBFD /* SetupStartViewController.h */,
 				DC1BC75520C1C95F00BADBFD /* SetupStartViewController.m */,
 				DC1BC75720C1C97200BADBFD /* SetupEnterStartMoneyViewController.h */,
@@ -921,6 +926,7 @@
 				DC26872C208681ED00F18663 /* HandlingView.swift in Sources */,
 				DC2686D9208681ED00F18663 /* ChartPointsTrackerLayer.swift in Sources */,
 				DC2686EE208681ED00F18663 /* ChartViewSelectorBrightness.swift in Sources */,
+				DC43081E20C2AAA100056240 /* StartViewController.m in Sources */,
 				DC268705208681ED00F18663 /* ChartAxisValuesGeneratorFixed.swift in Sources */,
 				DC2686E8208681ED00F18663 /* ChartNiceNumberCalculator.swift in Sources */,
 				DC2686F7208681ED00F18663 /* ChartAxisLabelsGenerator.swift in Sources */,

@@ -25,6 +25,8 @@ static NSString *STATIC_SEGUE_CURRENCYDETAILCHART = @"CurrencyChartSegue";
 static NSString *STATIC_SEGUE_SETUPTOCHOOSESTRATEGY = @"StartMoneyToChooseStrategySegue";
 static NSString *STATIC_SEGUE_SETUPTOSTRATEGYCONFIG = @"ChooseStrategyToStrategyConfigSegue";
 static NSString *STATIC_SEGUE_SETUPTOMAIN = @"StrategyConfigToMain";
+static NSString *STATIC_SEGUE_STARTSETUP = @"StartSetupSegue";
+static NSString *STATIC_SEGUE_STARTMAIN = @"StartMainSegue";
 
 
 //notifications
@@ -36,6 +38,8 @@ static NSString *STATIC_NOT_FETCHCURRENCIES = @"FetchNewCurrencyValues";
 //other
 static NSString *STATIC_USERDEFAULTS_TRADEHISTORY = @"CryptoAnalyticsUserDefaultsTradeHistory";
 static NSString *STATIC_USERDEFAULTS_MYCURRENCY = @"CryptoAnalyticsUserDefaultsMyCurrency";
+static NSString *STATIC_USERDEFAULTS_SETUPDONE = @"CryptoAnalyticsUserDefaultsSetupDone";
+static NSString *STATIC_IDENTIFIER_SETUPSTART = @"SetupStart";
 
 @interface Keys : NSObject
 

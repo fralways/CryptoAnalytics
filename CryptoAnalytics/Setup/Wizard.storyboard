@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="rzI-SU-LwM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="TZm-EW-FSk">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -61,7 +61,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fhC-Jg-ch1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="776.79999999999995" y="-35.532233883058474"/>
+            <point key="canvasLocation" x="1716" y="-35.532233883058474"/>
         </scene>
         <!--Setup Enter Start Money View Controller-->
         <scene sceneID="dBu-8U-KEy">
@@ -115,12 +115,42 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bVP-ze-RXD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1636" y="-36"/>
+            <point key="canvasLocation" x="2575.1999999999998" y="-36.431784107946029"/>
+        </scene>
+        <!--Start View Controller-->
+        <scene sceneID="KTl-1g-iVd">
+            <objects>
+                <viewController id="TZm-EW-FSk" customClass="StartViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="cP8-WI-oBe">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Crypto Analyzer" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DEB-0S-T6w">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.25882352939999997" green="0.25882352939999997" blue="0.30980392159999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="DEB-0S-T6w" firstAttribute="bottom" secondItem="UxA-0u-BmJ" secondAttribute="bottom" id="FcM-LB-SEA"/>
+                            <constraint firstItem="DEB-0S-T6w" firstAttribute="trailing" secondItem="UxA-0u-BmJ" secondAttribute="trailing" id="GVL-d7-Qrl"/>
+                            <constraint firstItem="DEB-0S-T6w" firstAttribute="leading" secondItem="UxA-0u-BmJ" secondAttribute="leading" id="Gqr-x2-p8V"/>
+                            <constraint firstItem="DEB-0S-T6w" firstAttribute="top" secondItem="cP8-WI-oBe" secondAttribute="top" id="JsI-7R-Llo"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="UxA-0u-BmJ"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="d7e-Wv-DJS"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dvP-Zt-svY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-135.19999999999999" y="-36.431784107946029"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="fHg-F8-Orf">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="rzI-SU-LwM" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="SetupStart" automaticallyAdjustsScrollViewInsets="NO" id="rzI-SU-LwM" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="6Ui-lb-DbX">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -133,7 +163,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KBh-5R-zVB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="9" y="-36"/>
+            <point key="canvasLocation" x="948" y="-36.431784107946029"/>
         </scene>
         <!--Setup Choose Strategy View Controller-->
         <scene sceneID="bc0-gD-DWZ">
@@ -187,7 +217,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bEW-Ci-NYY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2417" y="-36"/>
+            <point key="canvasLocation" x="3356" y="-36.431784107946029"/>
         </scene>
         <!--Setup Strategy Config View Controller-->
         <scene sceneID="Usw-OS-Sln">
@@ -239,7 +269,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2Rt-WS-MSA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3297" y="-36"/>
+            <point key="canvasLocation" x="4236" y="-36.431784107946029"/>
         </scene>
         <!--Main-->
         <scene sceneID="j8x-1B-Bhd">
@@ -247,7 +277,7 @@
                 <viewControllerPlaceholder storyboardIdentifier="Main" storyboardName="Main" id="tA1-mg-4DW" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yLa-rs-2JQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3992" y="-87"/>
+            <point key="canvasLocation" x="776" y="872"/>
         </scene>
     </scenes>
 </document>
