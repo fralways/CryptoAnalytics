@@ -25,6 +25,9 @@
 @property UILabel *lblSlider;
 @property Suggestion *suggestionClicked;
 
+//automatization
+@property NSMutableDictionary *lastUpdate;
+
 @end
 
 @implementation AnalyzerViewController
@@ -40,6 +43,8 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.backgroundColor = AppStyle.primaryLightColor;
+    
+    self.lastUpdate = [NSMutableDictionary new];
     
     [self initRefreshControl];
     [self initTimer];
@@ -76,6 +81,51 @@
 
 #pragma mark - Network
 
+- (void)automateTrade{
+    NSLog(@"Analyzer: Automate trades started");
+    BOOL shouldTrade = NO;
+    for (Suggestion *suggestion in self.suggestions) {
+        if ([self.lastUpdate objectForKey:suggestion.currency]){
+            long timestamp = [[self.lastUpdate objectForKey:suggestion.currency] longValue];
+            if (timestamp < suggestion.timestamp){
+                shouldTrade = YES;
+            }
+        }else{
+            shouldTrade = YES;
+        }
+        
+        double myMoney = [[[NSUserDefaults standardUserDefaults]objectForKey:STATIC_USERDEFAULTS_MYMONEY] doubleValue];
+        double moneyToSpend = myMoney / 10;
+        if (moneyToSpend < 10){
+            return;
+        }
+        
+        if (shouldTrade){
+            
+            [self.lastUpdate setObject:@(suggestion.timestamp) forKey:suggestion.currency];
+            
+            switch (suggestion.type) {
+                case BUY:
+                    [self buyCurrency:suggestion.currency forAmount:moneyToSpend];
+                    NSLog(@"Analyzer: Bought %@ for $%f", suggestion.currency, moneyToSpend);
+                    break;
+                case SELL:
+                    if ([[Context sharedContext].myCurrencies objectForKey:suggestion.currency]){
+                        double myCurrencyAmount = [[[Context sharedContext].myCurrencies objectForKey:suggestion.currency] doubleValue];
+                        if (myCurrencyAmount > 0){
+                            [self sellCurrency:suggestion.currency forAmount:myCurrencyAmount];
+                            NSLog(@"Analyzer: Sold %f units of %@", myCurrencyAmount, suggestion.currency);
+                        }
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+        
+    }
+}
+
 - (void)buyCurrency:(NSString *)currency forAmount:(NSInteger)amount{
     [[NetworkManager sharedManager]buyCurrency:currency forAmount:amount withCompletionHandler:^(bool successful, NSDictionary *trade, NSError *httpError) {
         if (successful){
@@ -95,7 +145,9 @@
                 [[Context sharedContext]addCurrency:currency amount:[trade[@"amount"] doubleValue]];
                 
                 [[NSNotificationCenter defaultCenter]postNotificationName:STATIC_NOT_BUYCURRENCY object:history];
-                [self presentAlertBuySuccess:history.amount];
+                if (self.segmentControl.selectedSegmentIndex != 0){
+                    [self presentAlertBuySuccess:history.amount];
+                }
             });
         }
     }];
@@ -119,7 +171,9 @@
                 [[Context sharedContext]addCurrency:currency amount:-amount];
                 
                 [[NSNotificationCenter defaultCenter]postNotificationName:STATIC_NOT_SELLCURRENCY object:history];
-                [self presentAlertSellSuccess:history.amount];
+                if (self.segmentControl.selectedSegmentIndex != 0){
+                    [self presentAlertSellSuccess:history.amount];
+                }
             });
         }
     }];
@@ -133,7 +187,7 @@
             [[NetworkManager sharedManager]getSuggestionsWithCompletionHandler:^(bool successful, NSArray *suggestions, NSError *httpError) {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     if (successful){
-                        NSLog(@"Analyzer: got suggestions: %@", suggestions);
+                        NSLog(@"Analyzer: got suggestions");
                         
                         NSSortDescriptor *sortByName = [NSSortDescriptor sortDescriptorWithKey:@"timestamp" ascending:NO];
                         NSArray *sortDescriptors = [NSArray arrayWithObject:sortByName];
@@ -145,6 +199,10 @@
                             Suggestion *suggestion = [[Suggestion alloc]initWithSuggestionDictionary:suggestionDictionary];
                             [self.suggestions addObject:suggestion];
                         }
+                    }
+                    
+                    if (self.segmentControl.selectedSegmentIndex == 0){
+                        [self automateTrade];
                     }
                 
                     [self refreshTable];
@@ -210,7 +268,7 @@
 - (void)setupTableView{
     if (self.segmentControl.selectedSegmentIndex == 0){
         //automatic
-        [self addLabelToTableViewWithText:@"Automatic mode is on. You can check progress in history tab"];
+        [self addLabelToTableViewWithText:@"Automatic mode is on. You can track progress in history tab"];
     }else{
         //manual
         
