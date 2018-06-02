@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="8q3-TG-j4v">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="8q3-TG-j4v">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -316,14 +316,14 @@
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RlT-1O-Hts">
                                 <rect key="frame" x="16" y="80.5" width="187" height="30.5"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gain: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fVZ-Ie-99N">
-                                        <rect key="frame" x="0.0" y="0.0" width="44" height="30.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wallet: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fVZ-Ie-99N">
+                                        <rect key="frame" x="0.0" y="0.0" width="56.5" height="30.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="0.00$" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="axI-cQ-z0S">
-                                        <rect key="frame" x="44" y="0.0" width="143" height="30.5"/>
+                                        <rect key="frame" x="56.5" y="0.0" width="130.5" height="30.5"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="ZcY-0a-PeP"/>
                                         </constraints>
@@ -372,7 +372,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="l9p-iO-BCw">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                                <rect key="frame" x="0.0" y="116" width="375" height="502"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="AnalyzerCell" rowHeight="150" id="NW7-nd-bMd" customClass="AnalyzerTableViewCell">
@@ -438,18 +438,28 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="UTw-Qe-1hK">
+                                <rect key="frame" x="111" y="80" width="153" height="29"/>
+                                <segments>
+                                    <segment title="Automatic"/>
+                                    <segment title="Manual"/>
+                                </segments>
+                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="UTw-Qe-1hK" firstAttribute="centerX" secondItem="5ye-mJ-L2g" secondAttribute="centerX" id="0o8-HF-lSt"/>
                             <constraint firstItem="l9p-iO-BCw" firstAttribute="bottom" secondItem="40T-tU-adl" secondAttribute="bottom" id="3z7-Ul-bXK"/>
-                            <constraint firstItem="l9p-iO-BCw" firstAttribute="top" secondItem="5ye-mJ-L2g" secondAttribute="top" id="HMO-Ng-iSe"/>
                             <constraint firstItem="l9p-iO-BCw" firstAttribute="leading" secondItem="40T-tU-adl" secondAttribute="leading" id="Tgm-Xd-fTX"/>
+                            <constraint firstItem="l9p-iO-BCw" firstAttribute="top" secondItem="UTw-Qe-1hK" secondAttribute="bottom" constant="8" id="W5j-KN-O9S"/>
                             <constraint firstItem="l9p-iO-BCw" firstAttribute="trailing" secondItem="40T-tU-adl" secondAttribute="trailing" id="asV-DZ-oaE"/>
+                            <constraint firstItem="UTw-Qe-1hK" firstAttribute="top" secondItem="40T-tU-adl" secondAttribute="top" constant="16" id="n8S-Gh-ryP"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="40T-tU-adl"/>
                     </view>
                     <navigationItem key="navigationItem" id="LwM-Yy-ogG"/>
                     <connections>
+                        <outlet property="segmentControl" destination="UTw-Qe-1hK" id="DvM-z6-3zB"/>
                         <outlet property="tableView" destination="l9p-iO-BCw" id="Ues-ki-5ul"/>
                     </connections>
                 </viewController>

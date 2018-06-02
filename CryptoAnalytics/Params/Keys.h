@@ -39,6 +39,7 @@ static NSString *STATIC_NOT_FETCHCURRENCIES = @"FetchNewCurrencyValues";
 static NSString *STATIC_USERDEFAULTS_TRADEHISTORY = @"CryptoAnalyticsUserDefaultsTradeHistory";
 static NSString *STATIC_USERDEFAULTS_MYCURRENCY = @"CryptoAnalyticsUserDefaultsMyCurrency";
 static NSString *STATIC_USERDEFAULTS_SETUPDONE = @"CryptoAnalyticsUserDefaultsSetupDone";
+static NSString *STATIC_USERDEFAULTS_MYMONEY = @"CryptoAnalyticsUserDefaultsMoney";
 static NSString *STATIC_IDENTIFIER_SETUPSTART = @"SetupStart";
 
 @interface Keys : NSObject

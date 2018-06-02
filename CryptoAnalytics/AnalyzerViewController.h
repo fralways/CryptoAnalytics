@@ -12,5 +12,6 @@
 @interface AnalyzerViewController : UIViewController<UITableViewDelegate, UITableViewDataSource, AnalyzerTableViewCellDelegate, UITextFieldDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) IBOutlet UISegmentedControl *segmentControl;
 
 @end

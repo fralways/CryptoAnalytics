@@ -102,6 +102,8 @@
     [[UISlider appearance]setThumbTintColor:AppStyle.primaryColor];
     [[UISlider appearance]setTintColor:AppStyle.primaryColor];
     
+    [[UISegmentedControl appearance]setTintColor:AppStyle.primaryDarkColor];
+    
 //    [[UIActivityIndicatorView appearance]setColor:[UIColor activityIndicatorTintColor]];
 }
 

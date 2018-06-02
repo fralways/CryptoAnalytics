@@ -154,11 +154,12 @@
 #pragma mark - Helper
 
 - (double)calculateGain{
-    double gain = 0;
-    for (History *history in self.history) {
-        if ([self.currencies objectForKey:history.currencyId]){
-            Currency *currency = [self.currencies objectForKey:history.currencyId];
-            gain += [history moneyChanged] - currency.price * [history tradedCurrencyAmount];
+    double gain = [[[NSUserDefaults standardUserDefaults] objectForKey:STATIC_USERDEFAULTS_MYMONEY] doubleValue];
+    for (NSString *currencyId in self.currencies) {
+        Currency *currency = self.currencies[currencyId];
+        if ([[Context sharedContext].myCurrencies objectForKey:currencyId]){
+            double amount = [[[Context sharedContext].myCurrencies objectForKey:currencyId] doubleValue];
+            gain += amount * currency.price;
         }
     }
     return gain;

@@ -1,15 +1,18 @@
 PODS:
+  - KVNProgress (2.3.1)
   - SCLAlertView-Objective-C (1.1.3)
   - SwiftyJSON (4.0.0)
 
 DEPENDENCIES:
+  - KVNProgress
   - SCLAlertView-Objective-C
   - SwiftyJSON (~> 4.0)
 
 SPEC CHECKSUMS:
+  KVNProgress: 8167b1f19e2758290c0b6143020ed9dcbb0477a1
   SCLAlertView-Objective-C: 917836fb2349afa58edc43d592d22d21d46bb2a4
   SwiftyJSON: 070dabdcb1beb81b247c65ffa3a79dbbfb3b48aa
 
-PODFILE CHECKSUM: 6b41342241e6b39194634e0b854ae1c509d54736
+PODFILE CHECKSUM: 85986566d754172fae4b0ea64e32e38de27e06de
 
 COCOAPODS: 1.4.0

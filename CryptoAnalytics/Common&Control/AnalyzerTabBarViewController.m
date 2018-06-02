@@ -59,9 +59,13 @@
 //    [[self.tabBar.items objectAtIndex:3] setTitle:NSLocalizedString(@"Tenant_title", nil)];
 //    [[self.tabBar.items objectAtIndex:4] setTitle:NSLocalizedString(@"RecentRequests_title", nil)];
     
-    //preload history
+    //preload vcs
     UINavigationController *historyViewControllerNavigation = self.viewControllers[2];
     [[historyViewControllerNavigation.viewControllers objectAtIndex:0] view];
+    UINavigationController *currencyViewControllerNavigation = self.viewControllers[0];
+    [[currencyViewControllerNavigation.viewControllers objectAtIndex:0] view];
+
+    self.selectedIndex = 1;
     
     NSLog(@"Tabbar: loaded");
 }

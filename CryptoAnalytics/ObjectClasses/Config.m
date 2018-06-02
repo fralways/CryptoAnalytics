@@ -63,17 +63,20 @@
 - (NSDictionary *)toDictionary{
     NSMutableDictionary *dictionary = [NSMutableDictionary new];
     
-    dictionary[@"selectedStrategy"] = [[Context sharedContext] strategyToString:self.selectedStrategy];
-    dictionary[@"speedStrategyPercentChangeNeeded"] = [NSNumber numberWithDouble:self.speedStrategyPercentChangeNeeded];
-    dictionary[@"speedStrategyInterval"] = [NSNumber numberWithInteger:self.speedStrategyInterval];
-    dictionary[@"smaStrategyInterval"] = [NSNumber numberWithInteger:self.smaStrategyInterval];
-    dictionary[@"smaStrategyShortCount"] = [NSNumber numberWithInteger:self.smaShortCount];
-    dictionary[@"smaStrategyLongCount"] = [NSNumber numberWithInteger:self.smaLongCount];
-    dictionary[@"emaStrategyInterval"] = [NSNumber numberWithInteger:self.emaStrategyInterval];
-    dictionary[@"emaStrategyShortCount"] = [NSNumber numberWithInteger:self.emaShortCount];
-    dictionary[@"emaStrategyLongCount"] = [NSNumber numberWithInteger:self.emaLongCount];
-    dictionary[@"macdStrategyInterval"] = [NSNumber numberWithInteger:self.macdStrategyInterval];
-
+    if (self.setupIsOn){
+        dictionary[@"selectedStrategy"] = [[Context sharedContext] strategyToString:self.selectedStrategy];
+    }else{
+        dictionary[@"selectedStrategy"] = [[Context sharedContext] strategyToString:self.selectedStrategy];
+        dictionary[@"speedStrategyPercentChangeNeeded"] = [NSNumber numberWithDouble:self.speedStrategyPercentChangeNeeded];
+        dictionary[@"speedStrategyInterval"] = [NSNumber numberWithInteger:self.speedStrategyInterval];
+        dictionary[@"smaStrategyInterval"] = [NSNumber numberWithInteger:self.smaStrategyInterval];
+        dictionary[@"smaStrategyShortCount"] = [NSNumber numberWithInteger:self.smaShortCount];
+        dictionary[@"smaStrategyLongCount"] = [NSNumber numberWithInteger:self.smaLongCount];
+        dictionary[@"emaStrategyInterval"] = [NSNumber numberWithInteger:self.emaStrategyInterval];
+        dictionary[@"emaStrategyShortCount"] = [NSNumber numberWithInteger:self.emaShortCount];
+        dictionary[@"emaStrategyLongCount"] = [NSNumber numberWithInteger:self.emaLongCount];
+        dictionary[@"macdStrategyInterval"] = [NSNumber numberWithInteger:self.macdStrategyInterval];
+    }
     return dictionary;
 }
 

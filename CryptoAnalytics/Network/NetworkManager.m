@@ -174,21 +174,43 @@
 }
 
 - (void)getSuggestionsWithCompletionHandler:(void (^)(bool successful, NSArray *suggestions, NSError *httpError))completionHandler{
-    NSMutableDictionary *httpAdditionalHeaders = [[NSMutableDictionary alloc] init];
-    NSString *endpoint = [self getUrlForEndpoint:@"strategy"];
-    [self get:endpoint httpAdditionalHeaders:httpAdditionalHeaders completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-        if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
-            NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
-            if (200 == httpResponse.statusCode && !error) {
-                NSArray *suggestions = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
-                completionHandler(YES, suggestions, nil);
+    if (self.endpoints){
+        NSMutableDictionary *httpAdditionalHeaders = [[NSMutableDictionary alloc] init];
+        NSString *endpoint = [self getUrlForEndpoint:@"strategy"];
+        [self get:endpoint httpAdditionalHeaders:httpAdditionalHeaders completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+            if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
+                NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+                if (200 == httpResponse.statusCode && !error) {
+                    NSArray *suggestions = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+                    completionHandler(YES, suggestions, nil);
+                }else{
+                    completionHandler(NO, nil, nil);
+                }
             }else{
-                completionHandler(NO, nil, nil);
+                completionHandler(NO, nil, error);
             }
-        }else{
-            completionHandler(NO, nil, error);
-        }
-    }];
+        }];
+    }else{
+        [self getHomeWithCompletionHandler:^(bool successful, NSError *httpError) {
+            if (successful){
+                NSMutableDictionary *httpAdditionalHeaders = [[NSMutableDictionary alloc] init];
+                NSString *endpoint = [self getUrlForEndpoint:@"strategy"];
+                [self get:endpoint httpAdditionalHeaders:httpAdditionalHeaders completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                    if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
+                        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+                        if (200 == httpResponse.statusCode && !error) {
+                            NSArray *suggestions = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+                            completionHandler(YES, suggestions, nil);
+                        }else{
+                            completionHandler(NO, nil, nil);
+                        }
+                    }else{
+                        completionHandler(NO, nil, error);
+                    }
+                }];
+            }
+        }];
+    }
 }
 
 - (void)patchConfig:(NSDictionary *)config withCompletionHandler:(void (^)(bool successful, NSDictionary *config, NSError *httpError))completionHandler{

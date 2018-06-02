@@ -69,7 +69,9 @@
 #pragma mark - Buttons
 
 - (IBAction)next:(id)sender {
-    [Context sharedContext].setupParams.money = [self.txtMoney.text integerValue];
+    [Context sharedContext].setupParams.money = [[self.txtMoney.text substringFromIndex:1] integerValue];
+    [[NSUserDefaults standardUserDefaults]setValue:@([Context sharedContext].setupParams.money) forKey:STATIC_USERDEFAULTS_MYMONEY];
+    [[NSUserDefaults standardUserDefaults]synchronize];
     [self performSegueWithIdentifier:STATIC_SEGUE_SETUPTOCHOOSESTRATEGY sender:nil];
 }
 

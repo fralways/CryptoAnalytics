@@ -36,12 +36,24 @@
     self.title = @"Suggestions";
     self.userDefaults = [NSUserDefaults standardUserDefaults];
     
+    self.view.backgroundColor = AppStyle.primaryLightColor;
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.backgroundColor = AppStyle.primaryLightColor;
     
     [self initRefreshControl];
     [self initTimer];
+    
+    if ([Context sharedContext].didSetup){
+        if ([Context sharedContext].setupParams.automatic){
+            [self.segmentControl setSelectedSegmentIndex:0];
+        }else{
+            [self.segmentControl setSelectedSegmentIndex:1];
+        }
+    }
+    [self.segmentControl addTarget:self action:@selector(changedSegment) forControlEvents:UIControlEventValueChanged];
+    
+    [self setupTableView];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -70,16 +82,21 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 History *history = [[History alloc]initWithTradeDictionary:trade];
                 NSMutableArray *tradeDefaults = [[self.userDefaults objectForKey:STATIC_USERDEFAULTS_TRADEHISTORY] mutableCopy];
+                
                 [tradeDefaults addObject:[history toTradeDictionary]];
                 [self.userDefaults setObject:tradeDefaults forKey:STATIC_USERDEFAULTS_TRADEHISTORY];
+                
+                double myMoney = [[self.userDefaults objectForKey:STATIC_USERDEFAULTS_MYMONEY] doubleValue];
+                myMoney -= amount;
+                [self.userDefaults setObject:@(myMoney) forKey:STATIC_USERDEFAULTS_MYMONEY];
+                
                 [self.userDefaults synchronize];
                 
-                [[Context sharedContext]addCurrency:currency amount:history.amount/history.price];
+                [[Context sharedContext]addCurrency:currency amount:[trade[@"amount"] doubleValue]];
                 
                 [[NSNotificationCenter defaultCenter]postNotificationName:STATIC_NOT_BUYCURRENCY object:history];
                 [self presentAlertBuySuccess:history.amount];
             });
-            
         }
     }];
 }
@@ -91,6 +108,11 @@
                 History *history = [[History alloc]initWithTradeDictionary:trade];
                 NSMutableArray *tradeDefaults = [[self.userDefaults objectForKey:STATIC_USERDEFAULTS_TRADEHISTORY] mutableCopy];
                 [tradeDefaults addObject:[history toTradeDictionary]];
+                
+                double myMoney = [[self.userDefaults objectForKey:STATIC_USERDEFAULTS_MYMONEY] doubleValue];
+                myMoney += [trade[@"amount"] doubleValue];
+                [self.userDefaults setObject:@(myMoney) forKey:STATIC_USERDEFAULTS_MYMONEY];
+                
                 [self.userDefaults setObject:tradeDefaults forKey:STATIC_USERDEFAULTS_TRADEHISTORY];
                 [self.userDefaults synchronize];
                 
@@ -155,6 +177,52 @@
 
 #pragma mark - Table
 
+- (void)addLabelToTableViewWithText:(NSString *)text{
+    UIView *noDataView = [UIView new];
+    [self.tableView setBackgroundView:noDataView];
+    
+    //        noDataView.translatesAutoresizingMaskIntoConstraints = NO;
+    [[noDataView.leadingAnchor constraintEqualToAnchor:[self.tableView leadingAnchor]] setActive:YES];
+    [[noDataView.trailingAnchor constraintEqualToAnchor:[self.tableView trailingAnchor]] setActive:YES];
+    [[noDataView.topAnchor constraintEqualToAnchor:[self.tableView topAnchor]] setActive:YES];
+    [[noDataView.bottomAnchor constraintEqualToAnchor:[self.tableView bottomAnchor]] setActive:YES];
+    
+    
+    UILabel *noDataLabel = [UILabel new];
+    [noDataView addSubview:noDataLabel];
+    
+    noDataLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    [[noDataLabel.leadingAnchor constraintEqualToAnchor:[noDataView leadingAnchor]] setActive:YES];
+    [[noDataLabel.trailingAnchor constraintEqualToAnchor:[noDataView trailingAnchor]] setActive:YES];
+    [[noDataLabel.centerYAnchor constraintEqualToAnchor:[noDataView centerYAnchor] constant:0] setActive:YES];
+    //            [[noDataLabel.heightAnchor constraintEqualToConstant:labelHeight] setActive:YES];
+    [[noDataLabel.bottomAnchor constraintEqualToAnchor:[noDataView bottomAnchor]] setActive:YES];
+    
+    noDataLabel.text = text;
+    noDataLabel.textColor = AppStyle.primaryTextColor;
+    noDataLabel.textAlignment = NSTextAlignmentCenter;
+    noDataLabel.numberOfLines = 3;
+    noDataLabel.font = [UIFont systemFontOfSize:24 weight:UIFontWeightLight];
+    
+    [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+}
+
+- (void)setupTableView{
+    if (self.segmentControl.selectedSegmentIndex == 0){
+        //automatic
+        [self addLabelToTableViewWithText:@"Automatic mode is on. You can check progress in history tab"];
+    }else{
+        //manual
+        
+        if (self.suggestions.count == 0){
+            [self addLabelToTableViewWithText:@"No suggestions to show. Check again later"];
+        }else{
+            self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+            self.tableView.backgroundView = nil;
+        }
+    }
+}
+
 - (void)setCellGraphics:(AnalyzerTableViewCell *)cell withSuggestionType: (SuggestionType)type{
     [cell.btnAction setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     if (type == BUY){
@@ -180,11 +248,16 @@
 }
 
 - (void)refreshTable{
+    [self setupTableView];
     [self.tableView reloadData];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return [self.suggestions count];
+    if (self.segmentControl.selectedSegmentIndex == 0){
+        return 0;
+    }else{
+        return [self.suggestions count];
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -215,6 +288,12 @@
     }
 }
 
+#pragma mark - Buttons
+
+- (void)changedSegment{
+    [self refreshTable];
+}
+
 #pragma mark - Alerts
 
 - (void)sliderValueChanged:(UISlider *)slider{
@@ -233,7 +312,7 @@
     
     UISlider *slider = [UISlider new];
     slider.minimumValue = 10.0;
-    slider.maximumValue = 100.0;
+    slider.maximumValue = [[[NSUserDefaults standardUserDefaults]objectForKey:STATIC_USERDEFAULTS_MYMONEY] doubleValue];
     slider.value = 20.0;
     slider.frame = CGRectMake(0, 0, 215 - 50, 30);
     [slider addTarget:self action:@selector(sliderValueChanged:) forControlEvents:UIControlEventValueChanged];
@@ -306,7 +385,7 @@
     [holder addSubview:amount];
     
     UILabel *myAmountLbl = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 215, 20)];
-    myAmountLbl.text = [NSString stringWithFormat:@"You own: %@", [myAmount stringValue]];
+    myAmountLbl.text = [NSString stringWithFormat:@"You have: %.06f", [myAmount doubleValue]];
     myAmountLbl.textAlignment = NSTextAlignmentCenter;
     myAmountLbl.font = [UIFont systemFontOfSize:14];
     myAmountLbl.textColor = AppStyle.primaryTextColor;
@@ -335,6 +414,10 @@
     .addCustomView(holder)
     .addButtonWithActionBlock(@"Confirm", ^{
         double amount = slider.value;
+        double myAmount = [[Context sharedContext].myCurrencies[self.suggestionClicked.currency] doubleValue];
+        if (amount > myAmount){
+            amount = myAmount;
+        }
         [self sellCurrency:self.suggestionClicked.currency forAmount:amount];
     });
     SCLAlertViewShowBuilder *showBuilder = [SCLAlertViewShowBuilder new]

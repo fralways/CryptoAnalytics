@@ -20,6 +20,7 @@
 @property NSInteger speedStrategyInterval;
 @property double speedStrategyPercentChangeNeeded;
 @property STRATEGIES selectedStrategy;
+@property BOOL setupIsOn;
 
 - (id)initWithNetworkData:(NSDictionary *)data;
 - (NSDictionary *)toDictionary;
