@@ -21,8 +21,8 @@
 }
 
 - (void)sliderValueChanged:(UISlider *)sender{
-    if ([self.delegate respondsToSelector:@selector(sliderValueChanged:withCellTitle:)]) {
-        [self.delegate sliderValueChanged:sender.value withCellTitle:self.lblTitle.text];
+    if ([self.delegate respondsToSelector:@selector(sliderValueChanged:withCell:)]) {
+        [self.delegate sliderValueChanged:sender.value withCell:self];
     }
 }
 

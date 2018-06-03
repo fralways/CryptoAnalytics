@@ -11,7 +11,7 @@
 @protocol SettingsTableViewCellDelegate<NSObject>
 
 @optional
-- (void)sliderValueChanged:(double)value withCellTitle:(NSString *)title;
+- (void)sliderValueChanged:(double)value withCell:(id)cell;
 
 @end
 
