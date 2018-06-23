@@ -38,8 +38,6 @@ import SwiftyJSON
                         self.spinner.stopAnimating()
                         self.createChart2(json: json)
                     }
-
-
                 }catch let error as NSError {
                     print(error.localizedDescription)
                     print(data!)

@@ -180,56 +180,57 @@
 }
 
 - (void)getSuggestions{
-    if (!self.loading){
-        self.loading = YES;
-        
-        if (![Context sharedContext].testing){
-            [[NetworkManager sharedManager]getSuggestionsWithCompletionHandler:^(bool successful, NSArray *suggestions, NSError *httpError) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    if (successful){
-                        NSLog(@"Analyzer: got suggestions");
-                        
-                        NSSortDescriptor *sortByName = [NSSortDescriptor sortDescriptorWithKey:@"timestamp" ascending:NO];
-                        NSArray *sortDescriptors = [NSArray arrayWithObject:sortByName];
-                        NSArray *sortedSuggestions = [suggestions sortedArrayUsingDescriptors:sortDescriptors];
-                        
-                        self.suggestionsArray = sortedSuggestions;
-                        self.suggestions = [NSMutableArray new];
-                        for (NSDictionary *suggestionDictionary in sortedSuggestions) {
-                            Suggestion *suggestion = [[Suggestion alloc]initWithSuggestionDictionary:suggestionDictionary];
-                            [self.suggestions addObject:suggestion];
+    if (![Context sharedContext].testing){
+        if (!self.loading){
+            self.loading = YES;
+            
+                [[NetworkManager sharedManager]getSuggestionsWithCompletionHandler:^(bool successful, NSArray *suggestions, NSError *httpError) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        if (successful){
+                            NSLog(@"Analyzer: got suggestions");
+                            
+                            NSSortDescriptor *sortByName = [NSSortDescriptor sortDescriptorWithKey:@"timestamp" ascending:NO];
+                            NSArray *sortDescriptors = [NSArray arrayWithObject:sortByName];
+                            NSArray *sortedSuggestions = [suggestions sortedArrayUsingDescriptors:sortDescriptors];
+                            
+                            self.suggestionsArray = sortedSuggestions;
+                            self.suggestions = [NSMutableArray new];
+                            for (NSDictionary *suggestionDictionary in sortedSuggestions) {
+                                Suggestion *suggestion = [[Suggestion alloc]initWithSuggestionDictionary:suggestionDictionary];
+                                [self.suggestions addObject:suggestion];
+                            }
                         }
-                    }
+                        
+                        if (self.segmentControl.selectedSegmentIndex == 0){
+                            [self automateTrade];
+                        }
                     
-                    if (self.segmentControl.selectedSegmentIndex == 0){
-                        [self automateTrade];
-                    }
-                
-                    [self refreshTable];
-                    [self.refreshControl endRefreshing];
-                    self.loading = NO;
-                });
-            }];
-        }else{
-            NSString *path = [[NSBundle mainBundle]pathForResource:@"suggestions" ofType:@"json"];
-            NSData *data = [[NSData alloc]initWithContentsOfURL:[NSURL fileURLWithPath:path]];
-            NSArray *suggestions = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
-            NSLog(@"Analyzer: %@", suggestions);
-            
-            NSSortDescriptor *sortByName = [NSSortDescriptor sortDescriptorWithKey:@"timestamp" ascending:NO];
-            NSArray *sortDescriptors = [NSArray arrayWithObject:sortByName];
-            NSArray *sortedSuggestions = [suggestions sortedArrayUsingDescriptors:sortDescriptors];
-            
-            self.loading = NO;
-            self.suggestionsArray = sortedSuggestions;
-            self.suggestions = [NSMutableArray new];
-            for (NSDictionary *suggestionDictionary in sortedSuggestions) {
-                Suggestion *suggestion = [[Suggestion alloc]initWithSuggestionDictionary:suggestionDictionary];
-                [self.suggestions addObject:suggestion];
-            }
-            [self refreshTable];
-            [self.refreshControl endRefreshing];
+                        [self refreshTable];
+                        [self.refreshControl endRefreshing];
+                        self.loading = NO;
+                    });
+                }];
         }
+    }else{
+        self.loading = YES;
+        NSString *path = [[NSBundle mainBundle]pathForResource:@"suggestions" ofType:@"json"];
+        NSData *data = [[NSData alloc]initWithContentsOfURL:[NSURL fileURLWithPath:path]];
+        NSArray *suggestions = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+        NSLog(@"Analyzer: %@", suggestions);
+        
+        NSSortDescriptor *sortByName = [NSSortDescriptor sortDescriptorWithKey:@"timestamp" ascending:NO];
+        NSArray *sortDescriptors = [NSArray arrayWithObject:sortByName];
+        NSArray *sortedSuggestions = [suggestions sortedArrayUsingDescriptors:sortDescriptors];
+        
+        self.loading = NO;
+        self.suggestionsArray = sortedSuggestions;
+        self.suggestions = [NSMutableArray new];
+        for (NSDictionary *suggestionDictionary in sortedSuggestions) {
+            Suggestion *suggestion = [[Suggestion alloc]initWithSuggestionDictionary:suggestionDictionary];
+            [self.suggestions addObject:suggestion];
+        }
+        [self refreshTable];
+        [self.refreshControl endRefreshing];
     }
 }
 

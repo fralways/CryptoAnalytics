@@ -26,6 +26,7 @@
 
 - (void)initParams{
     self.host = @"http://192.168.0.14:8080/crypto_war_exploded";
+//    self.host = @"http://172.22.36.161:8080/crypto_war_exploded";
     self.testing = NO;
     self.myCurrencies = [[[NSUserDefaults standardUserDefaults] objectForKey:STATIC_USERDEFAULTS_MYCURRENCY] mutableCopy];
     self.setupParams = [SetupParams new];
