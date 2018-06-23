@@ -124,7 +124,7 @@
             NSInteger preCells = self.optionsExpanded ? 2:1;
             switch (self.config.selectedStrategy) {
                 case MACD:
-                    return 1 + preCells;
+                    return 4 + preCells;
                     break;
                 case EMA: case SMA:
                     return 3 + preCells;
@@ -264,6 +264,27 @@
             case MACD:
                 switch (index) {
                     case 1:
+                        option = @"Short count";
+                        cell.slider.maximumValue = 20;
+                        cell.slider.minimumValue = 5;
+                        cell.slider.value = self.config.macdShortCount;
+                        cell.lblValue.text = [NSString stringWithFormat:@"%d", (int)cell.slider.value];
+                        break;
+                    case 2:
+                        option = @"Long count";
+                        cell.slider.maximumValue = 100;
+                        cell.slider.minimumValue = 20;
+                        cell.slider.value = self.config.macdLongCount;
+                        cell.lblValue.text = [NSString stringWithFormat:@"%d", (int)cell.slider.value];
+                        break;
+                    case 3:
+                        option = @"Signal count";
+                        cell.slider.maximumValue = 15;
+                        cell.slider.minimumValue = 5;
+                        cell.slider.value = self.config.macdSignalCount;
+                        cell.lblValue.text = [NSString stringWithFormat:@"%d", (int)cell.slider.value];
+                        break;
+                    case 4:
                         option = @"Tick interval";
                         cell.slider.minimumValue = 5;
                         cell.slider.maximumValue = 60 * 5;
@@ -392,6 +413,15 @@
                 break;
             case MACD:
                 if (row == 1){
+                    self.config.macdShortCount = value;
+                    cell.lblValue.text = [NSString stringWithFormat:@"%d", (int)cell.slider.value];
+                }else if (row == 2){
+                    self.config.macdLongCount = value;
+                    cell.lblValue.text = [NSString stringWithFormat:@"%d", (int)cell.slider.value];
+                }else if (row == 3){
+                    self.config.macdSignalCount = value;
+                    cell.lblValue.text = [NSString stringWithFormat:@"%d", (int)cell.slider.value];
+                }else if (row == 4){
                     self.config.macdStrategyInterval = value;
                     cell.lblValue.text = [NSString stringWithFormat:@"%d", (int)cell.slider.value];
                 }
@@ -426,7 +456,7 @@
     NSInteger count = 0;
     switch (strategy) {
         case MACD:
-            count = 1;
+            count = 4;
             break;
         case SPEED:
             count = 2;

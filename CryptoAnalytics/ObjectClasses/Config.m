@@ -24,6 +24,15 @@
         if ([data objectForKey:@"emaStrategyInterval"]){
             self.emaStrategyInterval = [[data objectForKey:@"emaStrategyInterval"] integerValue];
         }
+        if ([data objectForKey:@"macdLongCount"]){
+            self.macdLongCount = [[data objectForKey:@"macdLongCount"] integerValue];
+        }
+        if ([data objectForKey:@"macdShortCount"]){
+            self.macdShortCount = [[data objectForKey:@"macdShortCount"] integerValue];
+        }
+        if ([data objectForKey:@"macdSignalCount"]){
+            self.macdSignalCount = [[data objectForKey:@"macdSignalCount"] integerValue];
+        }
         if ([data objectForKey:@"macdStrategyInterval"]){
             self.macdStrategyInterval = [[data objectForKey:@"macdStrategyInterval"] integerValue];
         }
@@ -75,6 +84,9 @@
         dictionary[@"emaStrategyInterval"] = [NSNumber numberWithInteger:self.emaStrategyInterval];
         dictionary[@"emaStrategyShortCount"] = [NSNumber numberWithInteger:self.emaShortCount];
         dictionary[@"emaStrategyLongCount"] = [NSNumber numberWithInteger:self.emaLongCount];
+        dictionary[@"macdStrategyShortCount"] = [NSNumber numberWithInteger:self.macdShortCount];
+        dictionary[@"macdStrategyLongCount"] = [NSNumber numberWithInteger:self.macdLongCount];
+        dictionary[@"macdStrategySignalCount"] = [NSNumber numberWithInteger:self.macdSignalCount];
         dictionary[@"macdStrategyInterval"] = [NSNumber numberWithInteger:self.macdStrategyInterval];
     }
     return dictionary;

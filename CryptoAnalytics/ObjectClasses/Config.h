@@ -13,6 +13,9 @@
 @property NSInteger emaLongCount;
 @property NSInteger emaShortCount;
 @property NSInteger emaStrategyInterval;
+@property NSInteger macdLongCount;
+@property NSInteger macdShortCount;
+@property NSInteger macdSignalCount;
 @property NSInteger macdStrategyInterval;
 @property NSInteger smaLongCount;
 @property NSInteger smaShortCount;
