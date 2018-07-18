@@ -83,8 +83,8 @@
 
 - (void)automateTrade{
     NSLog(@"Analyzer: Automate trades started");
-    BOOL shouldTrade = NO;
     for (Suggestion *suggestion in self.suggestions) {
+        BOOL shouldTrade = NO;
         if ([self.lastUpdate objectForKey:suggestion.currency]){
             long timestamp = [[self.lastUpdate objectForKey:suggestion.currency] longValue];
             if (timestamp < suggestion.timestamp){
