@@ -59,7 +59,6 @@
     for (NSString *key in httpAdditionalHeaders) {
         [request setValue:httpAdditionalHeaders[key] forHTTPHeaderField:key];
     }
-    //    [self.session setSessionDescription:absoluteURL];
     
     [[self.session dataTaskWithRequest:request completionHandler:completionHandler] resume];
 }
@@ -109,8 +108,6 @@
             completionHandler(NO, error);
         }
     }];
-    
-    
 }
 
 - (void)getCurrenciesWithCompletionHandler:(void (^)(bool successful, NSArray *currencies, NSError *httpError))completionHandler{

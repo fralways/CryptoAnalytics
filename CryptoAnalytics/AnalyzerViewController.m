@@ -96,7 +96,7 @@
         
         double myMoney = [[[NSUserDefaults standardUserDefaults]objectForKey:STATIC_USERDEFAULTS_MYMONEY] doubleValue];
         double moneyToSpend = myMoney / 10;
-        if (moneyToSpend < 10){
+        if (moneyToSpend < 10 && suggestion.type == BUY){
             return;
         }
         
